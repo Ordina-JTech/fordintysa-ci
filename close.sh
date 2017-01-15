@@ -1,1 +1,1 @@
-echo "open sesame!"
+echo "Close sesame!"
