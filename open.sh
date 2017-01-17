@@ -14,7 +14,7 @@ if [ `whoami` != 'root' ]
   then
     echo -e "${yel}Insufficient privileges."
     echo -e "${gry}Unable to cast the ${red}open${gry} spell. Maybe try this:"
-    echo -e "   ${whi}sudo{gry} ./fordintys-ci/open.sh"
+    echo -e "   ${whi}sudo${gry} ./fordintys-ci/open.sh"
     exit
 fi
 if [ $# -lt 1 ]
@@ -39,7 +39,7 @@ echo " [ ]  |  ||   |   | \|     \|      \|  ||  ||     __   [ ]"
 echo " [ ]  \__/|   |___|  |   __/|___ __/|  ||  ||___  \/   [ ]"
 echo "O===O                                                 O===O"
 echo ""
-if [ `pwd` == "/home/docker" ] -a [ -d /mnt/sda1 ] -a [ ! -d /mnt/sda1/fordintys-ci ]
+if [ `pwd` == "/home/docker" -a -d /mnt/sda1 -a ! -d /mnt/sda1/fordintys-ci ]
   then
     echo "Moving fordintys-ci from a volatile to a persistent location"
     mv fordintys-ci /mnt/sda1/
