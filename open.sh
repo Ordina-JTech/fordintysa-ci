@@ -39,10 +39,20 @@ echo " [ ]  |  ||   |   | \|     \|      \|  ||  ||     __   [ ]"
 echo " [ ]  \__/|   |___|  |   __/|___ __/|  ||  ||___  \/   [ ]"
 echo "O===O                                                 O===O"
 echo ""
+# move the folder (conditionally)
 if [ `pwd` == "/home/docker" -a -d /mnt/sda1 -a ! -d /mnt/sda1/fordintys-ci ]
   then
     echo "Moving fordintys-ci from a volatile to a persistent location"
     mv fordintys-ci /mnt/sda1/
     echo -e "Current directory is changed to ${whi}/mnt/sda1/fordintys-ci${gry}"
     cd /mnt/sda1/fordintys-ci
+fi
+## install docker-compose (if not done already)
+if [ -r /usr/local/bin/docker-compose ]
+  then
+    echo "docker-compose already installed"
+  else
+    echo "installing docker-compose ..."
+    curl -L https://github.com/docker/compose/releases/download/1.7.1/docker-compose-`uname -s`-`uname -m` > /usr/local/bin/docker-compose
+    chmod +x /usr/local/bin/docker-compose
 fi
