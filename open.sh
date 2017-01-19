@@ -54,5 +54,5 @@ ip=`ip route | awk '/eth1/ { print $9 }'`
 # build the composition
 docker-compose build
 
-echo "Your build server will be up & running at ${grn}http://${ip}/${gry} after you enter the following command, until you type ${whi}Ctrl-C${gry}:"
+echo -e "Your build server will be up & running at ${grn}http://${ip}/${gry} after you enter the following command, until you type ${whi}Ctrl-C${gry}:"
 echo -e "${whi}   docker-compose up${gry}"
