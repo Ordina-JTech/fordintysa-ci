@@ -1,0 +1,7 @@
+# this is the docker-compose.yml file :)
+version: '2'
+services:
+  homepage:
+    build: ./homepage/
+    ports:
+     - "80:80"
