@@ -39,10 +39,9 @@ echo -e "${whi}O===O                                                 ${whi}O===O
 echo -e "${gry}"
 
 ## install docker-compose (if not done already)
-if [ -r /usr/local/bin/docker-compose ]
+docker-compose version
+if [ $? -ne 0 ]
   then
-    echo "docker-compose already installed"
-  else
     echo "installing docker-compose ..."
     curl -L https://github.com/docker/compose/releases/download/1.7.1/docker-compose-`uname -s`-`uname -m` > /usr/local/bin/docker-compose
     chmod +x /usr/local/bin/docker-compose
@@ -55,5 +54,5 @@ ip=`ip route | awk '/eth1/ { print $9 }'`
 # build the composition
 docker-compose build
 
-echo "Your build server will be up & running at http://$ip/ after you enter the following command:"
+echo "Your build server will be up & running at ${grn}http://${ip}/${gry} after you enter the following command:"
 echo -e "${whi}   docker-compose up${gry}"
