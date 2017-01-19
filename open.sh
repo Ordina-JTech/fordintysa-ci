@@ -48,5 +48,12 @@ if [ -r /usr/local/bin/docker-compose ]
     chmod +x /usr/local/bin/docker-compose
 fi
 
-# run docker-compose
-docker-compose -f=$1 up -d
+# prepare files for docker-compose
+cp $1 docker-compose.yml
+ip=`ip route | awk '/eth1/ { print $9 }'`
+
+# build the composition
+docker-compose build
+
+echo "Your build server will be up & running at http://$ip/ after you enter the following command:"
+echo -e "${whi}   docker-compose up${gry}"
