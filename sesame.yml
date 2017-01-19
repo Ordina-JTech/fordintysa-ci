@@ -5,3 +5,12 @@ services:
     build: ./homepage/
     ports:
      - "80:80"
+  gitlab:
+    image: gitlab/gitlab-ce:latest
+    ports:
+      - '8010:80'
+    volumes:
+      - './gitlab/config:/etc/gitlab'
+      - './gitlab/data:/var/opt/gitlab'
+      - './gitlab/logs:/var/log/gitlab'
+      
