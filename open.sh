@@ -38,11 +38,11 @@ echo -e "${whi} [ ]  ${cya}\__/|   |___|  | ${yel}  __/|___ __/|  ||  ||___ ${cy
 echo -e "${whi}O===O                                                 ${whi}O===O"
 echo -e "${gry}"
 
-## install docker-compose (if not done already)
-docker-compose version
+## is docker-compose installed?
+docker-compose version 2> /dev/null
 if [ $? -ne 0 ]
   then
-    echo "installing docker-compose ..."
+    echo -e "${whi}Installing docker-compose${gry}"
     curl -L https://github.com/docker/compose/releases/download/1.7.1/docker-compose-`uname -s`-`uname -m` > /usr/local/bin/docker-compose
     chmod +x /usr/local/bin/docker-compose
 fi
