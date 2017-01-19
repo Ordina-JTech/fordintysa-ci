@@ -8,6 +8,8 @@ yel='\033[1;33m'
 cya='\033[1;36m'
 whi='\033[1;37m'
 
+echo ""
+echo -e "${whi}O===O ${cya} __  __  ___     ${yel}  __  ___ __  __      ___ ${cya} __  ${whi}O===O"
 if [ `whoami` != 'root' ]
   then
     echo -e "${yel}Insufficient privileges."
@@ -15,6 +17,7 @@ if [ `whoami` != 'root' ]
     echo -e "   ${whi}sudo${gry} ./open.sh"
     exit
 fi
+echo -e "${whi} [ ]  ${cya}/  \|  \|   |  | ${yel} /   |   /   /  \|  ||    ${cya}|  | ${whi} [ ]"
 if [ $# -lt 1 ]
   then
     echo -e "${yel}Required parameter missing.${gry}"
@@ -22,6 +25,7 @@ if [ $# -lt 1 ]
     ls -1
     exit
 fi
+echo -e "${whi} [ ]  ${cya}|  ||__/|__ |\ | ${yel} \__ |__ \__ |__||\/||__  ${cya} \/  ${whi} [ ]"
 if [ ! -r $1 ]
   then
     echo -e "${yel}$1: file or directory not found.${gry}"
@@ -29,10 +33,6 @@ if [ ! -r $1 ]
     ls -1
     exit
 fi
-echo ""
-echo -e "${whi}O===O ${cya} __  __  ___     ${yel}  __  ___ __  __      ___ ${cya} __  ${whi}O===O"
-echo -e "${whi} [ ]  ${cya}/  \|  \|   |  | ${yel} /   |   /   /  \|  ||    ${cya}|  | ${whi} [ ]"
-echo -e "${whi} [ ]  ${cya}|  ||__/|__ |\ | ${yel} \__ |__ \__ |__||\/||__  ${cya} \/  ${whi} [ ]"
 echo -e "${whi} [ ]  ${cya}|  ||   |   | \| ${yel}    \|      \|  ||  ||    ${cya} __  ${whi} [ ]"
 echo -e "${whi} [ ]  ${cya}\__/|   |___|  | ${yel}  __/|___ __/|  ||  ||___ ${cya} \/  ${whi} [ ]"
 echo -e "${whi}O===O                                                 ${whi}O===O"
