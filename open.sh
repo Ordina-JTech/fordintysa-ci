@@ -6,7 +6,7 @@ yel='\033[1;33m'
 whi='\033[1;37m'
 if [ `pwd` == "/home/docker" ]
   then
-    mydir="./fordintys-ci/"
+    mydir="./fordintysa-ci/"
   else
     mydir="./"
 fi
@@ -14,7 +14,7 @@ if [ `whoami` != 'root' ]
   then
     echo -e "${yel}Insufficient privileges."
     echo -e "${gry}Unable to cast the ${red}open${gry} spell. Maybe try this:"
-    echo -e "   ${whi}sudo${gry} ./fordintys-ci/open.sh"
+    echo -e "   ${whi}sudo${gry} ./fordintysa-ci/open.sh"
     exit
 fi
 if [ $# -lt 1 ]
@@ -40,12 +40,12 @@ echo " [ ]  \__/|   |___|  |   __/|___ __/|  ||  ||___  \/   [ ]"
 echo "O===O                                                 O===O"
 echo ""
 # move the folder (conditionally)
-if [ `pwd` == "/home/docker" -a -d /mnt/sda1 -a ! -d /mnt/sda1/fordintys-ci ]
+if [ `pwd` == "/home/docker" -a -d /mnt/sda1 -a ! -d /mnt/sda1/fordintysa-ci ]
   then
-    echo "Moving fordintys-ci from a volatile to a persistent location"
-    mv fordintys-ci /mnt/sda1/
-    echo -e "Current directory is changed to ${whi}/mnt/sda1/fordintys-ci${gry}"
-    cd /mnt/sda1/fordintys-ci
+    echo "Moving fordintysa-ci from a volatile to a persistent location"
+    mv fordintysa-ci /mnt/sda1/
+    echo -e "Current directory is changed to ${whi}/mnt/sda1/fordintysa-ci${gry}"
+    cd /mnt/sda1/fordintysa-ci
 fi
 ## install docker-compose (if not done already)
 if [ -r /usr/local/bin/docker-compose ]
