@@ -5,11 +5,47 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>Fordintysa Build Server</title>
     <link rel="icon" type="image/png" href="favicon.png">
-    <link rel="stylesheet" href="http://www.w3schools.com/lib/w3.css">  </head>
+    <link rel="stylesheet" href="http://www.w3schools.com/lib/w3.css">
+    <style>
+p, h1   {color: #4d2959;}
+h1      {font-size: 60px;}
+.center {text-align: center;}
+    </style>
+  </head>
   <body class="w3-container w3-sand">
-    <div class="w3-panel w3-white w3-round-xlarge">
-      <h1><img src="fordintysa.png" alt="fordintysa logo" height="100px"/> <span style="position: relative; bottom: 9px">Build Server</span></h1>
+    <div class="w3-card-4 w3-white w3-round-xlarge w3-padding-large w3-margin center">
+      <h1><img src="fordintysa.png" alt="fordintysa logo"/> <span style="position: relative; bottom: 30px"><strong>Build&nbsp;Server</strong></span></h1>
+      <hr/>
+      <p>This is your private build server running in a Docker container.</p>
+      <p>It contains several components:</p>
     </div>
-    <p>This is your private build server running in a Docker container.</p>
+    <div class="w3-layout-container">
+      <div class="w3-layout-cell">
+        <div class="w3-card-4 w3-pale-green w3-round-xlarge w3-padding-16 w3-margin">
+          <p class="w3-margin center"><a href="/gitlab/" target="_blank">GitLab</a></p>
+        </div>
+      </div>
+      <div class="w3-layout-cell">
+        <div class="w3-card-4 w3-pale-green w3-round-xlarge w3-padding-16 w3-margin">
+          <p class="w3-margin center"><a href="/gitlab/" target="_blank">Jenkins</a></p>
+        </div>
+      </div>
+      <div class="w3-layout-cell">
+        <div class="w3-card-4 w3-pale-green w3-round-xlarge w3-padding-16 w3-margin">
+          <p class="w3-margin center"><a href="/sonar/" target="_blank">SonarQube</a></p>
+        </div>
+      </div>
+      <div class="w3-layout-cell">
+        <div class="w3-card-4 w3-pale-green w3-round-xlarge w3-padding-16 w3-margin">
+          <p class="w3-margin center"><a href="/artifactory/" target="_blank">Artifactory</a></p>
+        </div>
+      </div>
+      <div class="w3-layout-cell">
+        <div class="w3-card-4 w3-pale-green w3-round-xlarge w3-padding-16 w3-margin">
+          <p class="w3-margin center"><a href="/prince/" target="_blank">The final deployed app</a></p>
+        </div>
+      </div>
+    </div>
+
   </body>
 </html>
