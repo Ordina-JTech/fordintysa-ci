@@ -55,6 +55,11 @@ cat ./homepage/default.conf | sed s/$\{ip\}/$ip/ > ./homepage/tmp/default.conf
  
 # build the composition
 docker-compose build
+if [ $? -ne 0 ]
+  then
+    echo "Sorry, something went wrong..."
+    exit
+fi
 
 echo -e "Your build server will be up & running at ${grn}http://${ip}/${gry} after you enter the following command, until you type ${whi}Ctrl-C${gry}:"
 echo -e "${whi}   docker-compose up${gry}"
