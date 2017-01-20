@@ -50,8 +50,6 @@ fi
 # prepare files for docker-compose
 ip=`ip route | awk '/eth1/ { print $9 }'`
 cat $1 | sed s/$\{ip\}/$ip/ > docker-compose.yml
-mkdir ./homepage/tmp
-cat ./homepage/default.conf | sed s/$\{ip\}/$ip/ > ./homepage/tmp/default.conf
  
 # build the composition
 docker-compose build
