@@ -13,3 +13,4 @@ services:
       - './gitlab/logs:/var/log/gitlab'
     environment:
       - GITLAB_OMNIBUS_CONFIG=external_url 'http://${ip}/gitlab';
+      - GITLAB_ROOT_PASSWORD=sysadmin
