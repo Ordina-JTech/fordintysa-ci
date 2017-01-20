@@ -48,8 +48,8 @@ if [ $? -ne 0 ]
 fi
 
 # prepare files for docker-compose
-cp $1 docker-compose.yml
 ip=`ip route | awk '/eth1/ { print $9 }'`
+cat $1 | sed s/$\{ip\}/$ip/ > docker-compose.yml
 mkdir ./homepage/tmp
 cat ./homepage/default.conf | sed s/$\{ip\}/$ip/ > ./homepage/tmp/default.conf
  
