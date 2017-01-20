@@ -22,7 +22,7 @@ if [ $# -lt 1 ]
   then
     echo -e "${yel}Required parameter missing.${gry}"
     echo "Open what, Ali Baba? The current directory contains:"
-    ls -1
+    ls -1 *.*
     exit
 fi
 echo -e "${whi} [ ]  ${cya}|  ||__/|__ |\ | ${yel} \__ |__ \__ |__||\/||__  ${cya} \/  ${whi} [ ]"
@@ -30,7 +30,7 @@ if [ ! -r $1 ]
   then
     echo -e "${yel}$1: file or directory not found.${gry}"
     echo "Open what, Ali Baba? The current directory contains:"
-    ls -1
+    ls -1 *.*
     exit
 fi
 echo -e "${whi} [ ]  ${cya}|  ||   |   | \| ${yel}    \|      \|  ||  ||    ${cya} __  ${whi} [ ]"
