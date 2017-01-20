@@ -51,7 +51,7 @@ fi
 cp $1 docker-compose.yml
 ip=`ip route | awk '/eth1/ { print $9 }'`
 mkdir ./homepage/tmp
-cat ./homepage/nginx.conf | sed s/$\{ip\}/$ip/ > ./homepage/tmp/nginx.conf
+cat ./homepage/proxy.conf | sed s/$\{ip\}/$ip/ > ./homepage/tmp/proxy.conf
  
 # build the composition
 docker-compose build
