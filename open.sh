@@ -50,7 +50,7 @@ fi
 # prepare files for docker-compose
 cp $1 docker-compose.yml
 ip=`ip route | awk '/eth1/ { print $9 }'`
-cat ./homepage/nginx.conf | sed s/$\{ip\}/$ip/ > /tmp/nginx.conf
+cat ./homepage/nginx.conf | sed s/$\{ip\}/$ip/ > ./tmp/nginx.conf
  
 # build the composition
 docker-compose build
