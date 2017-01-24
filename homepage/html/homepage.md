@@ -15,7 +15,7 @@ The goal of this workshop is to give you some hands-on experience with the apps 
 
 
 
-## ![](images/gitlab.png) <span style="position: relative; bottom: 60px">GitLab - Introductiom</span>
+## ![](images/gitlab.png) <span style="position: relative; bottom: 60px">GitLab - Introduction</span>
 
 GitLab is a bit like GitHub. You already know about [GitHub](https://github.com/), right!?
 
@@ -31,3 +31,11 @@ In this workshop we'll use GitLab only to 'serve' a git repository, but it can d
 
 
 ## ![](images/gitlab.png) <span style="position: relative; bottom: 60px">GitLab - New Repository</span>
+
+Ipsum lorem...
+
+
+
+## ![](images/jenkins.png) <span style="position: relative; bottom: 60px">Jenkins - Introduction</span>
+
+Ipsum lorem
