@@ -15,10 +15,18 @@ The goal of this workshop is to give you some hands-on experience with the apps 
 
 
 
+## ![](images/gitlab.png) <span style="position: relative; bottom: 60px">GitLab - Introductiom</span>
+
+GitLab is a bit like GitHub. You already know about [GitHub](https://github.com/), right!?
+
+In this workshop we'll use GitLab only to 'serve' a git repository, but it can do [much more](https://about.gitlab.com/).
+
+
 ## ![](images/gitlab.png) <span style="position: relative; bottom: 60px">GitLab - Register & Login</span>
 
   - Click the __GitLab__ shortcut in the menu bar
-  - NB: it might take a while before the container is ready
+   <small>NB: it might take a while before the container is ready. 
+  If you get an error message, wait 10 seconds and press F5.</small>
   - Register yourself as a new user and log in
 
 
