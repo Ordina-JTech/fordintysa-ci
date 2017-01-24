@@ -1,105 +1,43 @@
 <!DOCTYPE html>
 <html>
-  <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>Fordintysa Build Server</title>
-    <link rel="icon" type="image/png" href="favicon.png">
-    <link rel="stylesheet" href="http://www.w3schools.com/lib/w3.css">
-    <style>
-p, h1, h2  {color: #4d2959;}
-h1      {font-size: 60px;}
-.center {text-align: center;}
-    </style>
-<script>
-function accClick(id) {
-    for (i=1; i<100; i++) {
-        var el = document.getElementById("part-" + i);
-        if (el) {
-            if (i == id) {
-                if (el.className.indexOf("w3-show") < 0) {
-                    el.className += " w3-show";
-                } else {
-                    el.className = el.className.replace(" w3-show", "");
-                }
-            } else {
-                el.className = el.className.replace(" w3-show", "");
-            }
-        }
-    }
-}
-</script>
-  </head>
-  <body class="w3-container w3-sand">
-    <div class="w3-card-4 w3-white w3-round-xlarge w3-padding-large w3-margin center">
-      <h1><img src="fordintysa.png" alt="fordintysa logo"/> <span style="position: relative; bottom: 30px"><strong>Build&nbsp;Server</strong></span></h1>
-      <hr/>
-      <p>This is your private build server running in a Docker container.</p>
-      <p>It contains several components:</p>
-    </div>
-    
-    <div class="w3-layout-container">
-      <div class="w3-layout-cell">
-        <div class="w3-card-4 w3-pale-green w3-round-xlarge w3-padding-16 w3-margin">
-          <div class="w3-margin">
-            <h2 class="center"><a href="/gitlab/" target="_blank">GitLab</a></h2>
-            <hr/>
-            <p>This is where it begins: a dedicated server which stores your source code repository.</p>
-          </div>
+    <head>
+        <meta charset="UTF-8">
+        <title>Fordintysa Build Server</title>
+        <link rel="icon" type="image/png" href="favicon.png">
+        <link rel="stylesheet" href="css/reveal.css">
+        <link rel="stylesheet" href="css/theme/blood.css" id="theme">
+		<link rel="stylesheet" href="css/custom.css">
+        <script src="lib/js/head.min.js "></script>
+        <script src="js/reveal.js"></script>
+    </head>
+    <body>
+        <div class="reveal">
+            <div class="slides">
+                <section data-markdown="homepage.md"  
+                         data-separator="^\n\n\n"  
+                         data-separator-vertical="^\n\n"  
+                         data-separator-notes="^Note:"  
+                         data-charset="iso-8859-15">
+                </section>
+                <section>Slide 2</section>
+            </div>
         </div>
-      </div>
-      <div class="w3-layout-cell">
-        <div class="w3-card-4 w3-pale-green w3-round-xlarge w3-padding-16 w3-margin">
-          <div class="w3-margin">
-            <h2 class="center"><a href="/gitlab/" target="_blank">Jenkins</a></h2>
-            <hr/>
-            <p>Jenkins will execute the build pipeline for you and deliver an artifact.</p>
-          </div>
-        </div>
-      </div>
-      <div class="w3-layout-cell">
-        <div class="w3-card-4 w3-pale-green w3-round-xlarge w3-padding-16 w3-margin">
-          <div class="w3-margin">
-            <h2 class="center"><a href="/sonar/" target="_blank">SonarQube</a></h2>
-            <hr/>
-            <p>Each build execution will deliver reports on unit test coverage etcetera. You can view the results here.</p>
-          </div>
-        </div>
-      </div>
-      <div class="w3-layout-cell">
-        <div class="w3-card-4 w3-pale-green w3-round-xlarge w3-padding-16 w3-margin">
-          <div class="w3-margin">
-            <h2 class="center"><a href="/artifactory/" target="_blank">Artifactory</a></h2>
-            <hr/>
-            <p>After a succesful build, the resulting artefacts are published here for download and deployment.</p>
-          </div>
-        </div>
-      </div>
-      <div class="w3-layout-cell">
-        <div class="w3-card-4 w3-pale-green w3-round-xlarge w3-padding-16 w3-margin">
-          <div class="w3-margin">
-            <h2 class="w3-margin center"><a href="/prince/" target="_blank">The final app</a></h2>
-            <hr/>
-            <p>At the end of the build the final application is deployed here for a final test by the end user (that's you!) What is it going to be, Ali Baba?</p>
-          </div>
-        </div>
-      </div>
-    </div>
-
-    <div class="w3-accordion w3-light-grey w3-round-xlarge">
-      <button onclick="accClick('1')" class="w3-btn-block w3-left-align">
-        1. Sign into GitLab
-      </button>
-      <div id="part-1" class="w3-accordion-content">
-        <p>Lorem ipsum...</p>
-      </div>
-      
-      <button onclick="accClick('2')" class="w3-btn-block w3-left-align">
-        2. Clone the Repository
-      </button>
-      <div id="part-2" class="w3-accordion-content">
-        <p>Lorem ipsum...</p>
-      </div>
-    </div>
-  </body>
+        <script>
+Reveal.initialize({
+	controls: true,
+    history: true,
+    center: false,
+    dependencies: [
+					{ src: 'plugin/highlight/highlight.js', async: true, callback: function() { hljs.configure({  languages: ['java', 'bash', 'yaml', 'docker'] }); hljs.initHighlighting();hljs.initHighlightingOnLoad(); } },
+					{ src: 'lib/js/classList.js', condition: function() { return !document.body.classList; } },
+					{ src: 'plugin/markdown/marked.js', condition: function() { return !!document.querySelector( '[data-markdown]' ); }, callback: function() { marked.setOptions({  }); } },
+					{ src: 'plugin/markdown/markdown.js', condition: function() { return !!document.querySelector( '[data-markdown]' ); } },
+					{ src: 'plugin/zoom-js/zoom.js', async: true },
+					{ src: 'plugin/menu/menu.js', async: true },
+					{ src: 'plugin/search/search.js', async: true },
+					{ src: 'plugin/notes/notes.js', async: true }
+    ]
+});
+        </script>
+    </body>
 </html>
