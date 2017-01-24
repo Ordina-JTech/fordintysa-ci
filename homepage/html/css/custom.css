@@ -1,5 +1,6 @@
 .reveal {
   font-size: 30px;
+  color: #4d2959;
 }
 
 .reveal p {
@@ -27,6 +28,10 @@
   max-height: 85%;
   max-width: 85%;
 }
+.reveal section img {
+  border: none;
+}
+
 .reveal  img[alt~="logo"] {
 }
 
@@ -48,6 +53,7 @@
 .reveal h5,
 .reveal h6 {
   color: #D98030;
+  text-transform: none;
 }
 
 .reveal table td {
