@@ -43,7 +43,8 @@ ip=`ip route | awk '/eth1/ { print $9 }'`
 echo -e "Detected ip address: ${whi}${ip}${gry}"
 echo -n "Is that correct? (y/n) : "
 read -n 1 answer
-if [ $answer -ne "y" ] && [ $answer -ne "Y" ]
+echo ""
+if [ $answer != "y" ] && [ $answer != "Y" ]
   then
     echo -n "Enter your ip address : "
 	read ip
