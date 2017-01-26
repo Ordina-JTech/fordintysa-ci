@@ -69,7 +69,7 @@ docker-machine ssh fordintysa-ci
 
  * Clone this repository and checkout branch `infra` with the following command:
 ```
-git clone http://192.168.1.17:8086/GitBlit/r/ordina-jtech/fordintysa-ci.git -b infra
+git clone https://github.com/ordina-jtech/fordintysa-ci.git -b infra
 ```
 (TODO: change to GitHub repo)
 
