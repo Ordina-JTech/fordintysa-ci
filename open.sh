@@ -38,6 +38,17 @@ echo -e "${whi} [ ]  ${cya}\__/|   |___|  | ${yel}  __/|___ __/|  ||  ||___ ${cy
 echo -e "${whi}O===O                                                 ${whi}O===O"
 echo -e "${gry}"
 
+## check the ip address
+ip=`ip route | awk '/eth1/ { print $9 }'`
+echo -e "Detected ip address: ${whi}${ip}${gry}"
+echo -n "Is that correct? (y/n) : "
+read -n 1 answer
+if [ $answer -ne "y" ] && [ $answer -ne "Y" ]
+  then
+    echo -n "Enter your ip address : "
+	read ip
+fi
+
 ## is docker-compose installed?
 docker-compose version 2> /dev/null
 if [ $? -ne 0 ]
@@ -53,7 +64,6 @@ if [ $? -ne 0 ]
 fi
 
 # prepare files for docker-compose
-ip=`ip route | awk '/eth1/ { print $9 }'`
 cat $1 | sed s/$\{ip\}/$ip/ > docker-compose.yml
  
 # build the composition
