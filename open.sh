@@ -41,7 +41,7 @@ echo -e "${gry}"
 ## check the ip address
 ip=`ip route | awk '/eth1/ { print $9 }'`
 echo -e "Detected ip address: ${whi}${ip}${gry}"
-echo -n "Is that correct? (y/n) : "
+echo -n "Is this correct? (y/n) : "
 read -n 1 answer
 echo ""
 if [ $answer != "y" ] && [ $answer != "Y" ]
@@ -75,5 +75,7 @@ if [ $? -ne 0 ]
     exit
 fi
 
-echo -e "Your build server will be up & running at ${grn}http://${ip}/${gry} after you enter the following command, until you type ${whi}Ctrl-C${gry}:"
+echo -e "Your build server will be up & running at ${grn}http://${ip}/${gry}"
+echo -e "if you enter the following command:"
 echo -e "${whi}   docker-compose up${gry}"
+echo -e "Press ${whi}Ctrl-C${gry} to stop it."
