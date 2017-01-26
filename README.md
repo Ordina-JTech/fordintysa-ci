@@ -56,9 +56,8 @@ docker-machine stop default
 
  * Instead of the dinky `default` machine we'll create one with 4 CPU cores instead of one, 8 GB RAM instead of one, and connected to our private Docker Registry:
 ```
-docker-machine create fordintysa-ci --driver virtualbox --virtualbox-cpu-count "4" --virtualbox-memory "8192" --engine-insecure-registry 172.18.18.32/32 --engine-registry-mirror http://172.18.18.32:5000
+docker-machine create fordintysa-ci --driver virtualbox --virtualbox-cpu-count "2" --virtualbox-memory "4096"
 ```
-(TODO: change IP address of private Docker registry)
 
  * Now you can login to the newly created VM with ssh (Secure Shell) as follows:
 ```
