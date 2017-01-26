@@ -14,3 +14,8 @@ services:
     environment:
       - GITLAB_OMNIBUS_CONFIG=external_url 'http://${ip}/gitlab';
       - GITLAB_ROOT_PASSWORD=sysadmin
+  gitblit:
+    build: ./gitblit/
+    ports:
+      - "5000:8080"
+

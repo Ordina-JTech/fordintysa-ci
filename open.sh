@@ -66,6 +66,7 @@ fi
 
 # prepare files for docker-compose
 cat $1 | sed s/$\{ip\}/$ip/ > docker-compose.yml
+git clone . ./gitblit/tmp/fordintys-ci.git --bare
  
 # build the composition
 docker-compose build
