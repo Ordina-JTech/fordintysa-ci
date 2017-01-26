@@ -44,6 +44,11 @@ if [ $? -ne 0 ]
   then
     echo -e "${whi}Installing docker-compose${gry}"
     curl -L https://github.com/docker/compose/releases/download/1.7.1/docker-compose-`uname -s`-`uname -m` > /usr/local/bin/docker-compose
+	if [ $? -ne 0 ]
+	  then
+	    echo "Sorry, something went wrong..."
+		exit
+	fi
     chmod +x /usr/local/bin/docker-compose
 fi
 
