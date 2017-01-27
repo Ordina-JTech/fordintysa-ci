@@ -1,6 +1,6 @@
-## <img src="images/fordintysa.png"></img>&nbsp;&nbsp;<span style="position: relative; bottom: 35px">Build Server</span>
+# ![](images/fordintysa.png) <span>Build Server</span>
 
-This is your private build server running in a Docker container.
+This is your private build server running in Docker containers.
 
 The goal of this workshop is to give you some hands-on experience with the apps listed in the menu bar on the bottom.
 
@@ -15,14 +15,14 @@ The goal of this workshop is to give you some hands-on experience with the apps 
 
 
 
-## ![](images/gitlab.png) <span style="position: relative; bottom: 60px">GitLab &mdash; Introduction</span>
+## ![gitlab-logo](images/gitlab.png) <span>GitLab &mdash; Introduction</span>
 
 GitLab is a bit like GitHub. You already know about [GitHub](https://github.com/), right!?
 
 In this workshop we'll use GitLab only to 'serve' a git repository, but it can do [much more](https://about.gitlab.com/).
 
 
-## ![](images/gitlab.png) <span style="position: relative; bottom: 60px">GitLab &mdash; Register & Login</span>
+## ![gitlab-logo](images/gitlab.png) <span>GitLab &mdash; Register & Login</span>
 
   - Click the __GitLab__ shortcut in the menu bar
    <small>NB: it might take a while before the container is ready. 
@@ -30,12 +30,12 @@ In this workshop we'll use GitLab only to 'serve' a git repository, but it can d
   - Register yourself as a new user and log in
 
 
-## ![](images/gitlab.png) <span style="position: relative; bottom: 60px">GitLab &mdash; New Repository</span>
+## ![gitlab-logo](images/gitlab.png) <span>GitLab &mdash; New Repository</span>
 
 Ipsum lorem...
 
 
 
-## ![](images/jenkins.png) <span style="position: relative; bottom: 60px">Jenkins &mdash; Introduction</span>
+## ![jenkins-logo](images/jenkins.png) <span>Jenkins &mdash; Introduction</span>
 
 Ipsum lorem

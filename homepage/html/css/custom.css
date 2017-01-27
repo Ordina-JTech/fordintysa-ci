@@ -3,12 +3,6 @@
   color: #4d2959;
 }
 
-.reveal p {
-  /* text-align: justify;
-  -moz-text-align-last: center;
-  text-align-last: center; */
-}
-
 .reveal li > code {
   font-size: 25px;
   color: #162955;
@@ -30,13 +24,17 @@
 }
 .reveal section img {
   border: none;
+  margin: 0;
 }
 
-.reveal  img[alt~="logo"] {
+.reveal h1 img+span {
+  position: relative;
+  bottom: 0.175em;
 }
 
-.reveal  img[alt~="pipeline"] {
-   width: 700px;
+.reveal h2 img+span {
+  position: relative;
+  bottom: 0.62em;
 }
 
 .reveal  img[alt~="headshot"] {
@@ -89,6 +87,7 @@
   padding-top: 0.3em;
   padding-bottom: 0.3em;
 }
+
 #menubar img {
   width: 32px;
   position: relative;
