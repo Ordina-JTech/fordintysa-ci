@@ -66,7 +66,17 @@ fi
 
 # prepare files for docker-compose
 cat $1 | sed s/$\{ip\}/$ip/ > docker-compose.yml
-git clone . ./gitblit/tmp/fordintys-ci.git --bare
+if [ -d ./gitblit/tmp ]
+  then
+    rm -rf ./gitblit/tmp
+fi
+git clone https://github.com/ordina-jtech/fordintysa-ci.git ./gitblit/tmp/ --bare
+if [ $? -ne 0 ]
+  then
+    echo "Sorry, something went wrong..."
+    exit
+fi
+
  
 # build the composition
 docker-compose build
