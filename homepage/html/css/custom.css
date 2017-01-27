@@ -84,8 +84,9 @@
   background-color: rgba(200,100,100,0.1);
   margin-right: 0.3em;
   padding: 0.3em;
-  padding-top: 0.3em;
-  padding-bottom: 0.3em;
+  padding-top: 0.6em;
+  padding-bottom: 0.4em;
+  font-size: 80%;
 }
 
 #menubar img {
