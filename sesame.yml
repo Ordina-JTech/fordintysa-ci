@@ -16,6 +16,4 @@ services:
       - GITLAB_ROOT_PASSWORD=sysadmin
   gitblit:
     build: ./gitblit/
-    ports:
-      - "5000:8080"
 
