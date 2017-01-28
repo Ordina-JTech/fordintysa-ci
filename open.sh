@@ -70,7 +70,7 @@ if [ -d ./gitblit/tmp ]
   then
     rm -rf ./gitblit/tmp
 fi
-git clone https://github.com/ordina-jtech/fordintysa-ci.git ./gitblit/tmp/fordintysa-ci.git --bare
+git clone https://github.com/ordina-jtech/fordintysa-ci.git ./gitblit/tmp/OrdinaJTech/fordintysa-ci.git --bare
 if [ $? -ne 0 ]
   then
     echo "Sorry, something went wrong..."
