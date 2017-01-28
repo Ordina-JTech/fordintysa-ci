@@ -85,7 +85,7 @@ cat ./gitblit/mutable-java.config >> ./gitblit/tmp/jqno/mutable-java.git/config
 git clone https://github.com/jqno/equalsverifier.git ./gitblit/tmp/jqno/equalsverifier.git --bare
 cat ./gitblit/equalsverifier.config >> ./gitblit/tmp/jqno/equalsverifier.git/config
 
-git clone https://github.com/IvoNet/ApacheCommonsEqualsHashcode.git ./gitblit/tmp/IvoNet/ApacheCommonsEqualsHashcode.git
+git clone https://github.com/IvoNet/ApacheCommonsEqualsHashcode.git ./gitblit/tmp/IvoNet/ApacheCommonsEqualsHashcode.git --bare
 cat ./gitblit/equalshashcode.config >> ./gitblit/tmp/IvoNet/ApacheCommonsEqualsHashcode.git/config
  
 # build the composition
