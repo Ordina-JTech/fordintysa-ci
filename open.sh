@@ -80,7 +80,7 @@ cat ./gitblit/fordintysa.config >> ./gitblit/tmp/OrdinaJTech/fordintysa-ci.git/c
 
 ## clone some extra repos:
 git clone https://github.com/jqno/mutable-java.git ./gitblit/tmp/jqno/mutable-java.git --bare
-cat .gitblit/mutable-java.config >> ./gitblit/tmp/jqno/mutable-java.git/config
+cat ./gitblit/mutable-java.config >> ./gitblit/tmp/jqno/mutable-java.git/config
 
 git clone https://github.com/jqno/equalsverifier.git ./gitblit/tmp/jqno/equalsverifier.git --bare
 cat ./gitblit/equalsverifier.config >> ./gitblit/tmp/jqno/equalsverifier.git/config
