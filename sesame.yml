@@ -5,15 +5,6 @@ services:
     build: ./homepage/
     ports:
      - "80:80"
-  gitlab:
-    image: gitlab/gitlab-ce:latest
-    volumes:
-      - './gitlab/config:/etc/gitlab'
-      - './gitlab/data:/var/opt/gitlab'
-      - './gitlab/logs:/var/log/gitlab'
-    environment:
-      - GITLAB_OMNIBUS_CONFIG=external_url 'http://${ip}/gitlab';
-      - GITLAB_ROOT_PASSWORD=sysadmin
   gitblit:
     build: ./gitblit/
 
