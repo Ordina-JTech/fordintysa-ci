@@ -22,21 +22,27 @@ The first requirement for practicing [Continuous Integration](https://en.wikiped
 
 By far the most popular SCM is [Git](https://git-scm.com/). You probably have a [git client](https://git-scm.com/downloads) installed on your PC, often integrated with your IDE. If not, now is a good time!
 
-Having a local repository is already a step forwards, but if you're working in a team on the same code base, it makes sense to connect it to a server.
+Having a local repository is already a step forwards, but if you're working in a team on the same code base, it makes sense to host it on a server.
 
 
 ## ![gitblit-logo](images/gitblit.png) <span>GitBlit &mdash; Introduction (2)</span>
 
-[GitBlit](http://gitblit.com/) is a basic repository management tool for hosting git repositories. It's a bit like GitHub used to be ten years ago. 
-
-While GitHub has extended it's features with an integrated wiki, issue tracking system, online code editing etc, Gitblit concentrates on one thing: serving your central repositories.
+[GitBlit](http://gitblit.com/) is a basic repository management tool for hosting git repositories on your own server. It does not try to be a full collaborative development environment, like <small>[GitBucket](https://gitbucket.github.io/gitbucket-news/about/)</small> it just hosts repositories.
+There are plenty other systems <small>([GitHub](https://github.com/), [GitLab](https://about.gitlab.com/), [Phabricator](https://www.phacility.com/), [SCM Manager](https://www.scm-manager.org/), and [Tuleap](https://www.tuleap.org/) to name a few)</small> 
+that offer more functionality. But for this workshop GitBlit is just fine.
 
 So let's give it a spin!
 
 
-## ![gitblit-logo](images/gitblit.png) <span>GitBlit &mdash; Register & Login</span>
+## ![gitblit-logo](images/gitblit.png) <span>GitBlit &mdash; Browsing Repository</span>
 
   - Click in the menu bar on __GitBlit__
+  - The first screen you see is the Dashboard, which is not that interesting.
+  - In the top menu pick the second option: **repositories**
+
+
+## ![gitblit-logo](images/gitblit.png) <span>GitBlit &mdash; Register & Login</span>
+
   - You can login with user&ensp;`user`&ensp;& password&ensp;`password`<br/><br/>
     ### ... or create your own account:
   - Login with user&ensp;`root`&ensp;& password&ensp;`sysadmin`
@@ -46,9 +52,6 @@ So let's give it a spin!
   - Log out and try to log in again using your own account
 
 
-## ![gitblit-logo](images/gitblit.png) <span>GitBlit &mdash; Browse Repository</span>
-
-Ipsum lorem...
 
 
 
