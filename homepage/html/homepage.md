@@ -34,11 +34,14 @@ that offer more functionality. But for this workshop GitBlit is just fine.
 So let's give it a spin!
 
 
-## ![gitblit-logo](images/gitblit.png) <span>GitBlit &mdash; Browsing Repository</span>
+## ![gitblit-logo](images/gitblit.png) <span>GitBlit &mdash; Repository Browsing</span>
 
-  - Click in the menu bar on __GitBlit__
-  - The first screen you see is the Dashboard, which is not that interesting.
-  - In the top menu pick the second option: **repositories**
+  - Click in the menu bar on __GitBlit__. The first screen you see is the Dashboard, which is not that interesting.
+  - In the top menu pick the second option: **Repositories**. We have pre-loaded a couple repositories into GitBlit. Take a look at for instance repository **jqno/equalsverifier**. 
+  - On the **Overview** screen you can see some *commits*, *tags* and *branches*.
+  - Also try the menu with *commits*, *tree* <small>(source code)</small> and *docs*.
+
+Don't spend too much time here, there's lots more to do. For instance, you cannot yet reach the most important repository because it needs your authentication. We'll do that next!
 
 
 ## ![gitblit-logo](images/gitblit.png) <span>GitBlit &mdash; Register & Login</span>
@@ -46,12 +49,21 @@ So let's give it a spin!
   - You can login with user&ensp;`user`&ensp;& password&ensp;`password`<br/><br/>
     ### ... or create your own account:
   - Login with user&ensp;`root`&ensp;& password&ensp;`sysadmin`
-  - Open the ![](images/gb_menudropdown.png) menu at the top right and select **Users** / _Gebruikers_
-  - At the top right there's a link to create a new user
-  - Fill in the form <small>(select options at your own risk)</small> and save
+  - Open the ![](images/gb_menudropdown.png) menu at the top right and select **Users** (_Gebruikers_)
+  - At the top right there's a link to create a new user so fill in that form.
+  - Do select 'admin' (_mag beheren_) <small>(other options at your own risk)</small> and save.
   - Log out and try to log in again using your own account
 
+Now you can access our repository **OrdinaJTech/fordintysa-ci**
 
+
+## ![gitblit-logo](images/gitblit.png) <span>GitBlit &mdash; Clone the Repository</span>
+
+We'll be making some small changes to the code in our repository, so you need to make a clone to your own computer.
+
+  - Om the overview screen of our repository `OrdinaJTech/fordintysa-ci` you'll find the attribute **repositorie url**.
+  - The quickest way to copy the url is to click on the ![](images/gb_copyurl.png) icon between the words `.git` and `RW+`.
+  - Use your favorite tools to make a clone of the repository.
 
 
 
