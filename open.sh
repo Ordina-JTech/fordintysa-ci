@@ -73,6 +73,7 @@ if [ -d ./gitblit/tmp ]
   then
     rm -rf ./gitblit/tmp
 fi
+echo -e "${whi}Clone some GitHub repositories...${gry}"
 git clone https://github.com/ordina-jtech/fordintysa-ci.git ./gitblit/tmp/OrdinaJTech/fordintysa-ci.git --bare
 if [ $? -ne 0 ]
   then
@@ -92,6 +93,7 @@ git clone https://github.com/IvoNet/ApacheCommonsEqualsHashcode.git ./gitblit/tm
 cat ./gitblit/equalshashcode.config >> ./gitblit/tmp/IvoNet/ApacheCommonsEqualsHashcode.git/config
  
 # build the composition
+echo -e "${whi}Start docker-compose build...${gry}"
 docker-compose build
 if [ $? -ne 0 ]
   then
