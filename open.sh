@@ -1,5 +1,12 @@
 #!/bin/sh
 
+## is docker installed?
+docker --version 1> /dev/null
+if [ $? -ne 0 ]
+  then
+    exit
+fi
+
 # some literals with ANSI escape sequences for switching colours
 red='\033[0;31m'
 grn='\033[0;32m'
