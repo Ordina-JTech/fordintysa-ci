@@ -1,12 +1,4 @@
 ansicolor:0.4.2
-artifactory:2.5.1
-checkstyle:3.47
-cobertura:1.9.8
-git-client:2.2.1
-git:3.0.1
 greenballs:1.15
-junit:1.19
 mask-passwords:2.9
-maven-plugin:2.14
-parameterized-trigger:2.32
 scm-api:1.3
