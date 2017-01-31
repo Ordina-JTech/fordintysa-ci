@@ -1,7 +1,7 @@
 FROM jenkins:2.32.1
 MAINTAINER Ordina <no-reply@ordina.nl>
 
-ENV --prefix=/jenkins
+ENV JENKINS_ARGS "--prefix=/jenkins"
 
 USER root
 RUN apt-get update \
