@@ -48,14 +48,20 @@ echo -e "${gry}"
 ## check the ip address
 ip=`ip route | awk '/eth1/ { print $9 }'`
 echo -e "Detected ip address: ${whi}${ip}${gry}"
-echo -n "Is this correct? (y/n) : "
-read -n 1 answer
-echo ""
-if [ $answer != "y" ] && [ $answer != "Y" ]
-  then
-    echo -n "Enter your ip address : "
-	read ip
-fi
+case "$ip" in
+  192.168.99.*)
+    # looks alright
+    ;;
+  *)
+    echo -n "Is this correct? (y/n) : "
+    read -n 1 answer
+    echo ""
+    if [ $answer != "y" ] && [ $answer != "Y" ]
+      then
+        echo -n "Enter your ip address : "
+    	read ip
+    fi
+esac
 
 ## is docker-compose installed?
 docker-compose version 2> /dev/null
@@ -73,32 +79,42 @@ fi
 
 # prepare files for docker-compose
 cat $1 | sed s/$\{ip\}/$ip/ > docker-compose.yml
-mkdir ./homepage/tmp
+mkdir ./homepage/tmp 2> /dev/null
 cat ./homepage/default.conf | sed s/$\{ip\}/$ip/ > ./homepage/tmp/default.conf
 
+clone=y
 if [ -d ./gitblit/tmp ]
   then
-    rm -rf ./gitblit/tmp
+    echo -n "Remove and re-clone repositories from GitHub? (y/n) : "
+    read -n 1 clone
+    if [ $clone = "y" ] || [ $clone = "Y" ]
+      then
+        rm -rf ./gitblit/tmp
+    fi
 fi
-echo -e "${whi}Clone some GitHub repositories...${gry}"
-git clone https://github.com/ordina-jtech/fordintysa-ci.git ./gitblit/tmp/OrdinaJTech/fordintysa-ci.git --bare
-if [ $? -ne 0 ]
+echo ""
+if [ $clone = "y" ] || [ $clone = "Y" ]
   then
-    echo "Sorry, something went wrong..."
-    exit
+    echo -e "${whi}Clone some GitHub repositories...${gry}"
+    git clone https://github.com/ordina-jtech/fordintysa-ci.git ./gitblit/tmp/OrdinaJTech/fordintysa-ci.git --bare
+    if [ $? -ne 0 ]
+      then
+        echo "Sorry, something went wrong..."
+        exit
+    fi
+    cat ./gitblit/fordintysa.config >> ./gitblit/tmp/OrdinaJTech/fordintysa-ci.git/config
+    
+    ## clone some extra repos:
+    git clone https://github.com/jqno/equalsverifier.git ./gitblit/tmp/jqno/equalsverifier.git --bare
+    cat ./gitblit/equalsverifier.config >> ./gitblit/tmp/jqno/equalsverifier.git/config
+    
+    git clone https://github.com/jqno/mutable-java.git ./gitblit/tmp/jqno/mutable-java.git --bare
+    cat ./gitblit/mutable-java.config >> ./gitblit/tmp/jqno/mutable-java.git/config
+    
+    git clone https://github.com/IvoNet/ApacheCommonsEqualsHashcode.git ./gitblit/tmp/IvoNet/ApacheCommonsEqualsHashcode.git --bare
+    cat ./gitblit/equalshashcode.config >> ./gitblit/tmp/IvoNet/ApacheCommonsEqualsHashcode.git/config
 fi
-cat ./gitblit/fordintysa.config >> ./gitblit/tmp/OrdinaJTech/fordintysa-ci.git/config
 
-## clone some extra repos:
-git clone https://github.com/jqno/equalsverifier.git ./gitblit/tmp/jqno/equalsverifier.git --bare
-cat ./gitblit/equalsverifier.config >> ./gitblit/tmp/jqno/equalsverifier.git/config
-
-git clone https://github.com/jqno/mutable-java.git ./gitblit/tmp/jqno/mutable-java.git --bare
-cat ./gitblit/mutable-java.config >> ./gitblit/tmp/jqno/mutable-java.git/config
-
-git clone https://github.com/IvoNet/ApacheCommonsEqualsHashcode.git ./gitblit/tmp/IvoNet/ApacheCommonsEqualsHashcode.git --bare
-cat ./gitblit/equalshashcode.config >> ./gitblit/tmp/IvoNet/ApacheCommonsEqualsHashcode.git/config
- 
 # build the composition
 echo -e "${whi}Start docker-compose build...${gry}"
 docker-compose build
