@@ -5,7 +5,7 @@ ENV JENKINS_OPTS "--prefix=/jenkins"
 
 USER root
 RUN apt-get update \
- && apt-get install wget curl apt-transport-https openjdk-8-jre maven -y \
+ && apt-get install wget curl apt-transport-https maven -y \
  && apt-get clean \
  && rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/*
 
