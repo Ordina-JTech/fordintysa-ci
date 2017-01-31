@@ -1,4 +1,0 @@
-ansicolor:0.4.2
-greenballs:1.15
-mask-passwords:2.9
-scm-api:1.3
