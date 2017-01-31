@@ -9,5 +9,6 @@ RUN apt-get update \
 
 USER jenkins
 
+COPY config.xml /var/jenkins_home/config.xml
 COPY plugins.txt /usr/share/jenkins/plugins.txt
 RUN /usr/local/bin/plugins.sh /usr/share/jenkins/plugins.txt
