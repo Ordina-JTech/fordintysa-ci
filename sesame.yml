@@ -9,3 +9,5 @@ services:
     build: ./gitblit/
   jenkins:
     build: ./jenkins/
+  artifactory:
+    image: docker.bintray.io/jfrog/artifactory-oss:4.16.0
