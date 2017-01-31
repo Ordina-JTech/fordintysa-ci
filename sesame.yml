@@ -9,5 +9,3 @@ services:
     build: ./gitblit/
   jenkins:
     build: ./jenkins/
-    volumes:
-      - ./data:/var/jenkins_home 
