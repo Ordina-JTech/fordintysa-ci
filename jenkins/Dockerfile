@@ -5,9 +5,16 @@ ENV JENKINS_OPTS "--prefix=/jenkins"
 
 USER root
 RUN apt-get update \
- && apt-get install wget curl apt-transport-https maven -y \
+ && apt-get install wget curl apt-transport-https -y \
  && apt-get clean \
  && rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/*
+
+ENV MAVEN_VERSION 3.3.9
+RUN \
+    curl -sSL http://archive.apache.org/dist/maven/maven-3/$MAVEN_VERSION/binaries/apache-maven-$MAVEN_VERSION-bin.tar.gz | tar xzf - -C /usr/share && \
+    mv /usr/share/apache-maven-$MAVEN_VERSION /usr/share/maven && \
+    ln -s /usr/share/maven/bin/mvn /usr/bin/mvn
+ENV MAVEN_HOME /usr/share/maven
 
 USER jenkins
 
