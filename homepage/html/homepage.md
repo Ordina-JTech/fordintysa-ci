@@ -79,6 +79,36 @@ We'll be making some small changes to the code in our repository, so you need to
 Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
 
 
+## ![jenkins-logo](images/jenkins.png) <span>Jenkins &mdash; Login</span>
+
+  - Click in the menu bar on __Jenkins__.<br/>
+  - Login with user&ensp;`user`&ensp;& password&ensp;`password`<br/>
+    _Jenkins will show a screen **Customize Jenkins** that allows you to add extra plugins. Not nescessary, since all the plugins you need are already installed._
+  - Click on the `x` at the top right.<br/>
+    _Jenkins reports it's **ready**._
+  - Click the button **Start using Jenkins**
+
+
+## ![jenkins-logo](images/jenkins.png) <span>Jenkins &mdash; Create the build item</span>
+
+  - Click on the link **Create new Item** (_Cre&euml;er nieuwe taken_)
+  - Enter an item name (eg&ensp;`fordintysa`)
+  - Select the box **Maven Build** (_Bouw een Maven item_)
+  - Click **OK**
+
+The item is now created, and we can configure it further.
+
+In the first tab **General** you can give the item a description, specify it needs parameters, deactivate it, etcetera.
+We don't need these features, so leave them as is.
+
+
+## ![jenkins-logo](images/jenkins.png) <span>Configure Build Item &mdash; SCM</span>
+
+Ofcourse Jenkins needs to clone our Git repository.
+  - Select **Git** as the SCM source.<br/>
+  
+
+
 ## ![jenkins-logo](images/jenkins.png) <span>Jenkins &mdash; Build the Project</span>
 
 Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
