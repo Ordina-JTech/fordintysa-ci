@@ -92,21 +92,43 @@ Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor i
 ## ![jenkins-logo](images/jenkins.png) <span>Jenkins &mdash; Create the build item</span>
 
   - Click on the link **Create new Item** (_Cre&euml;er nieuwe taken_)
-  - Enter an item name (eg&ensp;`fordintysa`)
+  - Enter an appropriate item name (eg&ensp;`fordintysa`)
   - Select the box **Maven Build** (_Bouw een Maven item_)
   - Click **OK**
 
 The item is now created, and we can configure it further.
 
-In the first tab **General** you can give the item a description, specify it needs parameters, deactivate it, etcetera.
-We don't need these features, so leave them as is.
+<small>In the first tab **General** you can give the item a description, specify it needs parameters, deactivate it, etc.<br/>
+We don't need these features, so leave them as is.<br/><br/>
+On the next pages we'll cover the most important parts you can configure in a Jenkins build item.</small>
 
 
-## ![jenkins-logo](images/jenkins.png) <span>Configure Build Item &mdash; SCM</span>
+## ![jenkins-logo](images/jenkins.png) <span>Configure Build Item &mdash; SCM (1)</span>
 
-Ofcourse Jenkins needs to clone our Git repository.
-  - Select **Git** as the SCM source.<br/>
+Jenkins needs to clone our repository hosted by GitBlit, and it needs the URL.
+
+  - Select **Git** as the SCM source.
+  - Switch your browser window to **GitBlit** and select the `fordintysa-ci` repository.
+  - Put it's URL in your copy-paste buffer, as explained [previously](#/1/4)
+  - Switch back to **Jenkins** and paste the URL.
+
+You'll see an error message, because part of the URL is your GitBlit userid and the password is not given. You're not going to let anyone else use that, not even Jenkins!
+
+
+## ![jenkins-logo](images/jenkins.png) <span>Configure Build Item &mdash; SCM (2)</span>
+
+GitBlit is already set up with an account for Jenkins, so we'll use that.
+
+  - Remove the part of the URL containing your userid.<br/>
+  - Click on the **Add** button next to **Credentials** and select **Jenkins** popping out.</br>
+    _A window shows up where you can enter the credentials:_
+      - Username:&ensp;`jenkins`
+	  - Password:&ensp;`jenkins`
+  - Select `jenkins` in the Credentials dropdown box.
   
+Now the error message should be gone.
+
+There are plenty other options in the SCM panel, but we'll see some of that later.
 
 
 ## ![jenkins-logo](images/jenkins.png) <span>Jenkins &mdash; Build the Project</span>
