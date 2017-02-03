@@ -40,13 +40,13 @@ So let's give it a spin!
 
 ## ![gitblit-logo](images/gitblit.png) <span>GitBlit &mdash; Repository Browsing</span>
 
-  - Click in the menu bar on __GitBlit__.
-      * The first screen you see is the Dashboard, which is not that interesting.
-  - In the top menu pick the second option: **Repositories**.
-      * We have pre-loaded a couple repositories into GitBlit.
-	  * Take a look at repository `jqno/equalsverifier`. 
+  - Click in the menu bar on __GitBlit__.<br/>
+	<small>_The first screen you see is the Dashboard, which is not that interesting._</small>
+  - In the top menu pick the second option: **Repositories**.<br/>
+    <small>_We have pre-loaded a couple repositories from GitHub into GitBlit._</small>
+  - Take a look at repository `jqno/equalsverifier`.<br/>
+    <small>_This is a quite mature project which uses tags & feature branches._</small>
   - On the **Overview** screen you can see some *commits*, *tags* and *branches*.
-      * This is a quite mature project which uses tags & feature branches.
   - Also try the menu with *commits*, *tree* <small>(view the source code)</small> and *docs*.
 
 <small>Don't spend too much time here, there's lots more to do. For instance, you cannot yet reach the most important repository because it needs your authentication. We'll do that next!</small>
