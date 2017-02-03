@@ -30,7 +30,7 @@ RUN /usr/local/bin/install-plugins.sh \
   greenballs:1.15 \
   mask-passwords:2.9 \
   maven-plugin:2.14 \
-  scm-api:1.3 \
+  scm-api:1.3
 
 ENV JENKINS_ARGS="--prefix=/jenkins"
 COPY ./data/ /var/jenkins_home/
