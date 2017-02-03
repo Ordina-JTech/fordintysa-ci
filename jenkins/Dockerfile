@@ -16,6 +16,11 @@ RUN \
     ln -s /usr/share/maven/bin/mvn /usr/bin/mvn
 ENV MAVEN_HOME /usr/share/maven
 
+# shared volume for tomcat
+RUN mkdir /tomcat-webapps-volume && chown jenkins /tomcat-webapps-volume
+VOLUME /tomcat-webapps-volume
+RUN chmod 666 -R /tomcat-webapps-volume
+
 USER jenkins
 
 RUN /usr/local/bin/install-plugins.sh ansicolor:0.4.2 greenballs:1.15 mask-passwords:2.9 scm-api:1.3 git-client:2.2.1 git:3.0.1 maven-plugin:2.14 artifactory:2.5.1
