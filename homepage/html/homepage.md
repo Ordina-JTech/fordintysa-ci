@@ -54,8 +54,6 @@ So let's give it a spin!
 
 ## ![gitblit-logo](images/gitblit.png) <span>GitBlit &mdash; Register & Login</span>
 
-  - You can login with user&ensp;`user`&ensp;& password&ensp;`password`<br/><br/>
-    ### ... or create your own account:
   - Login with user&ensp;`root`&ensp;& password&ensp;`sysadmin`
   - Open the ![](images/gb_menudropdown.png) menu at the top right and select **Users** (_Gebruikers_)
   - At the top right there's a link to create a new user so fill in that form.
