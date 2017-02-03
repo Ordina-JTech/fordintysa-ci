@@ -1,4 +1,4 @@
-FROM jenkins:2.32.1
+FROM jenkins:2.32.2
 MAINTAINER Ordina <no-reply@ordina.nl>
 
 ENV JENKINS_OPTS "--prefix=/jenkins"
