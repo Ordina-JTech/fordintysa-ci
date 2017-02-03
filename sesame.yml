@@ -5,6 +5,8 @@ services:
     build: ./homepage/
     ports:
      - "80:80"
+    depends_on:
+      - gitblit
   gitblit:
     build: ./gitblit/
   jenkins:
