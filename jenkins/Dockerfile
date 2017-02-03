@@ -36,4 +36,4 @@ ENV JENKINS_ARGS="--prefix=/jenkins"
 COPY ./data/ /var/jenkins_home/
 
 USER root
-RUN chmod -R jenkins:jenkins /var/jenkins_home
+RUN chown -R jenkins:jenkins /var/jenkins_home
