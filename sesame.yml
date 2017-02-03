@@ -5,9 +5,20 @@ services:
     build: ./homepage/
     ports:
      - "80:80"
+    depends_on:
+      - gitblit
   gitblit:
     build: ./gitblit/
   jenkins:
     build: ./jenkins/
+    volumes:
+     - tomcatwebapps:/tomcat-webapps-volume
   artifactory:
     image: docker.bintray.io/jfrog/artifactory-oss:4.16.0
+  tomcat:
+    image: tomcat
+    volumes:
+     - tomcatwebapps:/usr/local/tomcat/webapps
+
+volumes:
+  tomcatwebapps:
