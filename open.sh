@@ -78,7 +78,9 @@ if [ $? -ne 0 ]
 fi
 
 # prepare files for docker-compose
-cat $1 | sed s/$\{ip\}/$ip/ > docker-compose.yml
+if [ ! -f docker-compose.yml ]; then
+  ln -s sesame.yml docker-compose.yml
+fi
 mkdir ./homepage/tmp 2> /dev/null
 cat ./homepage/default.conf | sed s/$\{ip\}/$ip/ > ./homepage/tmp/default.conf
 
