@@ -273,18 +273,27 @@ Let's recapitulate what was actually filled in:
 
   1. It's a **Maven project** and it has a **name**.
   1. The **Git repository** URL is given, with credentials for access.
-  1. **Artifactory** is used for resolution of artifacts.
-  1. The `pom.xml` at the default location is built with goals `clean install`
+  1. **Artifactory** is used for resolution of artifacts <small>although its merits are not yet clear</small>
+  1. The `pom.xml` at the default location is used for the Maven goals&ensp;`clean install`
   
 Check? Then push **Save**!
 
 <small>The configuration _can_ be made quite complex, but with minimal effort a simple item can be configured in no time.</small>
 
 
-## ![jenkins-logo](images/jenkins.png) <span>Jenkins &mdash; Build the Project</span>
+## ![jenkins-logo](images/jenkins.png) <span>Jenkins &mdash; First Build</span>
 
-Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
+You're back now at the project page.
 
+About halfway the menu at the left is the option **Build now** (_Start nu een bouwpoging_)
+
+  - Start the build.<br/>
+    <small>The buid will go through scheduling in no time (your build server has not much to do)</small>
+  - Once you see **#1** blink, click on the grey ball.
+    <small>You now see the console. Jenkins has cloned the repo and triggered Maven. Since Maven runs for the first time, it's mainly busy downloading its plugins.</small>
+
+What does it say at the bottom? I bet it's &ensp;`BUILD SUCCESS` !!</br>
+In case of&ensp;`BUILD FAILURE`&ensp;you'll figure out what went wrong.
 
 
 ## ![artifactory-logo](images/artifactory.png) <span>Artifactory &mdash; Introduction</span>
