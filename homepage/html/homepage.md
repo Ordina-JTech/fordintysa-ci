@@ -6,7 +6,7 @@ The goal of this workshop is to give you some hands-on experience with the apps 
 
 ----
 
-<small>Page navigation:
+<small> **Page navigation** :
 
   - Just press **Space** for the next slide
   - **Down** goes to the next page within a chapter
@@ -30,7 +30,7 @@ Having a local repository is already a step forwards, but if you're working in a
 [GitBlit](http://gitblit.com/) is a basic repository management tool for hosting git repositories on your own server. 
 It does not try to be a full collaborative development environment.
 For example [GitHub](https://github.com/), [GitLab](https://about.gitlab.com/), [Phabricator](https://www.phacility.com/), [SCM Manager](https://www.scm-manager.org/), and [Tuleap](https://www.tuleap.org/)
-offer more functionality like a wiki, integrated bug / issue ticket system, etc.
+offer more functionality like an integrated bug / issue ticket system, a wiki, online editing, etc.
 
 Like [GitBucket](https://gitbucket.github.io/gitbucket-news/about/), GitBlit just hosts repositories. So for this workshop GitBlit is just fine.
 <small>(NB: we planned to use GitLab, but that starts up too slow and preloading it with repositories was a headache)</small>
@@ -46,16 +46,29 @@ So let's give it a spin!
     <small>_We have pre-loaded a couple repositories from GitHub into GitBlit._</small>
   - Take a look at repository `jqno/equalsverifier`.<br/>
     <small>_This is a quite mature project which uses tags & feature branches._</small>
-  - On the **Overview** screen you can see some *commits*, *tags* and *branches*.
-  - Also try the menu with *commits*, *tree* <small>(view the source code)</small> and *docs*.
+  - On the **Overview** screen you can see some *commits*<br/>
+    <small>_Scroll down to see *tags* and *branches*._</small>
 
-<small>Don't spend too much time here, there's lots more to do. For instance, you cannot yet reach the most important repository because it needs your authentication. We'll do that next!</small>
+
+## ![gitblit-logo](images/gitblit.png) <span>GitBlit &mdash; Question Time</span>
+
+  1. Can you locate the `readme.md` file?
+  2. At what interval is an update published in the past year?
+  3. Who or what is responsible for increasing the version number?
+  4. There's currently three (or four) active branches.<br/>
+     Was that always the case?
+  
+<small>Press **S** to see the answers.</small>
+
+Note: Answers:<br/>1. Menu option **Tree** or **Docs**.<br/>2. On average once a month.<br/>3. The `maven-release-plugin`.<br/>4. No, there were countless branches for issues & features. After the _merge_ of a branch back into the `master` it's obsolete and deleted. It's just a bookmark...
 
 
 ## ![gitblit-logo](images/gitblit.png) <span>GitBlit &mdash; Register & Login</span>
 
+You haven't seen the most important repository because it needs authentication:
+
   - Login with user&ensp;`root`&ensp;& password&ensp;`sysadmin`
-  - Open the ![](images/gb_menudropdown.png) menu at the top right and select **Users** (_Gebruikers_)
+  - Open the&ensp;![](images/gb_menudropdown.png)&ensp;menu at the top right and select **Users** (_Gebruikers_)
   - At the top right there's a link to create a new user so fill in that form.
   - Do select 'admin' (_mag beheren_) <small>(other options at your own risk)</small> and save.
   - Log out and try to log in again using your own account
@@ -67,10 +80,20 @@ Now you can access our repository **OrdinaJTech/fordintysa-ci**
 
 We'll be making some small changes to the code in our repository, so you need to make a clone to your own computer.
 
-  - On the overview screen of our repository `OrdinaJTech/fordintysa-ci` you'll find the attribute **repositorie url**.
-  - The quickest way to copy the url is to click on the ![](images/gb_copyurl.png) icon between the words `.git` and `RW+`.
+  - On the overview screen of our repository&ensp;`OrdinaJTech/fordintysa-ci`&ensp;you'll find the attribute **repositorie url**.<br/>
+    <small/>The quickest way to copy the url is to click on the ![](images/gb_copyurl.png) icon between the words `.git` and `RW+`.</small>
   - Use your favorite tool to make a clone of the repository.
-  - Import this _Maven_ Project into your favorite Java IDE (NetBeans, Eclipse...)
+  - Test whether the code compiles and all unit tests pass by executing&ensp;`mvn clean test`
+
+
+## ![gitblit-logo](images/gitblit.png) <span>Push a commit to GitBlit</span>
+
+  - Change something in the `readme.md` file in your local repository.
+  - **Commit** the change.
+  - **Push** the commit to the `origin`.
+  - Check in **GitBlit** your commit has arrived.
+  
+You should now have a working Git infrastructure with a local and remote repository.
 
 
 
@@ -79,7 +102,7 @@ We'll be making some small changes to the code in our repository, so you need to
 Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
 
 
-## ![jenkins-logo](images/jenkins.png) <span>Jenkins &mdash; Login</span>
+## ![jenkins-logo](images/jenkins.png) <span>Jenkins &mdash; Register & Login</span>
 
   - Click in the menu bar on __Jenkins__.<br/>
   - Login with user&ensp;`user`&ensp;& password&ensp;`password`<br/>
@@ -109,7 +132,7 @@ Jenkins needs to clone our repository hosted by GitBlit, and it needs the URL.
 
   - Select **Git** as the SCM source.
   - Switch your browser window to **GitBlit** and select the `fordintysa-ci` repository.
-  - Put it's URL in your copy-paste buffer, as explained [previously](#/1/4)
+  - Put it's URL in your copy-paste buffer, as explained [previously](#/1/5)
   - Switch back to **Jenkins** and paste the URL.
 
 You'll see an error message, because part of the URL is your GitBlit userid and the password is not given. You're not going to let anyone else use that, not even Jenkins!
