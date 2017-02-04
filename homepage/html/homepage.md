@@ -56,7 +56,7 @@ So let's give it a spin!
   2. At what interval is an update published in the past year?
   3. Who or what is responsible for increasing the version number?
   4. There's currently three (or four) active branches.<br/>
-     Was that always the case?
+     Is that all there ever was?
   
 <small>Press **S** to see the answers.</small>
 
@@ -97,22 +97,45 @@ You should now have a working Git infrastructure with a local and remote reposit
 
 
 
-## ![jenkins-logo](images/jenkins.png) <span>Jenkins &mdash; Introduction</span>
+## ![jenkins-logo](images/jenkins.png) <span>Jenkins &mdash; Introduction (1)</span>
 
-Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
+Now the SCM is covered, the next requirements of Continuous Integration need attention:
+
+  1. An **Automated Build** process
+  2. Automated **Testing** of the built software
+
+While your IDE can perform these processes, there's no _guarantee_ each developer has done these required steps before submitting their changes to the central repository.
+That's why we need it to be _automated_ and it's the role of a **Build Server** to execute this central part in Continuous Integration.
+
+
+## ![jenkins-logo](images/jenkins.png) <span>Jenkins &mdash; Introduction (2)</span>
+
+There's a [lot of software](https://en.wikipedia.org/wiki/Comparison_of_continuous_integration_software) available for automated builds & tests.
+Which one to chose depends on a couple of factors, like the ability to integrate with the rest of the environment. Think of:
+
+  - Connecting with the Source Code Repository
+  - Ability to compile the source code and perform automated tests
+  - Reporting of Static Code Quality Analysis
+  - Delivery of the compiled code for deployment
+
+Straight out of the box Jenkins cannot even clone a Git repository, but loaded with [plugins](https://plugins.jenkins.io/) that behaviour changes totally.
+What Jenkins does is merely provide a bare frame which is filled in with plugins. 
 
 
 ## ![jenkins-logo](images/jenkins.png) <span>Jenkins &mdash; Register & Login</span>
 
-  - Click in the menu bar on __Jenkins__.<br/>
-  - Login with user&ensp;`user`&ensp;& password&ensp;`password`<br/>
-    _Jenkins will show a screen **Customize Jenkins** that allows you to add extra plugins. Not nescessary, since all the plugins you need are already installed._
-  - Click on the `x` at the top right.<br/>
-    _Jenkins reports it's **ready**._
+  - Click in the menu bar on **Jenkins**. Use the bottom link to **signup as a new user**.
+  - Fill in the form and click **sign up**. <br/>
+    _You should be welcomed with **Success**._
+  - Click on the link to go **back to the top page**.<br/>
+    _You have woken up Jenkins from hybernation. It will show a screen **Customize Jenkins** to add extra plugins. Not nescessary, since all the plugins you need are already installed._
+  - Click on the `x` at the top right to close this _Add Plugins_ window.<br/>
+    _Jenkins reports it's ready._
   - Click the button **Start using Jenkins**
 
 
-## ![jenkins-logo](images/jenkins.png) <span>Jenkins &mdash; Create the build item</span>
+
+## ![jenkins-logo](images/jenkins.png) <span>Jenkins &mdash; Create your first Build Item</span>
 
   - Click on the link **Create new Item** (_Cre&euml;er nieuwe taken_)
   - Enter an appropriate item name (eg&ensp;`fordintysa`)
@@ -123,7 +146,7 @@ The item is now created, and we can configure it further.
 
 <small>In the first tab **General** you can give the item a description, specify it needs parameters, deactivate it, etc.<br/>
 We don't need these features, so leave them as is.<br/><br/>
-On the next pages we'll cover the most important parts you can configure in a Jenkins build item.</small>
+On the next pages we'll cover the most important parts of a Jenkins build item.</small>
 
 
 ## ![jenkins-logo](images/jenkins.png) <span>Configure Build Item &mdash; SCM (1)</span>
@@ -131,27 +154,131 @@ On the next pages we'll cover the most important parts you can configure in a Je
 Jenkins needs to clone our repository hosted by GitBlit, and it needs the URL.
 
   - Select **Git** as the SCM source.
-  - Switch your browser window to **GitBlit** and select the `fordintysa-ci` repository.
+  - Switch your browser window to **GitBlit**
+  - Select the `fordintysa-ci` repository.
   - Put it's URL in your copy-paste buffer, as explained [previously](#/1/5)
   - Switch back to **Jenkins** and paste the URL.
 
-You'll see an error message, because part of the URL is your GitBlit userid and the password is not given. You're not going to let anyone else use that, not even Jenkins!
+You'll see an error message, because part of the URL is your GitBlit userid.
+But the password is not given, and you're not going to let anyone else use that.
+Not even someone as trustworthy as Jenkins!
 
 
 ## ![jenkins-logo](images/jenkins.png) <span>Configure Build Item &mdash; SCM (2)</span>
 
-GitBlit is already set up with an account for Jenkins, so we'll use that.
+We've already set up credentials for Jenkins to connect with GitBlit, so let's use that:
 
-  - Remove the part of the URL containing your userid.<br/>
-  - Click on the **Add** button next to **Credentials** and select **Jenkins** popping out.</br>
-    _A window shows up where you can enter the credentials:_
-      - Username:&ensp;`jenkins`
-	  - Password:&ensp;`jenkins`
-  - Select `jenkins` in the Credentials dropdown box.
-  
+  - Remove the part of the URL containing your userid.
+  - In the Credentials dropdown box, select the _Jenkins credentials for Gitblit_.
+
 Now the error message should be gone.
 
-There are plenty other options in the SCM panel, but we'll see some of that later.
+<small>There are a lot of other options in this section and others, too much to explain them all.
+And most of them can/should be left at their default setting.
+If you're really curious what it does, click on the question mark at the right to display a help text.</small>
+
+
+## ![jenkins-logo](images/jenkins.png) <span>Configure Build Item &mdash; Build Triggers (_Bouwactiveerders_)</span>
+
+Here you can define to let this item build on regular intervals, or triggered by a commit...
+
+Since we're just starting with Jenkins, it's probably best to first trigger all builds manually.
+You can do that anyway, but triggering builds automatically is not our first concern.
+We first have to see whether it works at all before we can automate that.
+
+<small>One of the build trigger items is checked by default: **Build whenever a SNAPSHOT dependency is built**.<br/><br/>
+This needs some explanation. Usage of capital letters might give you the impression that *snapshot* is a deciding factor here. 
+Well, no... That word should be in small caps between brackets. The emphasys should be on **dependency**.<br/>
+**Build whenever a _Dependency_ is built**, regardless whether that's a snapshot.<br/><br/>
+Since our project has no dependencies I know of that are also built here with Jenkins, this switch won't do anything.</small>
+
+
+## ![jenkins-logo](images/jenkins.png) <span>Configure Build Item &mdash; Build Environment (_Bouwomgeving_)</span>
+
+This config part can be left empty, except for one thing... 
+We've got Artifactory installed, so we better use it as well.
+Artifactory can intercept all request that would normally go to the Maven Central repository, and act as a caching mirror.
+
+  - Tick the last option: _Resolve artifacts from Artifactory_.
+  - On the bottom right click the button **Refresh Repositories**<br>
+    _ The repository for released versions is OK, but **snapshot** versions have a separate repo_
+  - Select **libs-snapshot** as the _Resolution snapshots repository_.
+
+<small>You might really need this if the project has dependencies with artefacts that are developed in-house and so are not available in the Maven Central repository.
+There can be multiple build servers, so it makes sense to let these all fetch their dependencies from a central in-house location. Such as Artifactory.</small>
+
+
+## ![jenkins-logo](images/jenkins.png) <span>Configure Build Item &mdash; Pre Steps</span>
+
+This speaks for itself: you can specify some extra work to be done before the actual build is done. Not needed here....
+
+But do observe this: as you're scrolling down that quite large page, the tab selection in the top menu does change accordingly.
+So you can do both: scroll up & down or select a tab.
+
+
+## ![jenkins-logo](images/jenkins.png) <span>Configure Build Item &mdash; Build (_Bouwpoging_)</span>
+
+This is where it's realy happening. Here the Maven-specific aspects are configured.
+
+The location of the `pom.xml` is OK <small>(root of the repository)</small>, but the Maven goals to execute not yet.
+
+  - Fill in the **goals & options** for Maven you think are most appropriate.<br/>
+    <small>Need a hint? Press **S**...</small>
+  - Do click on **Advanced** (_Uitgebreid_) and watch all the extra options unfold.</br>
+    <small>Just know it's here you can e.g. specify an extra `settings.xml` file for Maven.<br/>
+	NB: I know of no way to let this part fold back up.</small>
+
+Note: just&ensp;**`clean install`**&ensp;would do fine...
+
+
+## ![jenkins-logo](images/jenkins.png) <span>Configure Build Item &mdash; Post Steps</span>
+
+Better start really simple, and don't make it too complex.
+
+Maybe later we'll add extra steps to execute when (or _if_) the build succeeds...
+
+There's no harm in peeking at what type of extra steps you can execute though.
+
+
+## ![jenkins-logo](images/jenkins.png) <span>Configure Build Item &mdash; Build Settings (_Bouwconfiguratie_)</span>
+
+If you tick the box to let Jenkins email notifications, it will only send emails for _failed_ builds.
+The majority of builds will succeed and don't need any attention. 
+Emails will be sent by default to all developers that changed any code since the previous succeeded build.
+
+That's good to know: Jenkins won't spam you.
+
+This specific instance of Jenkins cannot even spam you, the email config should not work.
+
+
+## ![jenkins-logo](images/jenkins.png) <span>Configure Build Item &mdash; Post Build Actions (_Acties na Bouwpoging_)</span>
+
+Have a peek at what type of actions can be done in this section.
+
+Compare that with the list of actions in the **Post Steps** section.
+
+## Question Time
+
+_What do you think is the difference between a **Post Step** and **Post Build Action** ?_
+
+<small>Press **S** to view the answer</small>
+
+Note: This has to do with the definition of when the build is done. Only build _steps_ may let the build fail. Afterwards only some finishing administrative actions are left to be done, but nothing that can influence the result.
+
+
+## ![jenkins-logo](images/jenkins.png) <span>Configure Build Item &mdash; Review & Save</span>
+
+We're finally at the bottom of this rather large form.<br/>
+Let's recapitulate what was actually filled in:
+
+  1. It's a **Maven project** and it has a **name**.
+  1. The **Git repository** URL is given, with credentials for access.
+  1. **Artifactory** is used for resolution of artifacts.
+  1. The `pom.xml` at the default location is built with goals `clean install`
+  
+Check? Then push **Save**!
+
+<small>The configuration _can_ be made quite complex, but with minimal effort a simple item can be configured in no time.</small>
 
 
 ## ![jenkins-logo](images/jenkins.png) <span>Jenkins &mdash; Build the Project</span>
