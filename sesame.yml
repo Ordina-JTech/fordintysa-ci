@@ -19,6 +19,11 @@ services:
     image: tomcat
     volumes:
      - tomcatwebapps:/usr/local/tomcat/webapps
+  sonarqube:
+    image: sonarqube:6.2-alpine
+    ports:
+      - "9000:9000"
+      - "9092:9092"
 
 volumes:
   tomcatwebapps:
