@@ -19,11 +19,8 @@ services:
     image: tomcat
     volumes:
      - tomcatwebapps:/usr/local/tomcat/webapps
-  sonar:
-    build: ./sonar/
-    ports:
-      - "9000:9000"
-      - "9092:9092"
+  sonarqube:
+    build: ./sonarqube/
 
 volumes:
   tomcatwebapps:
