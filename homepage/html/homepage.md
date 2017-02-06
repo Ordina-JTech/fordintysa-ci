@@ -58,7 +58,7 @@ So let's give it a spin!
   4. There's currently three (or four) active branches.<br/>
      Is that all there ever was?
   
-<small>Press **S** to see the answers.</small>
+<small>Press **S** to check your answers.</small>
 
 Note: Answers:<br/>1. Menu option **Tree** or **Docs**.<br/>2. On average once a month.<br/>3. The `maven-release-plugin`.<br/>4. No, there were countless branches for issues & features. After the _merge_ of a branch back into the `master` it's obsolete and deleted. It's just a bookmark...
 
@@ -78,15 +78,20 @@ Now you can access our repository **OrdinaJTech/fordintysa-ci**
 
 ## ![gitblit-logo](images/gitblit.png) <span>GitBlit &mdash; Clone the Repository</span>
 
-We'll be making some small changes to the code in our repository, so you need to make a clone to your own computer.
+We'll be making some small changes to some files in our repository, so you need to make a clone to your own computer.
 
   - On the overview screen of our repository&ensp;`OrdinaJTech/fordintysa-ci`&ensp;you'll find the attribute **repositorie url**.<br/>
     <small/>The quickest way to copy the url is to click on the ![](images/gb_copyurl.png) icon between the words `.git` and `RW+`.</small>
   - Use your favorite tool to make a clone of the repository.
   - Test whether the code compiles and all unit tests pass by executing&ensp;`mvn clean test`
 
+<small>NB: this workshop is about Continuous Integration. You may import this project in your IDE (Netbeans, Eclipse, IntelliJ) 
+but you should be able to do without, and just use a plain text editor. And ofcourse a Git client...</small>
+
 
 ## ![gitblit-logo](images/gitblit.png) <span>Push a commit to GitBlit</span>
+
+Let's test whether you can push a change to your own Gitblit server:
 
   - Change something in the `readme.md` file in your local repository.
   - **Commit** the change.
@@ -118,8 +123,12 @@ Which one to chose depends on a couple of factors, like the ability to integrate
   - Reporting of Static Code Quality Analysis
   - Delivery of the compiled code for deployment
 
-Straight out of the box Jenkins cannot even clone a Git repository, but loaded with [plugins](https://plugins.jenkins.io/) that behaviour changes totally.
-What Jenkins does is merely provide a bare frame which is filled in with plugins. 
+<small>The strength of Jenkins lies in the fact that it is merely an execution skeleton, while specific **plugins** do specialised tasks.
+For instance, look at the rich ecosystem supported by Jenkins for connecting with a SCM here: 
+[https://plugins.jenkins.io/](https://plugins.jenkins.io/), in the left menu at the bottom under **Source Control Management**.
+Multiple plugins for simular tasks and enhancing Jenkins' behaviour can be installed, so it can be made very simple or very complex.
+All of this is open source and completely free.<br/>
+So let's try that out...<small>
 
 
 ## ![jenkins-logo](images/jenkins.png) <span>Jenkins &mdash; Register & Login</span>
@@ -128,7 +137,9 @@ What Jenkins does is merely provide a bare frame which is filled in with plugins
   - Fill in the form and click **sign up**. <br/>
     _You should be welcomed with **Success**._
   - Click on the link to go **back to the top page**.<br/>
-    _You have woken up Jenkins from hybernation. It will show a screen **Customize Jenkins** to add extra plugins. Not nescessary, since all the plugins you need are already installed._
+    _You have woken up Jenkins and this is the first time it's being used.<br/>
+	It will show a screen **Customize Jenkins** to add extra plugins.<br/>
+	Skip that, since all the plugins you need for this workshop are already installed._
   - Click on the `x` at the top right to close this _Add Plugins_ window.<br/>
     _Jenkins reports it's ready._
   - Click the button **Start using Jenkins**
@@ -137,16 +148,29 @@ What Jenkins does is merely provide a bare frame which is filled in with plugins
 
 ## ![jenkins-logo](images/jenkins.png) <span>Jenkins &mdash; Create your first Build Item</span>
 
+You're now at the main screen of Jenkins.
+
+The list of projects it can build is still empty, but not for long:
+
   - Click on the link **Create new Item** (_Cre&euml;er nieuwe taken_)
   - Enter an appropriate item name (eg&ensp;`fordintysa`)
-  - Select the box **Maven Build** (_Bouw een Maven item_)
-  - Click **OK**
+  - Select the box **Maven Build** (_Bouw een Maven item_) and click **OK**.
 
 The item is now created, and we can configure it further.
 
-<small>In the first tab **General** you can give the item a description, specify it needs parameters, deactivate it, etc.<br/>
-We don't need these features, so leave them as is.<br/><br/>
-On the next pages we'll cover the most important parts of a Jenkins build item.</small>
+
+## ![jenkins-logo](images/jenkins.png) <span>Jenkins &mdash; Configure a Build Item</span>
+
+On the next pages we'll cover the most important parts of a Jenkins build item.
+
+The first tab **General** is for, ehm... _generic_ stuff:
+
+  - Give the item a name and a description
+  - Specify to prompt for parameters (manual input)
+  - Save disk space by deleting old data
+  - Deactivate it to prevent a build is accidentally started
+
+_We don't need these features yet, so leave them as is._
 
 
 ## ![jenkins-logo](images/jenkins.png) <span>Configure Build Item &mdash; SCM (1)</span>
@@ -190,21 +214,21 @@ We first have to see whether it works at all before we can automate that.
 This needs some explanation. Usage of capital letters might give you the impression that *snapshot* is a deciding factor here. 
 Well, no... That word should be in small caps between brackets. The emphasys should be on **dependency**.<br/>
 **Build whenever a _Dependency_ is built**, regardless whether that's a snapshot.<br/><br/>
-Since our project has no dependencies I know of that are also built here with Jenkins, this switch won't do anything.</small>
+Since our project has no dependencies that are also built by this Jenkins instance, this switch won't do anything.</small>
 
 
 ## ![jenkins-logo](images/jenkins.png) <span>Configure Build Item &mdash; Build Environment (_Bouwomgeving_)</span>
 
-This config part can be left empty, except for one thing... 
-We've got Artifactory installed, so we better use it as well.
-Artifactory can intercept all request that would normally go to the Maven Central repository, and act as a caching mirror.
+We keep all these options empty for now, except for the very last one.
 
   - Tick the last option: _Resolve artifacts from Artifactory_.
   - On the bottom right click the button **Refresh Repositories**<br>
     _ The repository for released versions is OK, but **snapshot** versions have a separate repo_
   - Select **libs-snapshot** as the _Resolution snapshots repository_.
 
-<small>You might really need this if the project has dependencies with artefacts that are developed in-house and so are not available in the Maven Central repository.
+<small>Artifactory is installed on your virtual build server, but if the plugin for it is not activated you won't see it in action.
+Artifactory will intercept all requests that would normally go to the Maven Central repository, and act as a caching mirror.<br/><br>
+You might really need this if the project has dependencies with artefacts that are developed in-house and so are not available in the Maven Central repository.
 There can be multiple build servers, so it makes sense to let these all fetch their dependencies from a central in-house location. Such as Artifactory.</small>
 
 
@@ -261,7 +285,7 @@ Compare that with the list of actions in the **Post Steps** section.
 
 _What do you think is the difference between a **Post Step** and **Post Build Action** ?_
 
-<small>Press **S** to view the answer</small>
+<small>Press **S** to check your answer</small>
 
 Note: This has to do with the definition of when the build is done. Only build _steps_ may let the build fail. Afterwards only some finishing administrative actions are left to be done, but nothing that can influence the result.
 
@@ -288,12 +312,13 @@ You're back now at the project page.
 About halfway the menu at the left is the option **Build now** (_Start nu een bouwpoging_)
 
   - Start the build.<br/>
-    <small>The buid will go through scheduling in no time (your build server has not much to do)</small>
+    <small>The build will go through scheduling in no time (your build server has not much to do)</small>
   - Once you see **#1** blink, click on the grey ball.
     <small>You now see the console. Jenkins has cloned the repo and triggered Maven. Since Maven runs for the first time, it's mainly busy downloading its plugins.</small>
 
 What does it say at the bottom? I bet it's &ensp;`BUILD SUCCESS` !!</br>
 In case of&ensp;`BUILD FAILURE`&ensp;you'll figure out what went wrong.
+
 
 
 ## ![artifactory-logo](images/artifactory.png) <span>Artifactory &mdash; Introduction</span>
