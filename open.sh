@@ -129,8 +129,8 @@ fi
 echo
 echo -e "Your build server will be up & running at ${grn}http://${ip}/${gry}"
 echo -e "if you enter the following command:"
-echo -e "${whi}docker-compose up -d${gry}"
+echo -e "${grn}docker-compose up -d${gry}"
 echo
 echo -e "If you want to stop it later on, type:"
-echo -e "${whi}docker-compose stop${gry}"
+echo -e "${grn}docker-compose stop${gry}"
 echo
