@@ -91,14 +91,13 @@ but you should be able to do without, and just use a plain text editor. And ofco
 
 ## ![gitblit-logo](images/gitblit.png) <span>Push a commit to GitBlit</span>
 
-Let's test whether you can push a change to your own Gitblit server:
+You should now have a working Git infrastructure with a local and remote repository.<br/>
+Let's test whether you can push a change to your own Gitblit server. 
 
-  - Change something in the `readme.md` file in your local repository.
+  - Edit the file `src/main/resources/`**`wishlist.txt`** in your local repository.
   - **Commit** the change.
   - **Push** the commit to the `origin`.
   - Check in **GitBlit** your commit has arrived.
-  
-You should now have a working Git infrastructure with a local and remote repository.
 
 
 
@@ -269,18 +268,21 @@ There's no harm in peeking at what type of extra steps you can execute though.
 If you tick the box to let Jenkins email notifications, it will only send emails for _failed_ builds.
 The majority of builds will succeed and don't need any attention. 
 Emails will be sent by default to all developers that changed any code since the previous succeeded build.
-Another email will be sent as soon as someone fxied the issue and the build is stable again.
+Another email will be sent as soon as someone fixed the issue and the build is stable again,
+so you don't need to look into issues someone else already fixed.
 
 _That's good to know: Jenkins won't spam you, and will tell you also when the panic is over._
 
 _This specific instance of Jenkins cannot even spam you, the email config should not work._
 
 
-## ![jenkins-logo](images/jenkins.png) <span>Configure Build Item &mdash; Post Build Actions (_Acties na Bouwpoging_)</span>
+## ![jenkins-logo](images/jenkins.png) <span>Configure Build Item &mdash; Post Build Actions<br/>(_Acties na Bouwpoging_)</span>
 
 Have a peek at what type of actions can be done in this section.
 
 Compare that with the list of actions in the **Post Steps** section.
+
+----
 
 ## Question Time
 
@@ -307,38 +309,87 @@ Check? Then click **Save**!
 
 
 
-## ![jenkins-logo](images/jenkins.png) <span>Jenkins &mdash; First Build</span>
+## ![jenkins-logo](images/jenkins.png) <span>Jenkins &mdash; First Build &mdash; Start</span>
 
 You're back now at the project page.
 
 About halfway the menu at the left is the option **Build now** (_Start nu een bouwpoging_)
 
   - Start the build.<br/>
-    <small>_The build will go through scheduling in no time (your build server has not much to do)_</small>
-  - Once you see **#1** blinking at the left, click on the grey ball.
-    <small>_You now see the console. Jenkins has cloned the repo and triggered Maven to do the actual build.
-	Since Maven runs for the first time, it's local repository is still empty and it is mainly busy downloading plugins._<br/>
-	<small>Note that in the console all URLs are decorated as clickable links.
-	Since these refer to a virtual host `http://artifactory:8081/` only present inside the Docker infrastructure, you cannot access them.
-	But we'll show you Artifactory in a minute.</small>
-	</small>
+    _The build job will go through scheduling in no time, your build server has not much to do.<br/>
+	It will appear at the left under **Build History** (Overzicht Bouwpogingen)_
+  - Once you see **#1** blinking, click there on the current **DateTime**.<br/>
+    _This is the details screen for the first build of our project._
 
-Your maiden Jenkins build should report&ensp;**`Finished: SUCCESS`**
+
+## ![jenkins-logo](images/jenkins.png) <span>Jenkins &mdash; First Build &mdash; Monitoring</span>
+  - From the menu on the left, click on **Console Output**<br/>
+    _You should now see the console log output from Jenkins and Maven._
+
+<small>_Jenkins has cloned the Git repository into a workspace folder and started Maven to do the actual build.
+Since Maven runs for the first time, it's local repository is still empty and it is mainly busy downloading the required plugins._<br/>
+<small><br/>Note that in the console all URLs are decorated as clickable links.
+Since `http://artifactory:8081/` refers to a virtual host that's only accessible inside the Docker infrastructure, you cannot access the link.
+But we'll show you Artifactory in a minute.</small></small>
+
+Your maiden Jenkins build should end within a minute with &ensp;**`Finished: SUCCESS`**
 
 
 ## ![jenkins-logo](images/jenkins.png) <span>Jenkins &mdash; Build Finished: SUCCESS</span>
 
-This is the first _and last_ build guaranteed to finish with success.
+**This is the first _and last_ build guaranteed to finish with success.**
 
-In this workshop we have **on purpose** introduced some points where a build failure is expected.
-So then don't panic. Read the messages in the console log very carefully.
-We trust you can figure out why it failed, and you should be able to correct it with some minor adjustments.
+<small>It is easy to guarantee this, because you have tested this yourself with `mvn clean install`.<br/>
+Now Jenkins has performed _exactly the same_ Maven process, so failure is not an option.</small>
+
+----
+
+NOTICE: in this workshop we have **on purpose** introduced some points where a build failure is expected.
+So ** _don't panic_ ** when a build fails. Read the <span style="color: red">`[ERROR]`</span> messages in the console log very carefully.
+We have all confidence you can figure out why it failed, and you should be able to correct it with some minor adjustments.
+Just keep your brain switched on...
+
+
+## ![jenkins-logo](images/jenkins.png) <span>Jenkins &mdash; Structure</span>
+
+Now we went through all the screens you use most often. This is the main structure:
+
+  - **Main Dashboard** aka **Job Index** containing all the items
+     - **Item** or **Project** identified by a _Name_ with a configuration how to build it
+	    - Actual **Builds** identified by a _Number_, which shows the build details
+		   - The **Console Output** with detailed logging of that specific build
+
+<small>After the first build started, we went from the Item through Build Details to the Console Output.
+The next time you start a build (especially one that previously failed) remember you can skip the Build Details screen
+and go directy to the Console Output by clicking on the blinking ball directly left of the Number.</small> 
+
+
+## ![jenkins-logo](images/jenkins.png) <span>Jenkins &mdash; Second Build</span>
+
+  - Start the build a second time to get a bit more familiar.
+
+_Since the first one succeeded, and nothing has changed,<br/>I can guarantee this one will succeed as well.<br/>
+This one will finish much faster ofcourse._
+
+<small><small>OK, so two slides back we lied... a tiny bit.</small></small>
+
+That's one of the basic principles of Continuous Integration:
+
+an Automated, Repeatable build & test process.
 
 
 
 ## ![artifactory-logo](images/artifactory.png) <span>Artifactory &mdash; Introduction</span>
 
-Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
+Lorem ipsum dolor sit amet.
+
+<small>Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.<br/><br/>
+<small>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.<br/><br/>
+<small>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.<br/><br/>
+<small>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.<br/><br/>
+<small>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.<br/><br/>
+<small>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.<br/><br/>
+</small></small></small></small></small></small>
 
 
 ## ![artifactory-logo](images/artifactory.png) <span>Artifactory &mdash; Browsing the Repository</span>
