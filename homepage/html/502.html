@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>502: Too Fast!</title>
+<style>
+    body {
+        width: 35em;
+        margin: 0 auto;
+        font-family: Tahoma, Verdana, Arial, sans-serif;
+    }
+</style>
+<script>
+function startTimer(duration, display) {
+    var timer = duration, minutes, seconds;
+    setInterval(function () {
+        minutes = parseInt(timer / 60, 10);
+        seconds = parseInt(timer % 60, 10);
+
+        minutes = minutes < 10 ? "0" + minutes : minutes;
+        seconds = seconds < 10 ? "0" + seconds : seconds;
+
+        display.textContent = minutes + ":" + seconds;
+
+        if (--timer < 0) {
+            timer = 0;
+        }
+    }, 1000);
+}
+
+window.onload = function () {
+    var fiveMinutes = 30,
+        display = document.querySelector('#time');
+    startTimer(fiveMinutes, display);
+};
+</script>
+</head>
+<body>
+<h1>You're too fast!</h1>
+<h3>Sorry, the container you are looking for is not yet available.</h3>
+<p>It usually takes a full minute for Gitblit to boot.<br/>
+I guess you have been reading for only 30 seconds,<br/>
+so wait 30 seconds and then press [F5].</p>
+<h2 id="time"></h2>
+<p>NB: if you did not expect GitBlit to show up,<br/>
+or you had access to GitBlit previously,<br/>
+then ask for help, because:</p>
+<p>This was a HTTP response 502 ;-)</p>
+</body>
+</html>
