@@ -163,14 +163,14 @@ The item is now created, and we can configure it further.
 
 On the next pages we'll cover the most important parts of a Jenkins build item.
 
-The first tab **General** is for, ehm... _generic_ stuff:
+The first tab **General** is for, ehm... _generic_ stuff, like:
 
-  - Give the item a name and a description
+<small>_We don't need these features yet, so leave them as is._</small>
+
+  - The name of an item and a description
   - Specify to prompt for parameters (manual input)
-  - Save disk space by deleting old data
+  - Save disk space by deleting old data, and retain just the last few job logs
   - Deactivate it to prevent a build is accidentally started
-
-_We don't need these features yet, so leave them as is._
 
 
 ## ![jenkins-logo](images/jenkins.png) <span>Configure Build Item &mdash; SCM (1)</span>
@@ -204,7 +204,7 @@ If you're really curious what it does, click on the question mark at the right t
 
 ## ![jenkins-logo](images/jenkins.png) <span>Configure Build Item &mdash; Build Triggers (_Bouwactiveerders_)</span>
 
-Here you can define to let this item build on regular intervals, or triggered by a commit...
+Here you can define to let this item build on regular intervals, when another build has finished, or triggered by a commit, etcetera...
 
 Since we're just starting with Jenkins, it's probably best to first trigger all builds manually.
 You can do that anyway, but triggering builds automatically is not our first concern.
@@ -213,7 +213,7 @@ We first have to see whether it works at all before we can automate that.
 <small>One of the build trigger items is checked by default: **Build whenever a SNAPSHOT dependency is built**.<br/><br/>
 This needs some explanation. Usage of capital letters might give you the impression that *snapshot* is a deciding factor here. 
 Well, no... That word should be in small caps between brackets. The emphasys should be on **dependency**.<br/>
-**Build whenever a _Dependency_ is built**, regardless whether that's a snapshot.<br/><br/>
+**Build whenever a _Dependency_ is built**, regardless whether that dependency is a snapshot.<br/><br/>
 Since our project has no dependencies that are also built by this Jenkins instance, this switch won't do anything.</small>
 
 
@@ -226,18 +226,18 @@ We keep all these options empty for now, except for the very last one.
     _ The repository for released versions is OK, but **snapshot** versions have a separate repo_
   - Select **libs-snapshot** as the _Resolution snapshots repository_.
 
-<small>Artifactory is installed on your virtual build server, but if the plugin for it is not activated you won't see it in action.
-Artifactory will intercept all requests that would normally go to the Maven Central repository, and act as a caching mirror.<br/><br>
-You might really need this if the project has dependencies with artefacts that are developed in-house and so are not available in the Maven Central repository.
-There can be multiple build servers, so it makes sense to let these all fetch their dependencies from a central in-house location. Such as Artifactory.</small>
+<small>Artifactory is installed on your virtual build server, but as long as the plugin for it is not activated on a build item you won't see it in action.
+We'll discuss Artifactory in depth later on. For now it's sufficient to know that Artifactory serves as a private Maven repository, 
+both for fetching artifacts not yet present in the local Maven repository, and for publishing the artifacts Jenkins has produced.</small>
 
 
 ## ![jenkins-logo](images/jenkins.png) <span>Configure Build Item &mdash; Pre Steps</span>
 
-This speaks for itself: you can specify some extra work to be done before the actual build is done. Not needed here....
+This speaks for itself: you can specify some extra work to be done before the actual build is done. 
+Not needed here, but please look what kind of actions you can add.
 
-But do observe this: as you're scrolling down that quite large page, the tab selection in the top menu does change accordingly.
-So you can do both: scroll up & down or select a tab.
+_And do observe this: as you're scrolling down that quite large page, the tab selection in the top menu does change accordingly.
+So you can navigate in the configuration page both ways: scroll up & down or select a tab at the top._
 
 
 ## ![jenkins-logo](images/jenkins.png) <span>Configure Build Item &mdash; Build (_Bouwpoging_)</span>
@@ -250,9 +250,9 @@ The location of the `pom.xml` is OK <small>(root of the repository)</small>, but
     <small>Need a hint? Press **S**...</small>
   - Do click on **Advanced** (_Uitgebreid_) and watch all the extra options unfold.</br>
     <small>Just know it's here you can e.g. specify an extra `settings.xml` file for Maven.<br/>
-	NB: I know of no way to let this part fold back up.</small>
+	NB: I know of no way to let this part fold back up again.</small>
 
-Note: just&ensp;**`clean install`**&ensp;would do fine...
+Note: Just&ensp;**`clean install`**&ensp;would do fine...
 
 
 ## ![jenkins-logo](images/jenkins.png) <span>Configure Build Item &mdash; Post Steps</span>
@@ -269,10 +269,11 @@ There's no harm in peeking at what type of extra steps you can execute though.
 If you tick the box to let Jenkins email notifications, it will only send emails for _failed_ builds.
 The majority of builds will succeed and don't need any attention. 
 Emails will be sent by default to all developers that changed any code since the previous succeeded build.
+Another email will be sent as soon as someone fxied the issue and the build is stable again.
 
-That's good to know: Jenkins won't spam you.
+_That's good to know: Jenkins won't spam you, and will tell you also when the panic is over._
 
-This specific instance of Jenkins cannot even spam you, the email config should not work.
+_This specific instance of Jenkins cannot even spam you, the email config should not work._
 
 
 ## ![jenkins-logo](images/jenkins.png) <span>Configure Build Item &mdash; Post Build Actions (_Acties na Bouwpoging_)</span>
@@ -285,9 +286,9 @@ Compare that with the list of actions in the **Post Steps** section.
 
 _What do you think is the difference between a **Post Step** and **Post Build Action** ?_
 
-<small>Press **S** to check your answer</small>
+<small>Press **S** to check your answer.</small>
 
-Note: This has to do with the definition of when the build is done. Only build _steps_ may let the build fail. Afterwards only some finishing administrative actions are left to be done, but nothing that can influence the result.
+Note: This has to do with the definition of when the build is finished. Only build _steps_ may let the build fail. Afterwards only some finishing administrative actions are left to be done, but nothing that can influence the result.
 
 
 ## ![jenkins-logo](images/jenkins.png) <span>Configure Build Item &mdash; Review & Save</span>
@@ -295,14 +296,15 @@ Note: This has to do with the definition of when the build is done. Only build _
 We're finally at the bottom of this rather large form.<br/>
 Let's recapitulate what was actually filled in:
 
-  1. It's a **Maven project** and it has a **name**.
-  1. The **Git repository** URL is given, with credentials for access.
-  1. **Artifactory** is used for resolution of artifacts <small>although its merits are not yet clear</small>
+  1. It's a **Maven project** and it has a **name** for identification purposes.
+  1. The **Git repository** URL is given, with credentials to access it.
+  1. **Artifactory** will resolve <small>(download)</small> any Maven artifacts <small>(i.e. Maven plugins & dependencies.)</small>
   1. The `pom.xml` at the default location is used for the Maven goals&ensp;`clean install`
   
-Check? Then push **Save**!
+Check? Then click **Save**!
 
-<small>The configuration _can_ be made quite complex, but with minimal effort a simple item can be configured in no time.</small>
+<small>The configuration _can_ be made quite complex, but a simple build item can be configured in no time.</small>
+
 
 
 ## ![jenkins-logo](images/jenkins.png) <span>Jenkins &mdash; First Build</span>
@@ -312,12 +314,25 @@ You're back now at the project page.
 About halfway the menu at the left is the option **Build now** (_Start nu een bouwpoging_)
 
   - Start the build.<br/>
-    <small>The build will go through scheduling in no time (your build server has not much to do)</small>
-  - Once you see **#1** blink, click on the grey ball.
-    <small>You now see the console. Jenkins has cloned the repo and triggered Maven. Since Maven runs for the first time, it's mainly busy downloading its plugins.</small>
+    <small>_The build will go through scheduling in no time (your build server has not much to do)_</small>
+  - Once you see **#1** blinking at the left, click on the grey ball.
+    <small>_You now see the console. Jenkins has cloned the repo and triggered Maven to do the actual build.
+	Since Maven runs for the first time, it's local repository is still empty and it is mainly busy downloading plugins._<br/>
+	<small>Note that in the console all URLs are decorated as clickable links.
+	Since these refer to a virtual host `http://artifactory:8081/` only present inside the Docker infrastructure, you cannot access them.
+	But we'll show you Artifactory in a minute.</small>
+	</small>
 
-What does it say at the bottom? I bet it's &ensp;`BUILD SUCCESS` !!</br>
-In case of&ensp;`BUILD FAILURE`&ensp;you'll figure out what went wrong.
+Your maiden Jenkins build should report&ensp;**`Finished: SUCCESS`**
+
+
+## ![jenkins-logo](images/jenkins.png) <span>Jenkins &mdash; Build Finished: SUCCESS</span>
+
+This is the first _and last_ build guaranteed to finish with success.
+
+In this workshop we have **on purpose** introduced some points where a build failure is expected.
+So then don't panic. Read the messages in the console log very carefully.
+We trust you can figure out why it failed, and you should be able to correct it with some minor adjustments.
 
 
 
