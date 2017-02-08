@@ -70,7 +70,7 @@ You haven't seen the most important repository because it needs authentication:
   - Login with user&ensp;`root`&ensp;& password&ensp;`sysadmin`
   - Open the&ensp;![](images/gb_menudropdown.png)&ensp;menu at the top right and select **Users** (_Gebruikers_)
   - At the top right there's a link to create a new user so fill in that form.
-  - Do select 'admin' (_mag beheren_) <small>(other options at your own risk)</small> and save.
+  - Do select 'admin' (_kan beheren_) <small>(other options at your own risk)</small> and save.
   - Log out and try to log in again using your own account
 
 Now you can access our repository **OrdinaJTech/fordintysa-ci**
