@@ -47,6 +47,12 @@ echo -e "${gry}"
 
 ## check the ip address
 ip=`ip route | awk '/eth1/ { print $9 }'`
+# empty result?
+if [ ${ip}"x" = "x" ]
+  then
+    # not VirtualBox, try Mac approach
+	ip=`ifconfig | grep "inet ." | awk '/broadcast/ { print $2 }'`
+fi
 echo -e "Detected ip address: ${whi}${ip}${gry}"
 case "$ip" in
   192.168.99.*)
@@ -68,7 +74,7 @@ docker-compose version 2> /dev/null
 if [ $? -ne 0 ]
   then
     echo -e "${whi}Installing docker-compose${gry}"
-    curl -L https://github.com/docker/compose/releases/download/1.7.1/docker-compose-`uname -s`-`uname -m` > /usr/local/bin/docker-compose
+    curl -L https://github.com/docker/compose/releases/download/1.10.1/docker-compose-`uname -s`-`uname -m` > /usr/local/bin/docker-compose
 	if [ $? -ne 0 ]
 	  then
 	    echo "Sorry, something went wrong..."
@@ -85,7 +91,7 @@ mkdir ./homepage/tmp 2> /dev/null
 cat ./homepage/default.conf | sed s/$\{ip\}/$ip/ > ./homepage/tmp/default.conf
 
 clone=y
-if [ -d ./gitblit/tmp ]
+if [ -d ./gitblit/tmp/OrdinaJTech ]
   then
     echo -n "Remove and re-clone repositories from GitHub? (y/n) : "
     read -n 1 clone
