@@ -281,8 +281,6 @@ The location of the `pom.xml` is OK <small>(root of the repository)</small>, but
     <small>Just know it's here you can e.g. specify an extra `settings.xml` file for Maven.<br/>
 	NB: I know of no way to let this part fold back up again.</small>
 
-### [![slow](images/slow.png)](#/2/11) &#8656; &emsp; &#8658; [![fast](images/fast.png)](#/2/14)
-
 Note: Just&ensp;**`clean install`**&ensp;would do fine...
 
 
