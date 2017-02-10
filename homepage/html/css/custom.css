@@ -37,6 +37,13 @@
   bottom: 0.62em;
 }
 
+.reveal h3 img {
+  position: relative;
+  bottom: -0.2em;
+  width: 50px;
+  height: 50px;
+}
+
 .reveal  img[alt~="headshot"] {
    margin: 0;
    margin-top: 5px;

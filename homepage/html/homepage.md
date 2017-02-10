@@ -38,6 +38,23 @@ Like [GitBucket](https://gitbucket.github.io/gitbucket-news/about/), GitBlit jus
 So let's give it a spin!
 
 
+## ![slow](images/slow.png) <span>Slow or Fast track?</span> ![fast](images/fast.png)
+
+We don't have much time for this workshop, so you get the choice:
+
+  - Follow the **Slow** track:<br/>
+    <small>This will be the best learning experience, but you probably won't make it in time to the end.<br/>
+	You can always finish it another time!</small>
+  - Follow the **Fast** track:<br/>
+    <small>This gives you the best chance of getting through this complete workshop and see the app deployed.<br/>
+    But you will miss some detailed information, so you won't get out all there is to learn.</small>
+
+<small>Whenever there's a track split or pages to skip, you'll see these icons at the bottom of the page.<br/>
+Just click on the one you want to follow. Note that you can always switch track midways!</small>
+
+### [![slow](images/slow.png)](#/1/3) &#8656; &emsp; &#8658; [![fast](images/fast.png)](#/1/6)
+
+
 ## ![gitblit-logo](images/gitblit.png) <span>GitBlit &mdash; Repository Browsing</span>
 
   - Click in the menu bar on __GitBlit__.<br/>
@@ -75,6 +92,18 @@ You haven't seen the most important repository because it needs authentication:
 
 Now you can access our repository **OrdinaJTech/fordintysa-ci**
 
+### &#8658; [![slow](images/slow.png)](#/1/7)
+
+
+## ![gitblit-logo](images/gitblit.png) <span>GitBlit &mdash; Login</span>
+
+  - Click in the menu bar on __GitBlit__.<br/>
+	<small>_The first screen you see is the Dashboard, which is not that interesting._</small>
+  - Login with user&ensp;`user`&ensp;& password&ensp;`password`
+  - In the top menu pick the second option: **Repositories**.</br>
+    <small>_We have pre-loaded a couple repositories from GitHub into GitBlit._</small>
+  - Select the repository &ensp;`OrdinaJTech/fordintysa-ci`&ensp;
+
 
 ## ![gitblit-logo](images/gitblit.png) <span>GitBlit &mdash; Clone the Repository</span>
 
@@ -83,10 +112,13 @@ We'll be making some small changes to some files in our repository, so you need 
   - On the overview screen of our repository&ensp;`OrdinaJTech/fordintysa-ci`&ensp;you'll find the attribute **repositorie url**.<br/>
     <small/>The quickest way to copy the url is to click on the ![](images/gb_copyurl.png) icon between the words `.git` and `RW+`.</small>
   - Use your favorite tool to make a clone of the repository.
-  - Test whether the code compiles and all unit tests pass by executing&ensp;`mvn clean test`
 
-<small>NB: this workshop is about Continuous Integration. You may import this project in your IDE (Netbeans, Eclipse, IntelliJ) 
-but you should be able to do without, and just use a plain text editor. And ofcourse a Git client...</small>
+<small>NB: this workshop is about Continuous Integration, not developing Java code. 
+You may import this project in your IDE (Netbeans, Eclipse, IntelliJ)
+or test whether the code compiles and all unit tests pass by executing&ensp;`mvn clean test`,
+but you should be able to do without. Just using a plain text editor (and ofcourse a Git client) should get you through.</small>
+
+### [![slow](images/slow.png)](#/1/8) &#8656; &emsp; &#8658; [![fast](images/fast.png)](#/2)
 
 
 ## ![gitblit-logo](images/gitblit.png) <span>Push a commit to GitBlit</span>
@@ -132,17 +164,11 @@ So let's try that out...<small>
 
 ## ![jenkins-logo](images/jenkins.png) <span>Jenkins &mdash; Register & Login</span>
 
-  - Click in the menu bar on **Jenkins**. Use the bottom link to **signup as a new user**.
+  - Click in the menu bar on **Jenkins**.
+  - Use the bottom link to **signup as a new user**.
   - Fill in the form and click **sign up**. <br/>
     _You should be welcomed with **Success**._
-  - Click on the link to go **back to the top page**.<br/>
-    _You have woken up Jenkins and this is the first time it's being used.<br/>
-	It will show a screen **Customize Jenkins** to add extra plugins.<br/>
-	Skip that, since all the plugins you need for this workshop are already installed._
-  - Click on the `x` at the top right to close this _Add Plugins_ window.<br/>
-    _Jenkins reports it's ready._
-  - Click the button **Start using Jenkins**
-
+  - Click on the link to go back to **the top page**.
 
 
 ## ![jenkins-logo](images/jenkins.png) <span>Jenkins &mdash; Create your first Build Item</span>
@@ -200,6 +226,8 @@ Now the error message should be gone.
 And most of them can/should be left at their default setting.
 If you're really curious what it does, click on the question mark at the right to display a help text.</small>
 
+### [![slow](images/slow.png)](#/2/7) &#8656; &emsp; &#8658; [![fast](images/fast.png)](#/2/8)
+
 
 ## ![jenkins-logo](images/jenkins.png) <span>Configure Build Item &mdash; Build Triggers (_Bouwactiveerders_)</span>
 
@@ -229,6 +257,8 @@ We keep all these options empty for now, except for the very last one.
 We'll discuss Artifactory in depth later on. For now it's sufficient to know that Artifactory serves as a private Maven repository, 
 both for fetching artifacts not yet present in the local Maven repository, and for publishing the artifacts Jenkins has produced.</small>
 
+### [![slow](images/slow.png)](#/2/9) &#8656; &emsp; &#8658; [![fast](images/fast.png)](#/2/10)
+
 
 ## ![jenkins-logo](images/jenkins.png) <span>Configure Build Item &mdash; Pre Steps</span>
 
@@ -250,6 +280,8 @@ The location of the `pom.xml` is OK <small>(root of the repository)</small>, but
   - Do click on **Advanced** (_Uitgebreid_) and watch all the extra options unfold.</br>
     <small>Just know it's here you can e.g. specify an extra `settings.xml` file for Maven.<br/>
 	NB: I know of no way to let this part fold back up again.</small>
+
+### [![slow](images/slow.png)](#/2/11) &#8656; &emsp; &#8658; [![fast](images/fast.png)](#/2/14)
 
 Note: Just&ensp;**`clean install`**&ensp;would do fine...
 
@@ -339,7 +371,7 @@ Your maiden Jenkins build should end within a minute with &ensp;**`Finished: SUC
 
 **This is the first _and last_ build guaranteed to finish with success.**
 
-<small>It is easy to guarantee this, because you have tested this yourself with `mvn clean install`.<br/>
+<small>It is easy to guarantee this, because the developer tested this himself by performing&ensp;`mvn clean install`&ensp;prior to committing any change to Git.
 Now Jenkins has performed _exactly the same_ Maven process, so failure is not an option.</small>
 
 ----
@@ -368,14 +400,14 @@ and go directy to the Console Output by clicking on the blinking ball directly l
 
   - Start the build a second time to get a bit more familiar.
 
-_Since the first one succeeded, and nothing has changed,<br/>I can guarantee this one will succeed as well.<br/>
+_Since the first one succeeded, and nothing has changed,<br/>it is guaranteed this one will succeed as well.<br/>
 This one will finish much faster ofcourse._
 
 <small><small>OK, so two slides back we lied... a tiny bit.</small></small>
 
 That's one of the basic principles of Continuous Integration:
 
-an Automated, Repeatable build & test process.
+an Automated, Repeatable build, test & QA process.
 
 
 
