@@ -4,6 +4,7 @@
 docker --version 1> /dev/null
 if [ $? -ne 0 ]
   then
+    echo "Error: docker not installed."
     exit
 fi
 
@@ -17,7 +18,12 @@ whi='\033[1;37m'
 
 echo ""
 echo -e "${whi}O===O ${cya} __  __  ___     ${yel}  __  ___ __  __      ___ ${cya} __  ${whi}O===O"
-if [ `whoami` != 'root' ]
+
+# root access required?
+docker-compose version > /dev/null 2>&1
+composeretc=$?
+needroot=$composeretc
+if [ $needroot -gt 0 ] && [ `whoami` != 'root' ]
   then
     echo -e "${yel}Insufficient privileges."
     echo -e "${gry}Unable to cast the ${red}open${gry} spell. Maybe try this:"
@@ -69,9 +75,8 @@ case "$ip" in
     fi
 esac
 
-## is docker-compose installed?
 docker-compose version 2> /dev/null
-if [ $? -ne 0 ]
+if [ $composeretc -ne 0 ]
   then
     echo -e "${whi}Installing docker-compose${gry}"
     curl -L https://github.com/docker/compose/releases/download/1.10.1/docker-compose-`uname -s`-`uname -m` > /usr/local/bin/docker-compose
