@@ -22,14 +22,22 @@ function startTimer(duration, display) {
         display.textContent = minutes + ":" + seconds;
 
         if (--timer < 0) {
-		    timer = duration;
+            timer = duration;
             location.reload();
         }
     }, 1000);
 }
 
 window.onload = function () {
-    var delay = 15,
+    var item = window.location.pathname
+    if (item.endsWith("/") {
+    item = item.substr(0, item.length -1)
+    }
+    var list = document.querySelectorAll("span.item");
+    for (i = 0; i < list.length; i++) {
+        list.elements[i].innerHtml = item
+    }
+    var delay = 10,
         display = document.querySelector('#time');
     startTimer(delay, display);
 };
@@ -38,12 +46,12 @@ window.onload = function () {
 <body>
 <h1>You're too fast!</h1>
 <h3>Sorry, the container you are looking for is not yet available.</h3>
-<p>It usually takes a full minute for GitBlit to boot.</p>
-<p>I guess you read the GitBlit Introduction slides in less than 30 seconds.<br/>
-So we'll pause for 15 seconds and your browser will try again.</p>
+<p>It usually takes a bit less than a minute for <span class="item"></span> to boot.</p>
+<p>I guess you read the introduction slides in less than 30 seconds.<br/>
+So we'll pause for 10 seconds and your browser will try again.</p>
 <h2 id="time">__:__</h2>
-<p>NB: if you did not expect GitBlit to show up,
-or you had access to GitBlit previously,
+<p>NB: if you did not expect <span class="item"></span> to show up,
+or you had access to <span class="item"></span> previously,
 then ask for help (or look at the docker logs of nginx container fordintysaci_homepage) because:</p>
 <p>The HTTP response is 502 ;-)</p>
 </body>
