@@ -186,6 +186,7 @@ Click in the menu bar on **Jenkins**.
 </div>
 
 
+
 ## ![jenkins-logo](images/jenkins.png) <span>Jenkins &mdash; Create your first Build Item</span>
 
 You're now at the main screen of Jenkins.
@@ -469,16 +470,19 @@ Both of them offer a free version that works well for casual usage, plus a comme
 
 If you're interested in the differences between them, there's a very extensive feature comparison matrix drawn up on [this page](https://binary-repositories-comparison.github.io/).
 
+But let's dive into Artifactory...
 
-
-## ![artifactory-logo](images/artifactory.png) <span>Artifactory &mdash; Introduction (1)</span>
-
-Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
 
 
 ## ![artifactory-logo](images/artifactory.png) <span>Artifactory &mdash; Browsing the Repository</span>
 
-Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
+  - Click in the menu bar on **Artifactory**.<br/>
+    <small>_You don't need to log in, everything's public here._</small>
+  - In the left menu, select the ![](images/arti_repos.png) icon<br/>
+    <small>_That's the Repository Browser. All down the list are the repositories we have set up in our Jenkins build job:_<br/>
+	`libs-release` _and_ `libs-snapshot`.</small>
+  - Select repository `jcenter-cache`<br/>
+    <small>This repository was empty when you started, now it contains everything that was downloaded for your single build.</small>
 
 
 ## ![artifactory-logo](images/artifactory.png) <span>Artifactory &mdash; let Jenkins deploy the Artifact</span>
