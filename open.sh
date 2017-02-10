@@ -48,7 +48,7 @@ echo -e "${whi}O===O                                                 ${whi}O===O
 echo -e "${gry}"
 
 ## check the ip address
-ip=`ip route | awk '/eth1/ { print $9 }'`
+ip=`ip route 2>/dev/null | awk '/eth1/ { print $9 }'`
 # empty result?
 if [ ${ip}"x" = "x" ]; then
     # not VirtualBox, try Mac approach
