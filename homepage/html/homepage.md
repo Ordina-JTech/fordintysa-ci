@@ -164,11 +164,26 @@ So let's try that out...<small>
 
 ## ![jenkins-logo](images/jenkins.png) <span>Jenkins &mdash; Register & Login</span>
 
-  - Click in the menu bar on **Jenkins**.
-  - Use the bottom link to **signup as a new user**.
-  - Fill in the form and click **sign up**. <br/>
-    _You should be welcomed with **Success**._
-  - Click on the link to go back to **the top page**.
+Click in the menu bar on **Jenkins**.
+
+<div id="left">
+<h3>![slow](images/slow.png)</h3>
+<ul>
+<li>Use the bottom link: **signup as a new user**.</li>
+<li>Fill in the form and click **sign up**. <br/>
+    _You should be welcomed with **Success**._</li>
+<li>Click on the link to go back to **the top page**.</li>
+</div>
+<div id="right">
+<h3>![fast](images/fast.png)</h3>
+<ul>
+<li>Login with:</li>
+  <ul>
+  <li>user:&ensp;`user`</li>
+  <li>password:&ensp;`password`</li>
+  </ul>
+</ul>
+</div>
 
 
 ## ![jenkins-logo](images/jenkins.png) <span>Jenkins &mdash; Create your first Build Item</span>
