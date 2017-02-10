@@ -408,7 +408,7 @@ This one will finish much faster ofcourse._
 
 That's one of the basic principles of Continuous Integration:
 
-### Employ build, test & QA processes that are repeatable through automation.
+### Employ a Build, Test & QA process that is Repeatable through Automation.
 
 
 
@@ -447,15 +447,12 @@ So public repositories like Maven Central are often not even accessible for the 
 
 The [adviced solution](https://maven.apache.org/repository-management.html) to these issues is to use a **Repository Management** tool.
 
-There are three alternatives I know of. In order of popularity:
+There are some alternatives for this, the most popular being 
+[Nexus](https://www.sonatype.org/nexus/go/) by Sonatype
+and [Artifactory](https://www.jfrog.com/open-source) by JFrog.
+Both of them offer a free version that works well for casual usage, plus a commercial version that beyond the basics offers functionality you'd use in a big professional environment.
 
-  1. [Nexus](https://www.sonatype.org/nexus/go/) by Sonatype
-  2. [Artifactory](https://www.jfrog.com/open-source) by JFrog
-  3. [Archiva](https://archiva.apache.org/) by Apache
-
-These are all free to use and should work well for casual work. 
-Both [Sonatype](https://links.sonatype.com/products/nexus/pro/home) and [JFrog](https://www.jfrog.com/artifactory/) 
-offer a paid version of their product that offers functionality beyond the basics you'd use in a big professional environment.
+If you're interested in the differences between them, there's a very extensive feature comparison matrix drawn up on [this page](https://binary-repositories-comparison.github.io/).
 
 
 
