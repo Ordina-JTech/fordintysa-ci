@@ -366,6 +366,9 @@ But we'll show you Artifactory in a minute.</small></small>
 
 Your maiden Jenkins build should end within a minute with &ensp;**`Finished: SUCCESS`**
 
+<small>Jenkins has put Maven to work: our Java source code from Git is compiled, tested and packaged into a .war file.
+The .war file (which is in essence an special .jar file) can then be deployed on a webserver for further testing, or for the 'live' application.</small>
+
 
 ## ![jenkins-logo](images/jenkins.png) <span>Jenkins &mdash; Build Finished: SUCCESS</span>
 
@@ -407,21 +410,54 @@ This one will finish much faster ofcourse._
 
 That's one of the basic principles of Continuous Integration:
 
-an Automated, Repeatable build, test & QA process.
+### Employ build, test & QA processes that are repeatable through automation.
 
 
 
-## ![artifactory-logo](images/artifactory.png) <span>Artifactory &mdash; Introduction</span>
+## ![artifactory-logo](images/artifactory.png) <span>Artifactory &mdash; Introduction (1)</span>
 
-Lorem ipsum dolor sit amet.
+As you might have learned, Maven uses two repositories:
 
-<small>Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.<br/><br/>
-<small>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.<br/><br/>
-<small>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.<br/><br/>
-<small>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.<br/><br/>
-<small>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.<br/><br/>
-<small>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.<br/><br/>
-</small></small></small></small></small></small>
+  - There's a **local** repository somewhere on your harddisk in which the artifacts you have built yourself are stored by the&ensp;`install`&ensp;goal.
+    The local repository also serves as a cache for artifacts you did not build yourself, which were fetched from:
+  - A **remote** repository. This is used to download any Maven plugins and dependencies  
+    which are not yet stored in your local repository.
+
+<small>The most often used remote repository is [Maven Central](http://repo1.maven.org/maven2), but there are plenty alternatives, e.g. ...</small>
+
+<small><small>Note that we're not discussing _source code_ repositories like Git, but _binary_ repositories that hold the built artifacts.
+These are quite different beasts.</small></small>
+
+
+## ![artifactory-logo](images/artifactory.png) <span>Artifactory &mdash; Introduction (2)</span>
+
+The Maven goal&ensp;`deploy`&ensp;can upload the built artifacts to a remote repository, 
+which is defined the [`distributionManagement`](https://maven.apache.org/pom.html#Distribution_Management) section of the pom.
+
+<small>That remote repository for artifact deployment shall not be Maven Central. 
+For that you need special privileges (which hardly anyone has) because our good friends at Apache only allow trusted content in their Maven Central repository.<br/><br/>
+So what to do then as an organization... Where should you store the artifacts you have built yourself?<br/><br/>
+Also, there are open source libraries you might want to use for your project which are not published at Maven Central,
+but only available at one of the alternative repositories we saw before.
+How can you arrange easy access to more than one remote repository?<br/><br/>
+And then buildservers: often all servers used within an organization are shielded from the evil outside world by a firewall
+and surrounded with a [DMZ](https://en.wikipedia.org/wiki/DMZ_%28computing%29).
+So public repositories like Maven Central are often not even accessible for the buildserver.</small>
+
+
+## ![artifactory-logo](images/artifactory.png) <span>Artifactory &mdash; Introduction (3)</span>
+
+The [adviced solution](https://maven.apache.org/repository-management.html) to these issues is to use a **Repository Management** tool.
+
+There are three alternatives I know of. In order of popularity:
+
+  1. [Nexus](https://www.sonatype.org/nexus/go/) by Sonatype
+  2. [Artifactory](https://www.jfrog.com/open-source) by JFrog
+  3. [Archiva](https://archiva.apache.org/) by Apache
+
+These are all free to use and should work well for casual work. 
+Both [Sonatype](https://links.sonatype.com/products/nexus/pro/home) and [JFrog](https://www.jfrog.com/artifactory/) 
+offer a paid version of their product that offers functionality beyond the basics you'd use in a big professional environment.
 
 
 ## ![artifactory-logo](images/artifactory.png) <span>Artifactory &mdash; Browsing the Repository</span>
