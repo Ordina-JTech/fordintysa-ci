@@ -414,7 +414,7 @@ That's one of the basic principles of Continuous Integration:
 
 
 
-## ![artifactory-logo](images/artifactory.png) <span>Artifactory &mdash; Introduction (1)</span>
+## Maven Repositories &mdash; Recapitulation</span>
 
 As you might have learned, Maven uses two repositories:
 
@@ -429,7 +429,7 @@ As you might have learned, Maven uses two repositories:
 These are quite different beasts.</small></small>
 
 
-## ![artifactory-logo](images/artifactory.png) <span>Artifactory &mdash; Introduction (2)</span>
+## Maven Repositories &mdash; Issues</span>
 
 The Maven goal&ensp;`deploy`&ensp;can upload the built artifacts to a remote repository, 
 which is defined the [`distributionManagement`](https://maven.apache.org/pom.html#Distribution_Management) section of the pom.
@@ -445,7 +445,7 @@ and surrounded with a [DMZ](https://en.wikipedia.org/wiki/DMZ_%28computing%29).
 So public repositories like Maven Central are often not even accessible for the buildserver.</small>
 
 
-## ![artifactory-logo](images/artifactory.png) <span>Artifactory &mdash; Introduction (3)</span>
+## Introducing &mdash; the Repository Manager</span>
 
 The [adviced solution](https://maven.apache.org/repository-management.html) to these issues is to use a **Repository Management** tool.
 
@@ -458,6 +458,12 @@ There are three alternatives I know of. In order of popularity:
 These are all free to use and should work well for casual work. 
 Both [Sonatype](https://links.sonatype.com/products/nexus/pro/home) and [JFrog](https://www.jfrog.com/artifactory/) 
 offer a paid version of their product that offers functionality beyond the basics you'd use in a big professional environment.
+
+
+
+## ![artifactory-logo](images/artifactory.png) <span>Artifactory &mdash; Introduction (1)</span>
+
+Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
 
 
 ## ![artifactory-logo](images/artifactory.png) <span>Artifactory &mdash; Browsing the Repository</span>
