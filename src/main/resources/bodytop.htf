@@ -1,0 +1,6 @@
+<body onresize="resize()">
+	<h1 id="title">Prince of Persia</h1>
+	<div id="listbox">
+		<h3>You rubbed the lamp and thus have woken up the genie.</h3>
+		<p>The genie can read your mind, and knows these are your wishes (or groceries) :</p>
+		<ul>

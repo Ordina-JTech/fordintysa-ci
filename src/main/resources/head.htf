@@ -1,0 +1,43 @@
+<head>
+	<link rel="icon" href="fordintysa_icon.png" type="image/png"/>
+	<link rel="shortcut icon" href="fordintysa_icon.png" type="image/png"/>
+	<script>
+function resize() {
+	var winHeight = window.innerHeight
+	var margin = document.getElementById("title").clientHeight
+	var zoom = (winHeight - margin) / winHeight
+	var wide = winHeight * zoom / 0.75
+	document.getElementById("listbox").style.width = "" + window.innerWidth - wide - margin + "px"
+	document.getElementById("wrapper").style.right = "" + margin + "px"
+	var payload = document.getElementById("payload")
+	payload.width = wide
+	payload.height = winHeight * zoom
+}
+	</script>
+	<style>
+body {
+	margin: 0;
+	color: #FFE4B5;
+	background-color: #282828;
+    font-family: Verdana,sans-serif;
+    font-size: 15px;
+}
+h1 {
+	text-align: center;
+	font-size: 28px;
+	margin: 0;
+	padding: 6px;
+}
+h3 {
+	margin: 0;
+	padding: 6px;
+}
+#wrapper {
+	position: absolute; 
+	bottom: 0;
+}
+#listbox {
+	padding: 6px;
+}
+	</style>
+</head>
