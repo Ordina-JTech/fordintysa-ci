@@ -15,46 +15,52 @@ yel='\033[1;33m'
 cya='\033[1;36m'
 whi='\033[1;37m'
 
+# determine whether 'echo -e' is required (boot2docker) or obsolete (os/x)
+eresult=`echo -e "x"`
+if [ $eresult = "x" ]; then
+    e="-e"  
+fi
+
 echo ""
-echo -e "${whi}O===O ${cya} __  __  ___     ${yel}  __  ___ __  __      ___ ${cya} __  ${whi}O===O"
+echo $e "${whi}O===O ${cya} __  __  ___     ${yel}  __  ___ __  __      ___ ${cya} __  ${whi}O===O"
 
 # root access required?
 docker-compose version > /dev/null 2>&1
 composeretc=$?
 needroot=$composeretc
 if [ $needroot -gt 0 ] && [ `whoami` != 'root' ]; then
-    echo -e "${yel}Insufficient privileges."
-    echo -e "${gry}Unable to cast the ${red}open${gry} spell. Maybe try this:"
-    echo -e "   ${whi}sudo${gry} ./open.sh"
+    echo $e "${yel}Insufficient privileges."
+    echo $e "${gry}Unable to cast the ${red}open${gry} spell. Maybe try this:"
+    echo $e "   ${whi}sudo${gry} ./open.sh"
     exit
 fi
-echo -e "${whi} [ ]  ${cya}/  \|  \|   |  | ${yel} /   |   /   /  \|  ||    ${cya}|  | ${whi} [ ]"
+echo $e "${whi} [ ]  ${cya}/  \|  \|   |  | ${yel} /   |   /   /  \|  ||    ${cya}|  | ${whi} [ ]"
 if [ $# -lt 1 ]; then
-    echo -e "${yel}Required parameter missing.${gry}"
+    echo $e "${yel}Required parameter missing.${gry}"
     echo "Open what, Ali Baba? The current directory contains:"
     ls -1 *.*
     exit
 fi
-echo -e "${whi} [ ]  ${cya}|  ||__/|__ |\ | ${yel} \__ |__ \__ |__||\/||__  ${cya} \/  ${whi} [ ]"
+echo $e "${whi} [ ]  ${cya}|  ||__/|__ |\ | ${yel} \__ |__ \__ |__||\/||__  ${cya} \/  ${whi} [ ]"
 if [ ! -r $1 ]; then
-    echo -e "${yel}$1: file or directory not found.${gry}"
+    echo $e "${yel}$1: file or directory not found.${gry}"
     echo "Open what, Ali Baba? The current directory contains:"
     ls -1 *.*
     exit
 fi
-echo -e "${whi} [ ]  ${cya}|  ||   |   | \| ${yel}    \|      \|  ||  ||    ${cya} __  ${whi} [ ]"
-echo -e "${whi} [ ]  ${cya}\__/|   |___|  | ${yel}  __/|___ __/|  ||  ||___ ${cya} \/  ${whi} [ ]"
-echo -e "${whi}O===O                                                 ${whi}O===O"
-echo -e "${gry}"
+echo $e "${whi} [ ]  ${cya}|  ||   |   | \| ${yel}    \|      \|  ||  ||    ${cya} __  ${whi} [ ]"
+echo $e "${whi} [ ]  ${cya}\__/|   |___|  | ${yel}  __/|___ __/|  ||  ||___ ${cya} \/  ${whi} [ ]"
+echo $e "${whi}O===O                                                 ${whi}O===O"
+echo $e "${gry}"
 
 ## check the ip address
 ip=`ip route 2>/dev/null | awk '/eth1/ { print $9 }'`
 # empty result?
 if [ ${ip}"x" = "x" ]; then
     # not VirtualBox, try Mac approach
-	ip=`ifconfig | grep "inet ." | awk '/broadcast/ { print $2 }'`
+    ip=`ifconfig | grep "inet ." | awk '/broadcast/ { print $2 }'`
 fi
-echo -e "Detected ip address: ${whi}${ip}${gry}"
+echo $e "Detected ip address: ${whi}${ip}${gry}"
 case "$ip" in
   192.168.99.*)
     # looks alright
@@ -65,18 +71,18 @@ case "$ip" in
     echo ""
     if [ $answer != "y" ] && [ $answer != "Y" ]; then
         echo -n "Enter your ip address : "
-    	read ip
+        read ip
     fi
 esac
 
 docker-compose version 2> /dev/null
 if [ $composeretc -ne 0 ]; then
-    echo -e "${whi}Installing docker-compose${gry}"
+    echo $e "${whi}Installing docker-compose${gry}"
     curl -L https://github.com/docker/compose/releases/download/1.10.1/docker-compose-`uname -s`-`uname -m` > /usr/local/bin/docker-compose
-	if [ $? -ne 0 ]; then
-	    echo "Sorry, something went wrong..."
-		exit
-	fi
+    if [ $? -ne 0 ]; then
+        echo "Sorry, something went wrong..."
+        exit
+    fi
     chmod +x /usr/local/bin/docker-compose
 fi
 
@@ -97,7 +103,7 @@ if [ -d ./gitblit/tmp/OrdinaJTech ]; then
 fi
 echo ""
 if [ $clone = "y" ] || [ $clone = "Y" ]; then
-    echo -e "${whi}Clone some GitHub repositories...${gry}"
+    echo $e "${whi}Clone some GitHub repositories...${gry}"
     git clone https://github.com/ordina-jtech/fordintysa-ci.git ./gitblit/tmp/OrdinaJTech/fordintysa-ci.git --bare
     if [ $? -ne 0 ]; then
         echo "Sorry, something went wrong..."
@@ -117,7 +123,7 @@ if [ $clone = "y" ] || [ $clone = "Y" ]; then
 fi
 
 # build the composition
-echo -e "${whi}Start docker-compose build...${gry}"
+echo $e "${whi}Start docker-compose build...${gry}"
 docker-compose build
 if [ $? -ne 0 ]; then
     echo "Sorry, something went wrong..."
@@ -125,10 +131,10 @@ if [ $? -ne 0 ]; then
 fi
 
 echo
-echo -e "Your build server will be up & running at ${grn}http://${ip}/${gry}"
-echo -e "if you enter the following command:"
-echo -e "${grn}docker-compose up -d${gry}"
+echo $e "Your build server will be up & running at ${grn}http://${ip}/${gry}"
+echo $e "if you enter the following command:"
+echo $e "${grn}docker-compose up -d${gry}"
 echo
-echo -e "If you want to stop it later on, type:"
-echo -e "${grn}docker-compose stop${gry}"
+echo $e "If you want to stop it later on, type:"
+echo $e "${grn}docker-compose stop${gry}"
 echo
