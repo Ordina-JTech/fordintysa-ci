@@ -14,7 +14,7 @@ public class MainTest {
     //@Test
     public void testGetNameNoArgs() {
         String[] args = {};
-        genericTest(args, "Fordintysa");
+        genericTest(args, "Fordintysa-CI");
     }
     
     @Test
