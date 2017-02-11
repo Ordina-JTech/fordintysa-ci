@@ -25,13 +25,13 @@ USER jenkins
 
 RUN /usr/local/bin/install-plugins.sh \
   artifactory:2.9.1 \
-  git:3.0.4 \
+  git:3.0.5 \
   git-client:2.2.1 \
   greenballs:1.15 \
   mask-passwords:2.9 \
   maven-plugin:2.14 \
   release:2.6.1 \
-  scm-api:2.0.2
+  scm-api:2.0.3
 
 ENV JENKINS_ARGS="--prefix=/jenkins"
 COPY ./data/ /var/jenkins_home/
