@@ -53,6 +53,9 @@ echo $e "${whi} [ ]  ${cya}\__/|   |___|  | ${yel}  __/|___ __/|  ||  ||___ ${cy
 echo $e "${whi}O===O                                                 ${whi}O===O"
 echo $e "${gry}"
 
+## pull updates
+git pull
+
 ## check the ip address
 ip=`ip route 2>/dev/null | awk '/eth1/ { print $9 }'`
 # empty result?
