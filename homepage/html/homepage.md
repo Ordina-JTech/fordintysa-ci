@@ -40,17 +40,18 @@ So let's give it a spin!
 
 ## ![slow](images/slow.png) <span>Slow or Fast track?</span> ![fast](images/fast.png)
 
-We don't have much time for this workshop, so you get the choice:
+We have limited time for this workshop, so you get the choice:
 
   - Follow the **Slow** track:<br/>
-    <small>This will be the best learning experience, but you probably won't make it in time to the end.<br/>
-	You can always finish it another time!</small>
+    <small>This will be the best learning experience, but you probably won't finish it in time.<br/>
+	You can complete it any other time at your own pace.</small>
   - Follow the **Fast** track:<br/>
-    <small>This gives you the best chance of getting through this complete workshop and see the app deployed.<br/>
+    <small>This gives you the best chance of getting through the whole workshop and see the app deployed.<br/>
     But you will miss some detailed information, so you won't get out all there is to learn.</small>
 
 <small>Whenever there's a track split or pages to skip, you'll see these icons at the bottom of the page.<br/>
-Just click on the one you want to follow. Note that you can always switch track midways!</small>
+Just click on the one you want to follow.<br/>
+<small>Note that at each decision point you can choose differently.</small></small>
 
 ### [![slow](images/slow.png)](#/1/3) &#8656; &emsp; &#8658; [![fast](images/fast.png)](#/1/6)
 
@@ -76,6 +77,8 @@ Just click on the one you want to follow. Note that you can always switch track 
      Is that all there ever was?
   
 <small>Press **S** to check your answers.</small>
+
+<small><small>Disable any popup blockers please to see the answers.</small></small>
 
 Note: Answers:<br/>1. Menu option **Tree** or **Docs**.<br/>2. On average once a month.<br/>3. The `maven-release-plugin`.<br/>4. No, there were countless branches for issues & features. After the _merge_ of a branch back into the `master` it's obsolete and deleted. It's just a bookmark...
 
@@ -118,7 +121,38 @@ You may import this project in your IDE (Netbeans, Eclipse, IntelliJ)
 or test whether the code compiles and all unit tests pass by executing&ensp;`mvn clean test`,
 but you should be able to do without. Just using a plain text editor (and ofcourse a Git client) should get you through.</small>
 
-### [![slow](images/slow.png)](#/1/8) &#8656; &emsp; &#8658; [![fast](images/fast.png)](#/2)
+
+## ![maven-logo](images/maven.png) <span>Maven &mdash; SNAPSHOT versions</span>
+
+Here's a fragment of the project's `pom.xml` you have just cloned:
+
+```
+<project>
+	<groupId>nl.fordintysa</groupId>
+	<artifactId>fordintysa-webapp</artifactId>
+	<version>1.0.0-SNAPSHOT</version>
+	<packaging>war</packaging>
+```
+
+Notice that `version` ends with `-SNAPSHOT`.
+
+<small>This means the project is not in a stable state, but contains _work in progress_.<br/>
+Each executed build results in a **snapshot** of the project as it progresses.<br/>
+As long as the work promised to be done is not finished, the version remains the same.
+</small>
+
+
+## ![maven-logo](images/maven.png) <span>Maven &mdash; Increment SNAPSHOT version</span>
+
+There will come a moment when the development team is happy with the state of all the changes they have implemented.
+Then the `SNAPSHOT` phase is over and a **Release Candidate** is built for deployment and further testing:
+
+  - The -SNAPSHOT suffix is removed from the version
+  - The release candidate version will be built
+  - The version number is increased and suffixed with -SNAPSHOT again
+
+<br/<br/>
+### [![slow](images/slow.png)](#/1/10) &#8656; &emsp; &#8658; [![fast](images/fast.png)](#/2)
 
 
 ## ![gitblit-logo](images/gitblit.png) <span>Push a commit to GitBlit</span>
@@ -189,9 +223,10 @@ Click in the menu bar on **Jenkins**.
 
 ## ![jenkins-logo](images/jenkins.png) <span>Jenkins &mdash; Create your first Build Item</span>
 
-You're now at the main screen of Jenkins.
+You're now at the main screen of Jenkins. 
+Here it should show the list of projects that Jenkins can build.
 
-The list of projects it can build is still empty, but not for long:
+The list is still empty, but not for long:
 
   - Click on the link **Create new Item** (_Cre&euml;er nieuwe taken_)
   - Enter an appropriate item name (eg&ensp;`fordintysa`)
@@ -224,9 +259,9 @@ Jenkins needs to clone our repository hosted by GitBlit, and it needs the URL.
   - Put it's URL in your copy-paste buffer, as explained [previously](#/1/7)
   - Switch back to **Jenkins** and paste the URL.
 
-You'll see an error message, because part of the URL is your GitBlit userid.
-But the password is not given, and you're not going to let anyone else use that.
-Not even someone as trustworthy as Jenkins!
+<small>You'll see an error message, because part of the URL is your GitBlit userid.<br/>
+But the password is not given, and you're not going to let anyone else use that.<br/>
+Not even someone as trustworthy as Jenkins!</small>
 
 
 ## ![jenkins-logo](images/jenkins.png) <span>Configure Build Item &mdash; SCM (2)</span>
@@ -242,7 +277,7 @@ Now the error message should be gone.
 And most of them can/should be left at their default setting.
 If you're really curious what it does, click on the question mark at the right to display a help text.</small>
 
-### [![slow](images/slow.png)](#/2/7) &#8656; &emsp; &#8658; [![fast](images/fast.png)](#/2/8)
+### [![slow](images/slow.png)](#/3/4) &#8656; &emsp; &#8658; [![fast](images/fast.png)](#/3/5)
 
 
 ## ![jenkins-logo](images/jenkins.png) <span>Configure Build Item &mdash; Build Triggers (_Bouwactiveerders_)</span>
@@ -266,14 +301,14 @@ We keep all these options empty for now, except for the very last one.
 
   - Tick the last option: _Resolve artifacts from Artifactory_.
   - On the bottom right click the button **Refresh Repositories**<br>
-    _ The repository for released versions is OK, but **snapshot** versions have a separate repo_
+    <small>_The repository for released versions is OK, but **snapshot** versions have a separate repo_</small>
   - Select **libs-snapshot** as the _Resolution snapshots repository_.
 
 <small>Artifactory is installed on your virtual build server, but as long as the plugin for it is not activated on a build item you won't see it in action.
 We'll discuss Artifactory in depth later on. For now it's sufficient to know that Artifactory serves as a private Maven repository, 
 both for fetching artifacts not yet present in the local Maven repository, and for publishing the artifacts Jenkins has produced.</small>
 
-### [![slow](images/slow.png)](#/2/9) &#8656; &emsp; &#8658; [![fast](images/fast.png)](#/2/10)
+### [![slow](images/slow.png)](#/3/6) &#8656; &emsp; &#8658; [![fast](images/fast.png)](#/3/7)
 
 
 ## ![jenkins-logo](images/jenkins.png) <span>Configure Build Item &mdash; Pre Steps</span>
