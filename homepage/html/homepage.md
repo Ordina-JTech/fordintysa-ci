@@ -92,7 +92,7 @@ You haven't seen the most important repository because it needs authentication:
 
 Now you can access our repository **OrdinaJTech/fordintysa-ci**
 
-### &#8658; [![slow](images/slow.png)](#/1/7)
+### Continue &#8658; [![slow](images/slow.png)](#/1/7)
 
 
 ## ![gitblit-logo](images/gitblit.png) <span>GitBlit &mdash; Login</span>
@@ -221,7 +221,7 @@ Jenkins needs to clone our repository hosted by GitBlit, and it needs the URL.
   - Select **Git** as the SCM source.
   - Switch your browser window to **GitBlit**
   - Select the `fordintysa-ci` repository.
-  - Put it's URL in your copy-paste buffer, as explained [previously](#/1/5)
+  - Put it's URL in your copy-paste buffer, as explained [previously](#/1/7)
   - Switch back to **Jenkins** and paste the URL.
 
 You'll see an error message, because part of the URL is your GitBlit userid.
@@ -437,7 +437,8 @@ As you might have learned, Maven uses two repositories:
   - A **remote** repository. This is used to download any Maven plugins and dependencies  
     which are not yet stored in your local repository.
 
-<small>The most often used remote repository is [Maven Central](http://repo1.maven.org/maven2), but there are plenty alternatives, e.g. ...</small>
+<small>The most often used remote repository is [Maven Central](http://repo1.maven.org/maven2), but there<br/>
+are some alternative hosts like [Atlassian](https://maven.atlassian.com/repository/public) and the [JCenter bintray](http://jcenter.bintray.com/).</small>
 
 <small><small>Note that we're not discussing _source code_ repositories like Git, but _binary_ repositories that hold the built artifacts.
 These are quite different beasts.</small></small>
@@ -445,7 +446,7 @@ These are quite different beasts.</small></small>
 
 ## Maven Repositories &mdash; Issues</span>
 
-The Maven goal&ensp;`deploy`&ensp;can upload the built artifacts to a remote repository, 
+The Maven goal&ensp;`deploy`&ensp;uploads the built artifacts to a remote repository, 
 which is defined the [`distributionManagement`](https://maven.apache.org/pom.html#Distribution_Management) section of the pom.
 
 <small>That remote repository for artifact deployment shall not be Maven Central. 
@@ -474,18 +475,34 @@ But let's dive into Artifactory...
 
 
 
-## ![artifactory-logo](images/artifactory.png) <span>Artifactory &mdash; Browsing the Repository</span>
+## ![artifactory-logo](images/artifactory.png) <span>Artifactory &mdash; Introduction</span>
+
+Within each Artifactory server there are multiple repositories hosted. 
+Locally produced artifacts are held separate from externally downloaded,
+dependency jars are kept separate from Maven plugins, etcetera.
+
+<small>Artifactory serves as a repository manager mainly for Maven artifacts, 
+but the 'pro' version can do the same thing for several other package types like
+Bower, Docker images, Microsoft NuGet, Node.js npm, etcetera.</small>
+
+
+## ![artifactory-logo](images/artifactory.png) <span>Artifactory &mdash; Browsing a Repository</span>
 
   - Click in the menu bar on **Artifactory**.<br/>
-    <small>_You don't need to log in, everything's public here._</small>
-  - In the left menu, select the ![](images/arti_repos.png) icon<br/>
-    <small>_That's the Repository Browser. All down the list are the repositories we have set up in our Jenkins build job:_<br/>
-	`libs-release` _and_ `libs-snapshot`.</small>
-  - Select repository `jcenter-cache`<br/>
-    <small>This repository was empty when you started, now it contains everything that was downloaded for your single build.</small>
+    <small>_You don't need to log in, everything here is public._</small>
+  - In the left menu, select the ![](images/arti_repos.png) icon.<br/>
+    <small>_That's the Repository Browser._</small>
+  - Select repository `jcenter-cache` from the list.
+  - Next to _Artifact Count_, click on **`Show`**
+
+<small>_This repository was empty when you started, now it contains everything that Jenkins (actually Maven) has downloaded for your single build.
+JCenter is a superset of the Maven Central, so it also includes libaries hosted elsewhere._</small>
+
+  - Select repository `libs-snapshop-local` from the list.<br/>
+    <small>_Jenkins did produce a snapshop jar, but it's not deployed here._</small>
 
 
-## ![artifactory-logo](images/artifactory.png) <span>Artifactory &mdash; let Jenkins deploy the Artifact</span>
+## ![jenkins-logo](images/jenkins.png) <span>Let Jenkins deploy the Artifact into Artifactory</span>
 
 Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
 
