@@ -461,6 +461,65 @@ That's one of the basic principles of Continuous Integration:
 
 
 
+## ![app-logo](images/Question.png) <span>The App &mdash; Run more Unit Tests</span>
+
+Currently for our project there's just three unit tests being executed.
+
+  - In your local (cloned) repository, navigate to
+     - folder&emsp;`src/test/java`
+     - package&ensp;`nl.fordintysa`
+  - Open file&ensp;`MainTest.java`&ensp;with a text editor (or your IDE)
+  - Remove both slashes at the start of **line 14**<br/>
+    <small>_The_ `@Test` _annotation is now uncommented, so in the next build the method_<br/>
+	`testGetNameNoArgs()` _will be executed as well during the unit tests._</small>
+  - **Save** the file, **commit** and **push** the change to GitBlit
+  - Start the build again in Jenkins and watch it's console output.
+
+
+## ![jenkins-logo](images/jenkins.png) <span>Jenkins &mdash; Failing Unit Tests</span>
+
+Some of the lines you should notice in the console output:
+
+```
+testGetNameNoArgs(nl.fordintysa.MainTest)  Time elapsed: 0.014 sec  <<< FAILURE!
+org.junit.ComparisonFailure: expected:<Fordintysa[]> but was:<Fordintysa[-CI]>
+---
+[ERROR] There are test failures.
+---
+[INFO] BUILD SUCCESS
+---
+Finished: UNSTABLE
+```
+
+<small>Just one unit tests failed. Which one could that be?<br/><br/>
+Usually Maven then reports `BUILD FAILURE`, but Jenkins here reports `BUILD SUCCESS`.<br/>
+At the end it's labelled `UNSTABLE`, which means an artifact _could_ be produced but its tests failed.</small>
+
+
+## ![jenkins-logo](images/jenkins.png) <span>Jenkins &mdash; Unstable Build</span>
+
+So it gets the benefits of the doubt. 
+A failing test is not enough to let a build fail completely.
+This is done so the following tasks like measuring the code quality can be done regardless.
+Jenkins leaves it up to you what to do.
+<br/><br/>
+
+  - Fix the unit test and make the build stable again
+
+<small><br/><br/></small>
+### [![slow](images/slow.png)](#/6/3) &#8656; &emsp; &#8658; [![fast](images/fast.png)](#/7)
+
+
+## ![app-logo](images/Question.png) <span>The App &mdash; Run more Unit Tests (2)</span>
+
+  - Still in `MainTest.java`, uncomment lines 26-30.
+  - Let it build again by Jenkins<br/>
+    <small>_Now there's a compilation error and the build is flagged as a FAILURE.<br/>
+	If you think you can prevent it, by all means: try._<br/><br/></small>
+  - Fix the unit test and make the build stable again
+
+
+
 ## ![maven-logo](images/maven.png) <span>Maven Repositories &mdash; Recapitulation</span>
 
 As you might have learned, Maven uses two repositories:
@@ -473,8 +532,8 @@ As you might have learned, Maven uses two repositories:
 <small>The most often used remote repository is [Maven Central](http://repo1.maven.org/maven2), but there<br/>
 are some alternative hosts like [Atlassian](https://maven.atlassian.com/repository/public) and the [JCenter bintray](http://jcenter.bintray.com/).</small>
 
-<small><small>Note that we're not discussing _source code_ repositories like Git, but _binary_ repositories that hold the built artifacts.
-These are quite different beasts.</small></small>
+<small><small>Note that we're not discussing _source code_ repositories like Git, but [_binary_ repositories](https://en.wikipedia.org/wiki/Binary_repository_manager) 
+that hold the built artifacts. These are quite different beasts.</small></small>
 
 
 ## ![maven-logo](images/maven.png) <span>Maven Repositories &mdash; Issues</span>
@@ -530,11 +589,16 @@ Within each Artifactory server there are multiple repositories hosted, so:
   - Select repository `jcenter-cache` from the list.
   - Next to _Artifact Count_, click on **`Show`**
 
-<small>_This repository was empty when you started, now it contains everything that Jenkins (actually Maven) has downloaded for your single build.
-JCenter is a superset of the Maven Central, so it also includes libaries hosted elsewhere._</small>
+_This repository was empty when you started, now it contains everything that Jenkins (actually Maven) has downloaded for your single build.
+JCenter is a superset of the Maven Central, so it also includes libaries hosted elsewhere._
+
+
+## ![artifactory-logo](images/artifactory.png) <span>Artifactory &mdash; Repository libs-snapshots-local</span>
+
+Jenkins did produce a snapshop war file during the build.
 
   - Select repository `libs-snapshop-local` from the list.<br/>
-    <small>_Jenkins did produce a snapshop jar, but it's not deployed here._</small>
+    <small>_, but it's not deployed here._</small>
 
 
 ## ![jenkins-logo](images/jenkins.png) <span>Let Jenkins deploy the Artifact into Artifactory</span>
