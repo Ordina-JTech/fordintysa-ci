@@ -3,11 +3,13 @@
 > Version 1.1, December 2016
 
 > Copyright (C) 2017 Bert Koorengevel - Ordina JTech
+
 > This project is written for _educational purposes_ only.
  
  Everyone is permitted to copy and distribute verbatim or modified copies of this license document.
 
 > DON'T BE A DICK PUBLIC LICENSE
+
 > TERMS AND CONDITIONS FOR COPYING, DISTRIBUTION AND MODIFICATION
 
  1. Do whatever you like with the original work, just don't be a dick.
