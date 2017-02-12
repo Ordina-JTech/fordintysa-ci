@@ -121,6 +121,20 @@ You may import this project in your IDE (Netbeans, Eclipse, IntelliJ)
 or test whether the code compiles and all unit tests pass by executing&ensp;`mvn clean test`,
 but you should be able to do without. Just using a plain text editor (and ofcourse a Git client) should get you through.</small>
 
+### [![slow](images/slow.png)](#/1/8) &#8656; &emsp; &#8658; [![fast](images/fast.png)](#/2)
+
+
+## ![gitblit-logo](images/gitblit.png) <span>Push a commit to GitBlit</span>
+
+You should now have a working Git infrastructure with a local and remote repository.<br/>
+Let's test whether you can push a change to your own Gitblit server. 
+
+  - Edit the file `src/main/resources/`**`wishlist.txt`** in your local repository.
+  - **Commit** the change.
+  - **Push** the commit to the `origin`.
+  - Check in **GitBlit** your commit has arrived.
+
+
 
 ## ![maven-logo](images/maven.png) <span>Maven &mdash; SNAPSHOT versions</span>
 
@@ -150,20 +164,6 @@ Then the `SNAPSHOT` phase is over and a **Release Candidate** is built for deplo
   - The -SNAPSHOT suffix is removed from the version
   - The release candidate version will be built
   - The version number is increased and suffixed with -SNAPSHOT again
-
-<br/<br/>
-### [![slow](images/slow.png)](#/1/10) &#8656; &emsp; &#8658; [![fast](images/fast.png)](#/2)
-
-
-## ![gitblit-logo](images/gitblit.png) <span>Push a commit to GitBlit</span>
-
-You should now have a working Git infrastructure with a local and remote repository.<br/>
-Let's test whether you can push a change to your own Gitblit server. 
-
-  - Edit the file `src/main/resources/`**`wishlist.txt`** in your local repository.
-  - **Commit** the change.
-  - **Push** the commit to the `origin`.
-  - Check in **GitBlit** your commit has arrived.
 
 
 
@@ -210,12 +210,10 @@ Click in the menu bar on **Jenkins**.
 </div>
 <div id="right">
 <h3>![fast](images/fast.png)</h3>
+<p>Login with:<p>
 <ul>
-<li>Login with:</li>
-  <ul>
-  <li>user:&ensp;`user`</li>
-  <li>password:&ensp;`password`</li>
-  </ul>
+<li>user:&emsp;&emsp;&emsp;`user`</li>
+<li>password:&ensp;`password`</li>
 </ul>
 </div>
 
@@ -224,15 +222,15 @@ Click in the menu bar on **Jenkins**.
 ## ![jenkins-logo](images/jenkins.png) <span>Jenkins &mdash; Create your first Build Item</span>
 
 You're now at the main screen of Jenkins. 
-Here it should show the list of projects that Jenkins can build.
-
-The list is still empty, but not for long:
+Here you usually see the list of projects contained in Jenkins, 
+with some details about their last build status.
+Let's put something there:
 
   - Click on the link **Create new Item** (_Cre&euml;er nieuwe taken_)
   - Enter an appropriate item name (eg&ensp;`fordintysa`)
   - Select the box **Maven Build** (_Bouw een Maven item_) and click **OK**.
 
-The item is now created, and we can configure it further.
+_The item is now created, and we can configure it further._
 
 
 ## ![jenkins-logo](images/jenkins.png) <span>Jenkins &mdash; Configure a Build Item</span>
@@ -271,13 +269,13 @@ We've already set up credentials for Jenkins to connect with GitBlit, so let's u
   - Remove the part of the URL containing your userid.
   - In the Credentials dropdown box, select the _Jenkins credentials for Gitblit_.
 
-Now the error message should be gone.
+_Now the error message should be gone._
 
 <small>There are a lot of other options in this section and others, too much to explain them all.
 And most of them can/should be left at their default setting.
 If you're really curious what it does, click on the question mark at the right to display a help text.</small>
 
-### [![slow](images/slow.png)](#/3/4) &#8656; &emsp; &#8658; [![fast](images/fast.png)](#/3/5)
+### [![slow](images/slow.png)](#/4/4) &#8656; &emsp; &#8658; [![fast](images/fast.png)](#/4/5)
 
 
 ## ![jenkins-logo](images/jenkins.png) <span>Configure Build Item &mdash; Build Triggers (_Bouwactiveerders_)</span>
@@ -308,7 +306,7 @@ We keep all these options empty for now, except for the very last one.
 We'll discuss Artifactory in depth later on. For now it's sufficient to know that Artifactory serves as a private Maven repository, 
 both for fetching artifacts not yet present in the local Maven repository, and for publishing the artifacts Jenkins has produced.</small>
 
-### [![slow](images/slow.png)](#/3/6) &#8656; &emsp; &#8658; [![fast](images/fast.png)](#/3/7)
+### [![slow](images/slow.png)](#/4/6) &#8656; &emsp; &#8658; [![fast](images/fast.png)](#/4/7)
 
 
 ## ![jenkins-logo](images/jenkins.png) <span>Configure Build Item &mdash; Pre Steps</span>
@@ -463,7 +461,7 @@ That's one of the basic principles of Continuous Integration:
 
 
 
-## Maven Repositories &mdash; Recapitulation</span>
+## ![maven-logo](images/maven.png) <span>Maven Repositories &mdash; Recapitulation</span>
 
 As you might have learned, Maven uses two repositories:
 
@@ -479,7 +477,7 @@ are some alternative hosts like [Atlassian](https://maven.atlassian.com/reposito
 These are quite different beasts.</small></small>
 
 
-## Maven Repositories &mdash; Issues</span>
+## ![maven-logo](images/maven.png) <span>Maven Repositories &mdash; Issues</span>
 
 The Maven goal&ensp;`deploy`&ensp;uploads the built artifacts to a remote repository, 
 which is defined the [`distributionManagement`](https://maven.apache.org/pom.html#Distribution_Management) section of the pom.
@@ -512,13 +510,15 @@ But let's dive into Artifactory...
 
 ## ![artifactory-logo](images/artifactory.png) <span>Artifactory &mdash; Introduction</span>
 
-Within each Artifactory server there are multiple repositories hosted. 
-Locally produced artifacts are held separate from externally downloaded,
-dependency jars are kept separate from Maven plugins, etcetera.
-
-<small>Artifactory serves as a repository manager mainly for Maven artifacts, 
+Artifactory serves as a repository manager mainly for Maven artifacts, 
 but the 'pro' version can do the same thing for several other package types like
-Bower, Docker images, Microsoft NuGet, Node.js npm, etcetera.</small>
+Bower web packages, Docker images, Microsoft NuGet packages, NPM packages for Node.js, etcetera.
+
+Within each Artifactory server there are multiple repositories hosted, so:
+
+  - Locally produced artifacts are held separate from externally downloaded jars
+  - Dependency jars are kept separate from Maven plugins
+  - A Virtual repository can aggregate multiple _real_ ones to function as they were one
 
 
 ## ![artifactory-logo](images/artifactory.png) <span>Artifactory &mdash; Browsing a Repository</span>
