@@ -6,13 +6,13 @@ The goal of this workshop is to give you some hands-on experience with the apps 
 
 ----
 
-<small> **Page navigation** :
-
-  - Just press **Space** for the next slide
-  - **Down** goes to the next page within a chapter
-  - **Right** skips to the next chapter
-  - For more keyboard shortcuts: press **?**
-</small>
+<small> **Page navigation** :<ul>
+  <li>Just press **Space** for the next slide</li>
+  <li>**Down** goes to the next page within a chapter</li>
+  <li>**Right** skips to the next chapter</li>
+  <li>For more keyboard shortcuts: press **?**</li>
+  <li>Text contains clickable [hyperlinks](#/1)</li>
+</ul></small>
 
 
 
@@ -51,9 +51,9 @@ We have limited time for this workshop, so you get the choice:
 
 <small>Whenever there's a track split or pages to skip, you'll see these icons at the bottom of the page.<br/>
 Just click on the one you want to follow.<br/>
-<small>Note that at each decision point you can choose differently.</small></small>
+<small>Note that at each decision point you can choose a different option.</small></small>
 
-### [![slow](images/slow.png)](#/1/3) &#8656; &emsp; &#8658; [![fast](images/fast.png)](#/1/6)
+### [![slow](images/slow.png)](#/1/3) &#8656; do \ Explore GitBlit & create account / skip &#8658; [![fast](images/fast.png)](#/1/6)
 
 
 ## ![gitblit-logo](images/gitblit.png) <span>GitBlit &mdash; Repository Browsing</span>
@@ -121,7 +121,7 @@ You may import this project in your IDE (Netbeans, Eclipse, IntelliJ)
 or test whether the code compiles and all unit tests pass by executing&ensp;`mvn clean test`,
 but you should be able to do without. Just using a plain text editor (and ofcourse a Git client) should get you through.</small>
 
-### [![slow](images/slow.png)](#/1/8) &#8656; &emsp; &#8658; [![fast](images/fast.png)](#/2)
+### [![slow](images/slow.png)](#/1/8) &#8656; do \ test git push to GitBlit / skip &#8658; [![fast](images/fast.png)](#/2)
 
 
 ## ![gitblit-logo](images/gitblit.png) <span>Push a commit to GitBlit</span>
@@ -129,7 +129,8 @@ but you should be able to do without. Just using a plain text editor (and ofcour
 You should now have a working Git infrastructure with a local and remote repository.<br/>
 Let's test whether you can push a change to your own Gitblit server. 
 
-  - Edit the file `src/main/resources/`**`wishlist.txt`** in your local repository.
+  - Navigate in your local repository to folder `src/main/resources/` 
+  - Edit the file **`wishlist.txt`**
   - **Commit** the change.
   - **Push** the commit to the `origin`.
   - Check in **GitBlit** your commit has arrived.
@@ -139,8 +140,8 @@ Let's test whether you can push a change to your own Gitblit server.
 ## ![maven-logo](images/maven.png) <span>Maven &mdash; SNAPSHOT versions</span>
 
 Here's a fragment of the project's `pom.xml` you have just cloned:
-
-```
+  
+```xml
 <project>
 	<groupId>nl.fordintysa</groupId>
 	<artifactId>fordintysa-webapp</artifactId>
@@ -152,8 +153,7 @@ Notice that `version` ends with `-SNAPSHOT`.
 
 <small>This means the project is not in a stable state, but contains _work in progress_.<br/>
 Each executed build results in a **snapshot** of the project as it progresses.<br/>
-As long as the work promised to be done is not finished, the version remains the same.
-</small>
+As long as the work promised to be done is not finished, the version remains the same.</small>
 
 
 ## ![maven-logo](images/maven.png) <span>Maven &mdash; Increment SNAPSHOT version</span>
@@ -169,10 +169,11 @@ Then the `SNAPSHOT` phase is over and a **Release Candidate** is built for deplo
 
 ## ![jenkins-logo](images/jenkins.png) <span>Jenkins &mdash; Introduction (1)</span>
 
-Now the SCM is covered, the next requirements of Continuous Integration need attention:
+Here are some important aspects of Continuous Integration:
 
+  1. Using a SCM tool for source code version control <small>(_already covered_)</small>
   1. An **Automated Build** process
-  2. Automated **Testing** of the built software
+  1. Automated **Testing** of the built software
 
 While your IDE can perform these processes, there's no _guarantee_ each developer has done these required steps before submitting their changes to the central repository.
 That's why we need it to be _automated_ and it's the role of a **Build Server** to execute this central part in Continuous Integration.
@@ -216,6 +217,10 @@ Click in the menu bar on **Jenkins**.
 <li>password:&ensp;`password`</li>
 </ul>
 </div>
+<div style="clear: both"></div>
+
+----
+###  ![fast](images/fast.png)&ensp;both continue with **space**&ensp;![slow](images/slow.png)
 
 
 
@@ -275,7 +280,7 @@ _Now the error message should be gone._
 And most of them can/should be left at their default setting.
 If you're really curious what it does, click on the question mark at the right to display a help text.</small>
 
-### [![slow](images/slow.png)](#/4/4) &#8656; &emsp; &#8658; [![fast](images/fast.png)](#/4/5)
+### [![slow](images/slow.png)](#/4/4) &#8656; read \ explanation: Build Triggers / skip &#8658; [![fast](images/fast.png)](#/4/5)
 
 
 ## ![jenkins-logo](images/jenkins.png) <span>Configure Build Item &mdash; Build Triggers (_Bouwactiveerders_)</span>
@@ -306,7 +311,7 @@ We keep all these options empty for now, except for the very last one.
 We'll discuss Artifactory in depth later on. For now it's sufficient to know that Artifactory serves as a private Maven repository, 
 both for fetching artifacts not yet present in the local Maven repository, and for publishing the artifacts Jenkins has produced.</small>
 
-### [![slow](images/slow.png)](#/4/6) &#8656; &emsp; &#8658; [![fast](images/fast.png)](#/4/7)
+### [![slow](images/slow.png)](#/4/6) &#8656; read \ explanation: Pre Steps / skip &#8658; [![fast](images/fast.png)](#/4/7)
 
 
 ## ![jenkins-logo](images/jenkins.png) <span>Configure Build Item &mdash; Pre Steps</span>
@@ -395,19 +400,20 @@ You're back now at the project page.
 About halfway the menu at the left is the option **Build now** (_Start nu een bouwpoging_)
 
   - Start the build.<br/>
-    _The build job will go through scheduling in no time, your build server has not much to do.<br/>
-	It will appear at the left under **Build History** (Overzicht Bouwpogingen)_
+    _<small>The build job will go through the scheduling queue in no time.<br/>
+	It will appear at the left under **Build History** (Overzicht Bouwpogingen)</small>_<br/><br/>
   - Once you see **#1** blinking, click there on the current **DateTime**.<br/>
-    _This is the details screen for the first build of our project._
+    _<small>This is the details screen for the first build of our project.</small>_
 
 
 ## ![jenkins-logo](images/jenkins.png) <span>Jenkins &mdash; First Build &mdash; Monitoring</span>
   - From the menu on the left, click on **Console Output**<br/>
-    _You should now see the console log output from Jenkins and Maven._
+    _<small>You should now see the console log output from Jenkins and Maven.</small>_
 
-<small>_Jenkins has cloned the Git repository into a workspace folder and started Maven to do the actual build.
-Since Maven runs for the first time, it's local repository is still empty and it is mainly busy downloading the required plugins._<br/>
-<small><br/>Note that in the console all URLs are decorated as clickable links.
+<small>Jenkins has cloned the Git repository into a workspace folder and started Maven to do the actual build.
+Since Maven runs for the first time, it's local repository is still empty and it is mainly busy downloading the required plugins.
+<br/><br/>
+<small>Note that in the console all URLs are decorated as clickable links.
 Since `http://artifactory:8081/` refers to a virtual host that's only accessible inside the Docker infrastructure, you cannot access the link.
 But we'll show you Artifactory in a minute.</small></small>
 
@@ -463,10 +469,10 @@ That's one of the basic principles of Continuous Integration:
 
 ## ![app-logo](images/Question.png) <span>The App &mdash; Run more Unit Tests</span>
 
-Currently for our project there's just three unit tests being executed.
+Our build executed just three unit tests. We have prepared some more.
 
   - In your local (cloned) repository, navigate to
-     - folder&emsp;`src/test/java`
+     - folder&emsp;&ensp;`src/test/java`
      - package&ensp;`nl.fordintysa`
   - Open file&ensp;`MainTest.java`&ensp;with a text editor (or your IDE)
   - Remove both slashes at the start of **line 14**<br/>
@@ -491,7 +497,7 @@ org.junit.ComparisonFailure: expected:<Fordintysa[]> but was:<Fordintysa[-CI]>
 Finished: UNSTABLE
 ```
 
-<small>Just one unit tests failed. Which one could that be?<br/><br/>
+<small>Just one unit tests failed. Which one could that be? ;-)<br/><br/>
 Usually Maven then reports `BUILD FAILURE`, but Jenkins here reports `BUILD SUCCESS`.<br/>
 At the end it's labelled `UNSTABLE`, which means an artifact _could_ be produced but its tests failed.</small>
 
@@ -507,7 +513,7 @@ Jenkins leaves it up to you what to do.
   - Fix the unit test and make the build stable again
 
 <small><br/><br/></small>
-### [![slow](images/slow.png)](#/6/3) &#8656; &emsp; &#8658; [![fast](images/fast.png)](#/7)
+### [![slow](images/slow.png)](#/6/3) &#8656; do \ activate another unit test / skip &#8658; [![fast](images/fast.png)](#/7)
 
 
 ## ![app-logo](images/Question.png) <span>The App &mdash; Run more Unit Tests (2)</span>
@@ -520,20 +526,51 @@ Jenkins leaves it up to you what to do.
 
 
 
+## ![jenkins-logo](images/jenkins.png) <span>Jenkins &mdash; let a Git Push trigger the build</span>
+
+It's really easy to let a **push** into GitBlit automatically trigger a **build** in Jenkins.
+
+  - Navigate in Jenkins to your **Project** page
+  - Select **Configure** (_Configureren_) in the menu on the left
+  - Select tab **Build Triggers** (_Bouwactiveerders_)
+  - Tick item **Poll SCM** (_Bemonster SCM_)
+  - Fill the field **Schedule** (_Planning_) with:
+    ```
+	H * * * *
+	```
+  - **Save** the changed configuration.
+
+
+## ![jenkins-logo](images/jenkins.png) <span>Jenkins &mdash; test Git Push triggers the build</span>
+
+  - Navigate in your local repository to folder `src/main/resources/` 
+  - Edit the file **`wishlist.txt`**
+  - **Commit** and **Push** the change
+  - Watch in Jenkins what happens...
+
+
+
 ## ![maven-logo](images/maven.png) <span>Maven Repositories &mdash; Recapitulation</span>
 
 As you might have learned, Maven uses two repositories:
 
-  - There's a **local** repository somewhere on your harddisk in which the artifacts you have built yourself are stored by the&ensp;`install`&ensp;goal.
-    The local repository also serves as a cache for artifacts you did not build yourself, which were fetched from:
+  - There's a **local** repository somewhere on the harddisk in which the artifacts you have built yourself are stored by the&ensp;`install`&ensp;goal.
+    The local repository also serves as a cache for artifacts you did not build yourself, but which were fetched from:
   - A **remote** repository. This is used to download any Maven plugins and dependencies  
     which are not yet stored in your local repository.
 
-<small>The most often used remote repository is [Maven Central](http://repo1.maven.org/maven2), but there<br/>
-are some alternative hosts like [Atlassian](https://maven.atlassian.com/repository/public) and the [JCenter bintray](http://jcenter.bintray.com/).</small>
+<small>The most often used remote repository is [Maven Central](http://repo1.maven.org/maven2),
+but there are some alternative hosts with simular content like 
+[Atlassian](https://maven.atlassian.com/repository/public),
+[Gradle](http://gradle.artifactoryonline.com/gradle/libs),
+[JBoss](http://repository.jboss.org/nexus/content/groups/public-jboss/)
+and the [JCenter bintray](http://jcenter.bintray.com/).
+There are also hosts with a limited set of artifacts, like
+[Spring](http://maven.springframework.org/release).
+</small>
 
 <small><small>Note that we're not discussing _source code_ repositories like Git, but [_binary_ repositories](https://en.wikipedia.org/wiki/Binary_repository_manager) 
-that hold the built artifacts. These are quite different beasts.</small></small>
+that hold the built .jar artifacts. These are quite different beasts.</small></small>
 
 
 ## ![maven-logo](images/maven.png) <span>Maven Repositories &mdash; Issues</span>
@@ -542,7 +579,7 @@ The Maven goal&ensp;`deploy`&ensp;uploads the built artifacts to a remote reposi
 which is defined the [`distributionManagement`](https://maven.apache.org/pom.html#Distribution_Management) section of the pom.
 
 <small>That remote repository for artifact deployment shall not be Maven Central. 
-For that you need special privileges (which hardly anyone has) because our good friends at Apache only allow trusted content in their Maven Central repository.<br/><br/>
+For that you need special privileges (which you don't have) because our good friends at Apache only allow trusted content in their Maven Central repository.<br/><br/>
 So what to do then as an organization... Where should you store the artifacts you have built yourself?<br/><br/>
 Also, there are open source libraries you might want to use for your project which are not published at Maven Central,
 but only available at one of the alternative repositories we saw before.
@@ -577,7 +614,7 @@ Within each Artifactory server there are multiple repositories hosted, so:
 
   - Locally produced artifacts are held separate from externally downloaded jars
   - Dependency jars are kept separate from Maven plugins
-  - A Virtual repository can aggregate multiple _real_ ones to function as they were one
+  - A _virtual_ repository can aggregate multiple _real_ ones to function as if they were one
 
 
 ## ![artifactory-logo](images/artifactory.png) <span>Artifactory &mdash; Browsing a Repository</span>
@@ -589,32 +626,55 @@ Within each Artifactory server there are multiple repositories hosted, so:
   - Select repository `jcenter-cache` from the list.
   - Next to _Artifact Count_, click on **`Show`**
 
-_This repository was empty when you started, now it contains everything that Jenkins (actually Maven) has downloaded for your single build.
-JCenter is a superset of the Maven Central, so it also includes libaries hosted elsewhere._
+_<small>This repository was empty when you started, now it contains everything that Jenkins (actually Maven) has downloaded<br/>
+for your single build. JCenter is a superset of the Maven Central repository, so it also includes libaries hosted elsewhere.</small>_
 
 
 ## ![artifactory-logo](images/artifactory.png) <span>Artifactory &mdash; Repository libs-snapshots-local</span>
 
-Jenkins did produce a snapshop war file during the build.
+Jenkins did produce a .war file during the build, and the version has the `-SNAPSHOT` suffix.
 
-  - Select repository `libs-snapshop-local` from the list.<br/>
-    <small>_, but it's not deployed here._</small>
-
-
-## ![jenkins-logo](images/jenkins.png) <span>Let Jenkins deploy the Artifact into Artifactory</span>
-
-Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
+  - Select repository `libs-snapshot-local` from the list.<br/>
+    <small>_This is the repository where the .war file is expected to land, but it is still empty._</small>
 
 
 
-## ![jenkins-logo](images/jenkins.png) <span>Jenkins &mdash; let a Git Push trigger the build</span>
+## ![jenkins-logo](images/jenkins.png) <span>Jenkins &mdash; deploy the Artifact to Artifactory (1)</span>
 
-Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
+  - Navigate in Jenkins to your **Project** page
+  - Select **Configure** (_Configureren_) in the menu on the left
+  - Select tab **Post-Build Actions** (_Acties na Bouwpoging_)
+  - Unfold the list **Add post-build action** (_Toevoegen actie na bouwpoging_)<br/>
+    and select **Deploy artifacts to Artifactory**<br/>
+	
+	<small>_The added form is quite big. Scroll about one page back upwards.<br/>
+	You should select what repositories to deploy to, but the list is still empty._</small>
 
 
-## ![git-logo](images/git.png) <span> &mdash; Merge a Branch</span>
+## ![jenkins-logo](images/jenkins.png) <span>Jenkins &mdash; deploy the Artifact to Artifactory (2)</span>
 
-Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
+  - Under the repository fields, on the right click button **Refresh Repositories**
+  - Select the following repositories:<br/>
+    - Target **releases** repository: `libs-release-local`
+    - Target **snapshot** repository: `libs-snapshot-local`
+	
+	_The rest of this huge form can be left empty._</small>
+  - Click **Save** and run the build again.
+
+
+## ![artifactory-logo](images/artifactory.png) <span>Artifactory &mdash; Behold: your artifact!</span>
+
+The Jenkins build should finish without issues.
+
+  - Switch back to Artifactory and refresh the screen with **F5**.<br/>
+    <small>_There should now be a &#9658; sign next to_ `libs-snapshot-local` _to signify it has content._</small>
+  - Unfold the folders of our groupId, artifactId and version.<br/>
+    <small>_Here you'll find the produced_ `.pom` _and_ `.war` _files, plus a_ `maven-metadata.xml`</small>
+  - Dig in deeper, into the `.war` and it's subfolders `WEB-INF/classes`.<br/>
+    <small>_This is where your_ `wishlist.txt`, _originally from_ `src/main/resources` _is placed._</small>
+  - Check that your own, personal `wishlist.txt` was put into the `.war` file.
+
+### [![slow](images/slow.png)](#/11) &#8656; do \ SonarQube code quality reports / skip &#8658; [![fast](images/fast.png)](#/12)
 
 
 
