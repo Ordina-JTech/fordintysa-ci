@@ -16,7 +16,7 @@ services:
   artifactory:
     image: docker.bintray.io/jfrog/artifactory-oss:4.15.0
   tomcat:
-    image: tomcat
+    image: tomcat:7.0.75-jre8
     volumes:
      - tomcatwebapps:/usr/local/tomcat/webapps
   sonarqube:
