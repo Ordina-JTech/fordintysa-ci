@@ -30,7 +30,6 @@ RUN /usr/local/bin/install-plugins.sh \
   greenballs:1.15 \
   mask-passwords:2.9 \
   maven-plugin:2.14 \
-  release:2.6.1 \
   scm-api:2.0.3
 
 ENV JENKINS_ARGS="--prefix=/jenkins"
