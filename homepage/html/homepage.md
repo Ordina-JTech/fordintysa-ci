@@ -124,10 +124,10 @@ but you should be able to do without. Just using a plain text editor (and ofcour
 ### [![slow](images/slow.png)](#/1/8) &#8656; do \ test git push to GitBlit / skip &#8658; [![fast](images/fast.png)](#/2)
 
 
-## ![gitblit-logo](images/gitblit.png) <span>Push a commit to GitBlit</span>
+## ![git-logo](images/git.png) <span>Push a commit to GitBlit</span>
 
 You should now have a working Git infrastructure with a local and remote repository.<br/>
-Let's test whether you can push a change to your own Gitblit server. 
+Let's test whether you can push a change to your own GitBlit server. 
 
   - Navigate in your local repository to folder `src/main/resources/` 
   - Edit the file **`wishlist.txt`**
@@ -272,7 +272,7 @@ Not even someone as trustworthy as Jenkins!</small>
 We've already set up credentials for Jenkins to connect with GitBlit, so let's use that:
 
   - Remove the part of the URL containing your userid.
-  - In the Credentials dropdown box, select the _Jenkins credentials for Gitblit_.
+  - In the Credentials dropdown box, select the _Jenkins credentials for GitBlit_.
 
 _Now the error message should be gone._
 
@@ -626,8 +626,8 @@ Within each Artifactory server there are multiple repositories hosted, so:
   - Select repository `jcenter-cache` from the list.
   - Next to _Artifact Count_, click on **`Show`**
 
-_<small>This repository was empty when you started, now it contains everything that Jenkins (actually Maven) has downloaded<br/>
-for your single build. JCenter is a superset of the Maven Central repository, so it also includes libaries hosted elsewhere.</small>_
+<small>_This repository was empty when you started, now it contains everything that Jenkins (actually Maven) has downloaded<br/>
+for your single build. JCenter is a superset of the Maven Central repository, so it also includes libaries hosted elsewhere._</small>
 
 
 ## ![artifactory-logo](images/artifactory.png) <span>Artifactory &mdash; Repository libs-snapshots-local</span>
@@ -672,7 +672,8 @@ The Jenkins build should finish without issues.
     <small>_Here you'll find the produced_ `.pom` _and_ `.war` _files, plus a_ `maven-metadata.xml`</small>
   - Dig in deeper, into the `.war` and it's subfolders `WEB-INF/classes`.<br/>
     <small>_This is where your_ `wishlist.txt`, _originally from_ `src/main/resources` _is placed._</small>
-  - Check that your own, personal `wishlist.txt` was put into the `.war` file.
+  - Check that your own, personal `wishlist.txt` was put into the `.war` file.<br/>
+    <small>&nbsp;</small>
 
 ### [![slow](images/slow.png)](#/11) &#8656; do \ SonarQube code quality reports / skip &#8658; [![fast](images/fast.png)](#/12)
 
@@ -680,12 +681,12 @@ The Jenkins build should finish without issues.
 
 ## ![sonarqube-logo](images/sonar.png) <span>SonarQube &mdash; Introduction</span>
 
-Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
+> Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
 
 
 ## ![sonarqube-logo](images/sonar.png) <span>SonarQube &mdash; Fix some Code Quality issues</span>
 
-Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tem
+Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
 
 
 
