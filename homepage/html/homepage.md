@@ -690,7 +690,83 @@ Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor i
 
 
 
-## ![jenkins-logo](images/jenkins.png) <span>Jenkins &mdash; deploy The App</span>
+## ![jenkins-logo](images/jenkins.png) <span>Jenkins &mdash; Release Configuration (1)</span>
+
+It's time to deploy the final 1.0.0 version of our mysterious App, so you can test it.<br/>
+<small>This will be executed with a new job in Jenkins. 
+So there will be one for **snapshot** builds and another for a **release**.</small>
+
+  - Navigate in Jenkins to the main page of your project.<br/>
+    <small>_Since there's a Git push trigger on the current project, we'll disable it from running._</small>
+  - At the top right is a button to **deactivate** this project.<br/>
+    <small>_We'll use this project as a template for the new one by making a copy._</small>  
+  - At the top left click the link **Back to the Dashboard**
+  - Create a **New Item** and name the new item e.g. `fordintysa-release`
+  - At the bottom, just after **Copy from**: type the name of the existing project
+  - Click **OK**
+
+
+## ![jenkins-logo](images/jenkins.png) <span>Jenkins &mdash; Release Configuration (2)</span>
+
+The copied Jenkins item needs some additions to perform a release.
+
+  - In the **General** section: untick the **deactivate** field.<br/>
+    <small>_The old item was disabled, this one should run!_</small>
+  - In the **Post Steps** section: select to Run only if build succeeds **or is unstable**
+  - Add a post-step of type **execute shell script** (_Voer shell script uit_)
+  - Copy & paste the following command:
+    ```
+cp ./target/*.war /tomcat-webapps-volume/app.war
+    ```
+    <small>_This command copies the .war file to a location monitored by a Tomcat server that can execute it._</small>
+
+
+## ![jenkins-logo](images/jenkins.png) <span>Jenkins &mdash; Release Configuration (3)</span>
+
+  - At the bottom of the form: add another action of type **Git Publisher**
+  - Select **Push Only if build succeeds**
+  - Click **Add Tag**<br/>
+    <small>_Every release should be tagged in the Git repository, 
+	so the exact source code state of that release can be traced back._</small>
+  - Tag to push:
+    ```
+v${POM_VERSION}
+```
+  - Select **Create new tag**
+  - Target remote name = `origin`
+  - Click **Save**
+
+
+## ![jenkins-logo](images/jenkins.png) <span>Jenkins &mdash; Release Execution</span>
+
+  - In your local repository, edit the `pom.xml`
+  - Change the version: strip off the `SNAPSHOT` part.
+  - Commit and Push.<br/>
+    <small>_In Jenkins now the **Release** job should be triggered._</small>
+  - Look in GitBlit whether the tag is set on your last commit.
+
+
+## ![theapp-logo](images/question.png) <span>The App &mdash; Test it</span>
+
+You saw **The App** in the menu bar all the time.
+
+  - Start **[?] The App**
 
 ### ... and ...
+
 # WIN !!!
+
+
+
+## THE END
+
+----
+
+### Credits:
+
+> (c) 2017 Bert Koorengevel, Ordina JTech
+>
+> This slideshow is powered by [reveal.js](https://github.com/hakimel/reveal.js/),<br/>
+> which is powered by a [nginx docker container](https://hub.docker.com/_/nginx/)
+>
+> Visit the the wiki and issue tracker of this project at [GitHub](https://github.com/Ordina-JTech/fordintysa-ci).
