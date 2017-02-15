@@ -19,8 +19,8 @@ services:
     image: tomcat:7.0.75-jre8
     volumes:
      - tomcatwebapps:/usr/local/tomcat/webapps
-  sonarqube:
-    build: ./sonarqube/
+#  sonarqube:
+#    build: ./sonarqube/
 
 volumes:
   tomcatwebapps:
