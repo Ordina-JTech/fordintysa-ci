@@ -65,8 +65,11 @@ if [ ${ip}"x" = "x" ]; then
 fi
 echo $e "Detected ip address: ${whi}${ip}${gry}"
 case "$ip" in
+  192.168.66.*)
+    # from our stick, looks alright
+    ;;
   192.168.99.*)
-    # looks alright
+    # from docker-machine/toolbox, looks alright
     ;;
   *)
     echo -n "Is this correct? (y/n) : "
