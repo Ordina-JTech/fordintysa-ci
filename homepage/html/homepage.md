@@ -775,11 +775,9 @@ v${POM_VERSION}
 
 ## ![jenkins-logo](images/jenkins.png) <span>Jenkins &mdash; Release Execution</span>
 
-First assure we're not cheating:
-  - Check the menu item **The App** at the bottom of this page.<br/>
-    <small>_You should see a 404: page not found._</small>
-
-Now to release and deploy it:
+You saw **The App** in the menu bar all the time. Will it come alive?<br/>First assure we're not cheating:
+  - Click menu item **[?]The App** at the bottom of this page.<br/>
+    <small>_You should see a 404: page not found. Now to release and deploy it:_</small>
   - In your local repository, edit the `pom.xml`
   - Change the version: strip off the `SNAPSHOT` part.
   - Commit and Push.<br/>
@@ -789,9 +787,9 @@ Now to release and deploy it:
 
 ## ![theapp-logo](images/question.png) <span>The App &mdash; Test it</span>
 
-You saw **The App** in the menu bar all the time.
+  - Refresh **[?] The App** page.
 
-  - Start **[?] The App**
+&nbsp;
 
 ### ... and ...
 
