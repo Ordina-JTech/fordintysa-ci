@@ -71,7 +71,7 @@ Just click on the one you want to follow.<br/>
 ## ![gitblit-logo](images/gitblit.png) <span>GitBlit &mdash; Question Time</span>
 
   1. Can you locate the `readme.md` file?
-  2. At what interval is an update published in the past year?
+  2. At what interval is a release published in the past year?
   3. Who or what is responsible for increasing the version number?
   4. There's currently three (or four) active branches.<br/>
      Is that all there ever was?
