@@ -40,7 +40,7 @@ So let's give it a spin!
 
 ## ![slow](images/slow.png) <span>Slow or Fast track?</span> ![fast](images/fast.png)
 
-We have limited time for this workshop, so you get the choice:
+We have only 90 minutes for this workshop and too much to do, so you get the choice:
 
   - Follow the **Slow** track:<br/>
     <small>This will be the best learning experience, but you probably won't finish it in time.<br/>
@@ -51,7 +51,7 @@ We have limited time for this workshop, so you get the choice:
 
 <small>Whenever there's a track split or pages to skip, you'll see these icons at the bottom of the page.<br/>
 Just click on the one you want to follow.<br/>
-<small>Note that at each decision point you can choose a different option.</small></small>
+<small>Note that at each decision point you can choose a different option, so you're not trapped in your first decision.</small></small>
 
 ### [![slow](images/slow.png)](#/1/3) &#8656; do \ Explore GitBlit & create account / skip &#8658; [![fast](images/fast.png)](#/1/6)
 
@@ -428,7 +428,8 @@ The .war file (which is in essence an special .jar file) can then be deployed on
 **This is the first _and last_ build guaranteed to finish with success.**
 
 <small>It is easy to guarantee this, because the developer tested this himself by performing&ensp;`mvn clean install`&ensp;prior to committing any change to Git.
-Now Jenkins has performed _exactly the same_ Maven process, so failure is not an option.</small>
+Now Jenkins has performed _exactly the same_ Maven process, so failure is not an option.<br/><br/>
+<small>In case it _did_ fail: press **S**.</small></small>
 
 ----
 
@@ -436,6 +437,8 @@ NOTICE: in this workshop we have **on purpose** introduced some points where a b
 So ** _don't panic_ ** when a build fails. Read the <span style="color: red">`[ERROR]`</span> messages in the console log very carefully.
 We have all confidence you can figure out why it failed, and you should be able to correct it with some minor adjustments.
 Just keep your brain switched on...
+
+Note: <p>Sorry it failed. Maybe the console shows something like:</p><p style="color: red">`Failed to execute goal... Plugin [xxx] or one of its dependencies could not be resolved`</p><p>It's possible Artifactory could not keep up delivering all the required jars in time.</p><p>Go back to Jenkins `fordintysa` project page and click **Configure**. Click the **Bouwpoging** tab and add an extra option `-U` at Maven's goals and options. Save and start again.</p>
 
 
 ## ![jenkins-logo](images/jenkins.png) <span>Jenkins &mdash; Structure</span>
@@ -543,8 +546,9 @@ It's really easy to let a **push** into GitBlit automatically trigger a **build*
 
 ## ![jenkins-logo](images/jenkins.png) <span>Jenkins &mdash; test Git Push triggers the build</span>
 
-  - Navigate in your local repository to folder `src/main/resources/` 
-  - Edit the file **`wishlist.txt`**
+  - Navigate in your local repository<br/>to folder `src/main/resources/` 
+  - Edit the file **`wishlist.txt`**<br/>
+    <small>_Make sure none of the original content is left in there,<br/>but only contains your personal wish (or grocery) list._</small>
   - **Commit** and **Push** the change
   - Watch in Jenkins what happens...
 
@@ -664,29 +668,61 @@ Jenkins did produce a .war file during the build, and the version has the `-SNAP
 
 ## ![artifactory-logo](images/artifactory.png) <span>Artifactory &mdash; Behold: your artifact!</span>
 
-The Jenkins build should finish without issues.
+<small>The Jenkins build should finish without issues.</small>
 
   - Switch back to Artifactory and refresh the screen with **F5**.<br/>
     <small>_There should now be a &#9658; sign next to_ `libs-snapshot-local` _to signify it has content._</small>
   - Unfold the folders of our groupId, artifactId and version.<br/>
-    <small>_Here you'll find the produced_ `.pom` _and_ `.war` _files, plus a_ `maven-metadata.xml`</small>
+    <small>_Here you'll find_ `maven-metadata.xml` _and the produced_ `.pom` _and_ `.war` _files.</small>
   - Dig in deeper, into the `.war` and it's subfolders `WEB-INF/classes`.<br/>
-    <small>_This is where your_ `wishlist.txt`, _originally from_ `src/main/resources` _is placed._</small>
-  - Check that your own, personal `wishlist.txt` was put into the `.war` file.<br/>
-    <small>&nbsp;</small>
+    <small>_This is where your_ `wishlist.txt`, _originally from_ `src/main/resources` _is placed.<br/>
+    Check in tab_ **View Source** _that your own, personal_ `wishlist.txt` _was put into the_ `.war` _file._<br/><br/></small>
 
-### [![slow](images/slow.png)](#/11) &#8656; do \ SonarQube code quality reports / skip &#8658; [![fast](images/fast.png)](#/12)
-
+### [![slow](images/slow.png)](#/11) &#8656; do \ Quality Assurance reports / skip &#8658; [![fast](images/fast.png)](#/12)
 
 
-## ![sonarqube-logo](images/sonar.png) <span>SonarQube &mdash; Introduction</span>
 
-> Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
+## ![sonarqube-logo](images/sonar.png) <span>Quality Assurance reports &mdash; Introduction</span>
+
+Another good practice in Continuous Integration is to focus on code quality.
+It's easy for developers to just write working code, and while typing minor (or somewhat bigger) errors will slip through.
+We're only human, this is natural.
+
+<small>You might let a colleague do code reviews: always a good idea.
+But to let the reviewers focus on what really matters, there's help you can get from **Static Code Analysers**.
+There are multiple analysers available as Maven plugins, each focusing on different code quality aspects.
+You can even let the build fail if the code contains serious errors or when the quality is too low.
+
+So let's put that to work, and let some of the analysers produce their reports on our code.</small>
 
 
-## ![sonarqube-logo](images/sonar.png) <span>SonarQube &mdash; Fix some Code Quality issues</span>
+## ![sonarqube-logo](images/sonar.png) <span>Quality Assurance reports &mdash; Generate the reports</span>
 
-Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
+Generation of reports is all prepared in our `pom.xml` under the `reporting` section.
+We only have to let Maven execute the goal that executes it:
+
+  - Navigate in Jenkins to your **Project** page
+  - Select **Configure** (_Configureren_) in the menu on the left
+  - Select tab **Build** (_Bouwpoging_)
+  - Add `site-deploy` to the Goals and options
+  - Save and start the build again, wait until it has finished
+
+
+## ![sonarqube-logo](images/sonar.png) <span>Quality Assurance reports &mdash; View the reports</span>
+
+  - Click on **QA Reports** in the menu bar at the bottom of this page
+  - Select our project
+  - On the left, open the last menu item **Project Reports**
+  - Have a good look at the reports.
+
+<small>For this project we have kept configuration of the reporting plugins completely default.
+In practice you would surpress certain type of warnings if you decide fixing such issues doesn't really help or is not worth the trouble.<br/><br/>
+In a mature project you should aim at keeping these reports always empty.
+Every item reported is a potential risk and adds to the project's **[Technical Debt](https://en.wikipedia.org/wiki/Technical_debt)**.
+These are things you should maybe change. 
+It's often hard to plan time for it, but you really should.
+Don't let this pile up until it is too much work.
+Better fix it now and keep your reports clean.</small>
 
 
 
@@ -739,6 +775,11 @@ v${POM_VERSION}
 
 ## ![jenkins-logo](images/jenkins.png) <span>Jenkins &mdash; Release Execution</span>
 
+First assure we're not cheating:
+  - Check the menu item **The App** at the bottom of this page.<br/>
+    <small>_You should see a 404: page not found._</small>
+
+Now to release and deploy it:
   - In your local repository, edit the `pom.xml`
   - Change the version: strip off the `SNAPSHOT` part.
   - Commit and Push.<br/>
@@ -766,7 +807,12 @@ You saw **The App** in the menu bar all the time.
 
 > (c) 2017 Bert Koorengevel, Ordina JTech
 >
-> This slideshow is powered by [reveal.js](https://github.com/hakimel/reveal.js/),<br/>
-> which is powered by a [nginx docker container](https://hub.docker.com/_/nginx/)
+> <small>With many thanks to:<br/>
+>   - Mieke (my wife): sorry I was so busy on the laptop past weeks
+>   - Sebas and Johan for helping me getting this all up & running
+>   - Ivo, Teije, Roma and the Ordina JTech Young Professionals class for beta-testing
+>   - Frank Coenen and Koen Aerts for letting me do this project. It was great!
 >
-> Visit the the wiki and issue tracker of this project at [GitHub](https://github.com/Ordina-JTech/fordintysa-ci).
+> This slideshow is powered by [reveal.js](https://github.com/hakimel/reveal.js/),<br/>
+> which is powered by a [nginx docker container](https://hub.docker.com/_/nginx/)<br/><br/>
+> Visit the the wiki and issue tracker of this project at [GitHub](https://github.com/Ordina-JTech/fordintysa-ci).</small>
