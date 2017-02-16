@@ -137,9 +137,10 @@ if [ $? -ne 0 ]; then
 fi
 
 echo
-echo $e "Your build server will be up & running at ${grn}http://${ip}/${gry}"
-echo $e "if you enter the following command:"
+echo $e "Enter the following command:"
 echo $e "${grn}docker-compose up -d${gry}"
+echo
+echo $e "Then start your build server at ${grn}http://${ip}/${gry} in your browser."
 echo
 echo $e "If you want to stop it later on, type:"
 echo $e "${grn}docker-compose stop${gry}"
