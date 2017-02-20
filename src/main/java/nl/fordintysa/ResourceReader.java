@@ -20,7 +20,6 @@ public class ResourceReader {
 			}
 			reader.close();
 		} catch (IOException e) {
-			e.printStackTrace();
 		}
 		return result;
 	}
