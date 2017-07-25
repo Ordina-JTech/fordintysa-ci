@@ -470,7 +470,7 @@ That's one of the basic principles of Continuous Integration:
 
 
 
-## ![app-logo](images/Question.png) <span>The App &mdash; Run more Unit Tests</span>
+## ![app-logo](images/question.png) <span>The App &mdash; Run more Unit Tests</span>
 
 Our build executed just three unit tests. We have prepared some more.
 
@@ -519,7 +519,7 @@ Jenkins leaves it up to you what to do.
 ### [![slow](images/slow.png)](#/6/3) &#8656; do \ activate another unit test / skip &#8658; [![fast](images/fast.png)](#/7)
 
 
-## ![app-logo](images/Question.png) <span>The App &mdash; Run more Unit Tests (2)</span>
+## ![app-logo](images/question.png) <span>The App &mdash; Run more Unit Tests (2)</span>
 
   - Still in `MainTest.java`, uncomment lines 26-30.
   - Let it build again by Jenkins<br/>
