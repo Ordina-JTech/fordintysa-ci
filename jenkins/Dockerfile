@@ -31,7 +31,7 @@ RUN /usr/local/bin/install-plugins.sh \
   mask-passwords:2.10.1 \
   maven-plugin:2.17 \
   scm-api:2.2.0 \
-  workflow-cps:2.13
+  workflow-cps:2.36.1
 
 ENV JENKINS_ARGS="--prefix=/jenkins"
 COPY ./data/ /var/jenkins_home/
