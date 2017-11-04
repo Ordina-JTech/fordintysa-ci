@@ -1,4 +1,4 @@
-FROM jenkins:2.60.2
+FROM jenkins/jenkins:2.87
 MAINTAINER Ordina <no-reply@ordina.nl>
 
 ENV JENKINS_OPTS "--prefix=/jenkins"
@@ -24,14 +24,14 @@ RUN chmod 666 -R /tomcat-webapps-volume
 USER jenkins
 
 RUN /usr/local/bin/install-plugins.sh \
-  artifactory:2.12.1 \
-  git:3.4.1 \
-  git-client:2.4.6 \
+  artifactory:2.13.1 \
+  git:3.6.3 \
+  git-client:2.6.0 \
   greenballs:1.15 \
   mask-passwords:2.10.1 \
-  maven-plugin:2.17 \
-  scm-api:2.2.0 \
-  workflow-cps:2.36.1
+  maven-plugin:3.0 \
+  scm-api:2.2.5 \
+  workflow-cps:2.41
 
 ENV JENKINS_ARGS="--prefix=/jenkins"
 COPY ./data/ /var/jenkins_home/
