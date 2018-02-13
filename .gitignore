@@ -3,3 +3,5 @@ gitlab/
 tmp/
 *.bak
 *.orig
+*.iml
+.idea/
