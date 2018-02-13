@@ -17,7 +17,7 @@ whi='\033[1;37m'
 
 # determine whether 'echo -e' is required (boot2docker) or obsolete (os/x)
 eresult=`echo -e "x"`
-if [ $eresult = "x" ]; then
+if [ "${eresult}" = "x" ]; then
     e="-e"  
 fi
 
@@ -63,7 +63,16 @@ if [ ${ip}"x" = "x" ]; then
     # not VirtualBox, try Mac approach
     ip=`ifconfig | grep "inet ." | awk '/broadcast/ { print $2 }'`
 fi
-echo $e "Detected ip address: ${whi}${ip}${gry}"
+ipCount=`echo "$ip" | wc -w`
+
+if [[ $ip =~ ^[0-9]{1,3}(\.[0-9]{1,3}){3}$ ]] ; then
+    echo $e "Detected ip address: ${whi}${ip}${gry}"
+else
+    echo $e "${red}Multiple ip addresses detected:"
+    echo $e "${whi}${ip}"
+    echo $e "${gry}If you run Docker 'native', then your ip address should NOT start with 192.168."
+    ip=
+fi
 case "$ip" in
   192.168.66.*)
     # from our stick, looks alright
@@ -72,9 +81,13 @@ case "$ip" in
     # from docker-machine/toolbox, looks alright
     ;;
   *)
-    echo -n "Is this correct? (y/n) : "
-    read -n 1 answer
-    echo ""
+    if [ ${ip}"x" = "x" ]; then
+        answer="n"
+    else
+        echo -n "Is this correct? (y/n) : "
+        read -n 1 answer
+        echo ""
+    fi
     if [ $answer != "y" ] && [ $answer != "Y" ]; then
         echo -n "Enter your ip address : "
         read ip
