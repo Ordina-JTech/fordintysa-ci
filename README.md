@@ -10,7 +10,7 @@ The Java software we're going to build is also contained in this repository. You
 
 ## Preparation
 
-Students visiting Ordina at 20st Feb 2017 will receive an USB memory stick containing a VirtualBox image. 
+Students visiting Ordina at 21st or 23rd Feb 2018 will receive an USB memory stick containing a VirtualBox image. 
 Instructions on how to spin that up will be shipped in a PDF on that stick.
 
 However, if you're reading this page on GitHub, you'll have to do some installation yourself. 
