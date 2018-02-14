@@ -63,9 +63,9 @@ if [ ${ip}"x" = "x" ]; then
     # not VirtualBox, try Mac approach
     ip=`ifconfig | grep "inet ." | awk '/broadcast/ { print $2 }'`
 fi
-ipCount=`echo "$ip" | wc -w`
 
-if [[ $ip =~ ^[0-9]{1,3}(\.[0-9]{1,3}){3}$ ]] ; then
+dotCount=`echo $ip | awk -F. '{print NF-1}'`
+if [ ${dotCount} -eq 3 ]; then
     echo $e "Detected ip address: ${whi}${ip}${gry}"
 else
     echo $e "${red}Multiple ip addresses detected:"
