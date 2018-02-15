@@ -74,8 +74,11 @@ else
     ip=
 fi
 case "$ip" in
-  192.168.66.*)
+  192.168.56.*)
     # from our stick, looks alright
+    ;;
+  192.168.66.*)
+    # from our old stick, looks alright
     ;;
   192.168.99.*)
     # from docker-machine/toolbox, looks alright
