@@ -25,6 +25,7 @@ USER jenkins
 
 RUN /usr/local/bin/install-plugins.sh \
   artifactory:2.14.0 \
+  build-pipeline:1.5.8 \
   git:3.6.3 \
   git-client:2.6.0 \
   greenballs:1.15 \
