@@ -232,7 +232,7 @@ with some details about their last build status.
 Let's put something there:
 
   - Click on the link **Create new Item** (_Cre&euml;er nieuwe taken_)
-  - Enter an appropriate item name (eg&ensp;`fordintysa`)
+  - Enter an appropriate item name (eg&ensp;`fordintysa-build`)
   - Select the box **Maven Build** (_Bouw een Maven item_) and click **OK**.
 
 _The item is now created, and we can configure it further._
@@ -470,70 +470,109 @@ That's one of the basic principles of Continuous Integration:
 
 
 
-## ![app-logo](images/question.png) <span>The App &mdash; Run more Unit Tests</span>
+## ![sonarqube-logo](images/sonar.png) <span>SonarQube &mdash; Introduction</span>
 
-Our build executed just three unit tests. We have prepared some more.
+Another good practice in Continuous Integration is to focus on code quality.
+It's easy for developers to just write working code, and while typing minor (or somewhat bigger) errors will slip through.
+We're only human, this is natural.
 
-  - In your local (cloned) repository, navigate to
-     - folder&emsp;&ensp;`src/test/java`
-     - package&ensp;`nl.fordintysa`
-  - Open file&ensp;`MainTest.java`&ensp;with a text editor (or your IDE)
-  - Remove both slashes at the start of **line 14**<br/>
-    <small>_The_ `@Test` _annotation is now uncommented, so in the next build the method_<br/>
-	`testGetNameNoArgs()` _will be executed as well during the unit tests._</small>
-  - **Save** the file, **commit** and **push** the change to GitBlit
-  - Start the build again in Jenkins and watch it's console output.
+You might let a colleague do code reviews: always a good idea.
+But to let the reviewers focus on what _really_ matters, there's help you can get from **Static Code Analysers**.
+One of the most popular ones is SonarQube.
 
-
-## ![jenkins-logo](images/jenkins.png) <span>Jenkins &mdash; Failing Unit Tests</span>
-
-Some of the lines you should notice in the console output:
-
-```
-testGetNameNoArgs(nl.fordintysa.MainTest)  Time elapsed: 0.014 sec  <<< FAILURE!
-org.junit.ComparisonFailure: expected:<Fordintysa[]> but was:<Fordintysa[-CI]>
----
-[ERROR] There are test failures.
----
-[INFO] BUILD SUCCESS
----
-Finished: UNSTABLE
-```
-
-<small>Just one unit tests failed. Which one could that be? ;-)<br/><br/>
-Usually Maven then reports `BUILD FAILURE`, but Jenkins here reports `BUILD SUCCESS`.<br/>
-At the end it's labelled `UNSTABLE`, which means an artifact _could_ be produced but its tests failed.</small>
-
-
-## ![jenkins-logo](images/jenkins.png) <span>Jenkins &mdash; Unstable Build</span>
-
-So it gets the benefits of the doubt. 
-A failing test is not enough to let a build fail completely.
-This is done so the following tasks like measuring the code quality can be done regardless.
-Jenkins leaves it up to you what to do.
+<small>
+SonarQube offers reports on duplicated code, coding standards, unit tests, code coverage, code complexity, comments, bugs, and security vulnerabilities.
+SonarQube can record metrics history and provides evolution graphs.
 <br/><br/>
-
-  - Fix the unit test and make the build stable again
-
-<small><br/><br/></small>
-### [![slow](images/slow.png)](#/6/3) &#8656; do \ activate another unit test / skip &#8658; [![fast](images/fast.png)](#/7)
+So let's put that to work, and let Sonar produce a report on our code.</small>
 
 
-## ![app-logo](images/question.png) <span>The App &mdash; Run more Unit Tests (2)</span>
+## ![sonarqube-logo](images/sonar.png) <span>SonarQube &mdash; Create Jenkins job</span>
 
-  - Still in `MainTest.java`, uncomment lines 26-30.
-  - Let it build again by Jenkins<br/>
-    <small>_Now there's a compilation error and the build is flagged as a FAILURE.<br/>
-	If you think you can prevent it, by all means: try._<br/><br/></small>
-  - Fix the unit test and make the build stable again
+We'll make a separate job in Jenkins that lets Maven execute the goal &nbsp; `sonar:sonar`
+
+  - Navigate in Jenkins back to the **Main Dashboard**
+  - Create a **New Item** with name &nbsp; `fordintysa-qa`
+  - At the bottom of the form in **Copy from** 
+    <br/>select the &nbsp; `fordintysa-build` &nbsp; job.
+    <br/><small>This saves us repeating a lot of the job configuration, like selecting the git repository.</small>
+  - Click on the **Ok** button.
+    <br/><small>You should now see the job configuration.</small>
+  - Select tab **Build** (_Bouwpoging_)
+  - Set the **Goals and options** to &nbsp; `clean test sonar:sonar`
+  - Save this build item.
+
+
+## ![sonarqube-logo](images/sonar.png) <span>SonarQube &mdash; View the reports</span>
+
+  - Start this build item and wait for it to finish.
+    <br/><small>You can watch its progress in the console.</small>
+  - Click on **SonarQube** in the menu bar at the bottom of this page
+  - Select the **Projects** menu item and open our project
+  - On the left, open the last menu item **Project Reports**
+  - Have a good look around.
+
+<small>For this project we have kept configuration of the SonarQube plugins completely default.
+In practice you would surpress certain type of warnings if you decide fixing such issues doesn't really help or is not worth the trouble.<br/><br/>
+In a mature project you should aim at keeping the issue list always empty.
+Every item reported is a potential risk and adds to the project's **[Technical Debt](https://en.wikipedia.org/wiki/Technical_debt)**.
+These are things you should maybe change. It's often hard to plan time for it, but you really should.
+Don't let this pile up until it is too much work, better fix it as soon as possible and keep your issue list clean.</small>
+
+
+## ![sonarqube-logo](images/sonar.png) <span>SonarQube &mdash; View the code with UnitTest coverage</span>
+
+ - Select the **code** item in the SonarQube menu.
+ - Click on the package &nbsp; `src/main/java/nl/fordintysa`
+ 
+There are three classes in this package.
+We'll concentrate here only on increasing the unit test coverage 
+of class `Main.java` which currently is just 36.4%.
+
+ - Click on the class &nbsp; `Main.java`
+
+----
+
+### Question Time
+
+_Can you explain why line 11 is orange but line 12 is red?_
+
+<small>We'll make the unit test coverage of that whole method green, but first...</small>
 
 
 
-## ![jenkins-logo](images/jenkins.png) <span>Jenkins &mdash; let a Git Push trigger the build</span>
+## ![jenkins-logo](images/jenkins.png) <span>Jenkins &mdash; Set up a Build Pipeline</span>
+
+<small>We have two Jenkins jobs. It would be nice if they both run after each other automatically 
+and we can see the progress.</small>
+
+  - In **Jenkins** go back to the **Main Dashboard**
+  - Open the `fordintysa-qa` job
+  - Select **Configure** (_Configureren_) in the menu on the left
+  - Select tab **Build Triggers** (_Bouwactiveerders_)
+  - Tick the option **Build after other projects are built**
+    <br/>and select project &nbsp; `fordintysa-build`.
+    <br/><small>Both jobs are now connected, and QA will run after each build.</small>
+  - Select the option **Trigger even if the build is unstable**.
+    <br/><small>This way the Sonar QA reports are also generated when some of the unit tests fail.</small>
+  - Save the changes.
+
+
+## ![jenkins-logo](images/jenkins.png) <span>Jenkins &mdash; Set up the Pipeline View</span>
+  - Go back to the **Main Dashboard**.
+  - Click at the top of the item list on the tab with the blue plus sign<br/> to create a new view.
+  - Fill the **View name** with &nbsp; `pipeline`.
+  - Select the **Build Pipeline View** and press **Ok**.
+  - In the next screen we can leave everything at default,
+    <br/>but do check the **Initial Job** is set to `fordintysa-build`.
+  - Save this view and run the pipeline.
+
+
+## ![jenkins-logo](images/jenkins.png) <span>Jenkins &mdash; Let a Git Push trigger the build</span>
 
 It's really easy to let a **push** into GitBlit automatically trigger a **build** in Jenkins.
 
-  - Navigate in Jenkins to your **Project** page
+  - Navigate in Jenkins to the **Project** page of `fordintysa-build`
   - Select **Configure** (_Configureren_) in the menu on the left
   - Select tab **Build Triggers** (_Bouwactiveerders_)
   - Tick item **Poll SCM** (_Bemonster SCM_)
@@ -551,6 +590,68 @@ It's really easy to let a **push** into GitBlit automatically trigger a **build*
     <small>_Make sure none of the original content is left in there,<br/>but only contains your personal wish (or grocery) list._</small>
   - **Commit** and **Push** the change
   - Watch in Jenkins what happens...
+
+
+
+## ![app-logo](images/question.png) <span>The App &mdash; Run more Unit Tests</span>
+
+Our build executed just two unit tests. We have prepared some more.
+
+  - In your local (cloned) repository, navigate to
+     - folder&emsp;&ensp;`src/test/java`
+     - package&ensp;`nl.fordintysa`
+  - Open file&ensp;`MainTest.java`&ensp;with a text editor (or your IDE)
+  - Remove both slashes at the start of **lines 14 and 20**<br/>
+    <small>_The_ `@Test` _annotation is now uncommented, so in the next build the methods_ `testGetNameNoArgs()`
+	<br/> _and_ `testGetNameOneArg()` _will be executed as well during the unit tests._</small>
+  - **Save** the file, **commit** and **push** the change to GitBlit
+  - Jenkins should have started a build, so watch it's console output.
+
+
+## ![jenkins-logo](images/jenkins.png) <span>Jenkins &mdash; Failing Unit Tests</span>
+
+Some of the lines you should notice in the console output:
+
+```
+testGetNameNoArgs(nl.fordintysa.MainTest)  Time elapsed: 0.014 sec  <<< FAILURE!
+org.junit.ComparisonFailure: expected:<Fordintysa[]> but was:<Fordintysa[-CI]>
+---
+[ERROR] There are test failures.
+---
+[INFO] BUILD SUCCESS
+---
+Finished: UNSTABLE
+```
+
+<small>One unit tests failed. Which one could that be? ;-)<br/><br/>
+Usually Maven then reports `BUILD FAILURE`, but Jenkins here reports `BUILD SUCCESS`.<br/>
+At the end it's labelled `UNSTABLE`, which means an artifact _could_ be produced but the unittests failed.</small>
+
+
+## ![jenkins-logo](images/jenkins.png) <span>Jenkins &mdash; Unstable Build</span>
+
+So it gets the benefits of the doubt. 
+A failing test is not enough to let a build fail completely.
+This is done so the following tasks like measuring the code quality can be done regardless.
+Jenkins leaves it up to you what to do.
+<br/><br/>
+
+  - Fix the unit test and make the build stable again.
+  - Have a look in SonarQube what percentage of the code is now covered.
+
+<small>It previously was 36.4%</small>
+<br/><br/>
+
+### [![slow](images/slow.png)](#/8/3) &#8656; do \ activate another unit test / skip &#8658; [![fast](images/fast.png)](#/9)
+
+
+## ![app-logo](images/question.png) <span>The App &mdash; Run more Unit Tests (2)</span>
+
+  - Still in `MainTest.java`, uncomment lines 26-30.
+  - Let it build again by Jenkins<br/>
+    <small>_Now there's a compilation error and the build is flagged as a FAILURE.<br/>
+	If you think you can prevent it, by all means: try._<br/><br/></small>
+  - Fix the unit test and make the build stable again.
 
 
 
@@ -579,7 +680,7 @@ that hold the built .jar artifacts. These are quite different beasts.</small></s
 
 ## ![maven-logo](images/maven.png) <span>Maven Repositories &mdash; Issues</span>
 
-The Maven goal&ensp;`deploy`&ensp;uploads the built artifacts to a remote repository, 
+The Maven goal &nbsp; `deploy` &nbsp; uploads the built artifacts to a remote repository, 
 which is defined the [`distributionManagement`](https://maven.apache.org/pom.html#Distribution_Management) section of the pom.
 
 <small>That remote repository for artifact deployment shall not be Maven Central. 
@@ -645,7 +746,7 @@ Jenkins did produce a .war file during the build, and the version has the `-SNAP
 
 ## ![jenkins-logo](images/jenkins.png) <span>Jenkins &mdash; deploy the Artifact to Artifactory (1)</span>
 
-  - Navigate in Jenkins to your **Project** page
+  - Navigate in Jenkins to the **Project** page of item `fordintysa-build`
   - Select **Configure** (_Configureren_) in the menu on the left
   - Select tab **Post-Build Actions** (_Acties na Bouwpoging_)
   - Unfold the list **Add post-build action** (_Toevoegen actie na bouwpoging_)<br/>
@@ -671,84 +772,31 @@ Jenkins did produce a .war file during the build, and the version has the `-SNAP
 <small>The Jenkins build should finish without issues.</small>
 
   - Switch back to Artifactory and refresh the screen with **F5**.<br/>
-    <small>_There should now be a &#9658; sign next to_ `libs-snapshot-local` _to signify it has content._</small>
+    <small>_There should now be a_ &#9658; _sign next to_ `libs-snapshot-local` _to signify it has content._</small>
   - Unfold the folders of our groupId, artifactId and version.<br/>
     <small>_Here you'll find_ `maven-metadata.xml` _and the produced_ `.pom` _and_ `.war` _files.</small>
   - Dig in deeper, into the `.war` and it's subfolders `WEB-INF/classes`.<br/>
     <small>_This is where your_ `wishlist.txt`, _originally from_ `src/main/resources` _is placed.<br/>
     Check in tab_ **View Source** _that your own, personal_ `wishlist.txt` _was put into the_ `.war` _file._<br/><br/></small>
 
-### [![slow](images/slow.png)](#/11) &#8656; do \ Quality Assurance reports / skip &#8658; [![fast](images/fast.png)](#/12)
 
 
-
-## ![sonarqube-logo](images/sonar.png) <span>Quality Assurance reports &mdash; Introduction</span>
-
-Another good practice in Continuous Integration is to focus on code quality.
-It's easy for developers to just write working code, and while typing minor (or somewhat bigger) errors will slip through.
-We're only human, this is natural.
-
-<small>You might let a colleague do code reviews: always a good idea.
-But to let the reviewers focus on what really matters, there's help you can get from **Static Code Analysers**.
-There are multiple analysers available as Maven plugins, each focusing on different code quality aspects.
-You can even let the build fail if the code contains serious errors or when the quality is too low.
-
-So let's put that to work, and let some of the analysers produce their reports on our code.</small>
-
-
-## ![sonarqube-logo](images/sonar.png) <span>Quality Assurance reports &mdash; Generate the reports</span>
-
-Generation of reports is all prepared in our `pom.xml` under the `reporting` section.
-We only have to let Maven execute the goal that executes it:
-
-  - Navigate in Jenkins to your **Project** page
-  - Select **Configure** (_Configureren_) in the menu on the left
-  - Select tab **Build** (_Bouwpoging_)
-  - Add `site-deploy` to the Goals and options
-  - Save and start the build again, wait until it has finished
-
-
-## ![sonarqube-logo](images/sonar.png) <span>Quality Assurance reports &mdash; View the reports</span>
-
-  - Click on **QA Reports** in the menu bar at the bottom of this page
-  - Select our project
-  - On the left, open the last menu item **Project Reports**
-  - Have a good look at the reports.
-
-<small>For this project we have kept configuration of the reporting plugins completely default.
-In practice you would surpress certain type of warnings if you decide fixing such issues doesn't really help or is not worth the trouble.<br/><br/>
-In a mature project you should aim at keeping these reports always empty.
-Every item reported is a potential risk and adds to the project's **[Technical Debt](https://en.wikipedia.org/wiki/Technical_debt)**.
-These are things you should maybe change. 
-It's often hard to plan time for it, but you really should.
-Don't let this pile up until it is too much work.
-Better fix it now and keep your reports clean.</small>
-
-
-
-## ![jenkins-logo](images/jenkins.png) <span>Jenkins &mdash; Release Configuration (1)</span>
+## ![jenkins-logo](images/jenkins.png) <span>Jenkins &mdash; Deploy Configuration (1)</span>
 
 It's time to deploy the final 1.0.0 version of our mysterious App, so you can test it.<br/>
-<small>This will be executed with a new job in Jenkins. 
-So there will be one for **snapshot** builds and another for a **release**.</small>
+<small>This will be executed with a new job in the Jenkins pipeline in parallel with Sonar.</small>
 
-  - Navigate in Jenkins to the main page of your project.<br/>
-    <small>_Since there's a Git push trigger on the current project, we'll disable it from running._</small>
-  - At the top right is a button to **deactivate** this project.<br/>
-    <small>_We'll use this project as a template for the new one by making a copy._</small>  
-  - At the top left click the link **Back to the Dashboard**
-  - Create a **New Item** and name the new item e.g. `fordintysa-release`
-  - At the bottom, just after **Copy from**: type the name of the existing project
+  - Navigate in Jenkins **Back to the Dashboard**
+  - Create a **New Item** and name the new item `fordintysa-deploy`
+  - At the bottom, just after **Copy from**: type `fordintysa-qa`
   - Click **OK**
 
 
-## ![jenkins-logo](images/jenkins.png) <span>Jenkins &mdash; Release Configuration (2)</span>
+## ![jenkins-logo](images/jenkins.png) <span>Jenkins &mdash; Deploy Configuration (2)</span>
 
-The copied Jenkins item needs some additions to perform a release.
+The copied Jenkins item needs some alterations to perform a release.
 
-  - In the **General** section: untick the **deactivate** field.<br/>
-    <small>_The old item was disabled, this one should run!_</small>
-  - In the **Post Steps** section: select to Run only if build succeeds **or is unstable**
+  - In the **Build** section: set the Maven goal to `clean install`
   - Add a post-step of type **execute shell script** (_Voer shell script uit_)
   - Copy & paste the following command:
     ```
@@ -757,7 +805,7 @@ cp ./target/*.war /tomcat-webapps-volume/app.war
     <small>_This command copies the .war file to a location monitored by a Tomcat server that can execute it._</small>
 
 
-## ![jenkins-logo](images/jenkins.png) <span>Jenkins &mdash; Release Configuration (3)</span>
+## ![jenkins-logo](images/jenkins.png) <span>Jenkins &mdash; Deploy Configuration (3)</span>
 
   - At the bottom of the form: add another action of type **Git Publisher**
   - Select **Push Only if build succeeds**
@@ -767,7 +815,7 @@ cp ./target/*.war /tomcat-webapps-volume/app.war
   - Tag to push:
     ```
 v${POM_VERSION}
-```
+    ```
   - Select **Create new tag**
   - Target remote name = `origin`
   - Click **Save**
@@ -777,11 +825,11 @@ v${POM_VERSION}
 
 You saw **The App** in the menu bar all the time. Will it come alive?<br/>First assure we're not cheating:
   - Click menu item **[?]The App** at the bottom of this page.<br/>
-    <small>_You should see a 404: page not found. Now to release and deploy it:_</small>
+    <small>_You should see a 404: page not found. Now to deploy it:_</small>
   - In your local repository, edit the `pom.xml`
   - Change the version: strip off the `SNAPSHOT` part.
   - Commit and Push.<br/>
-    <small>_In Jenkins now the **Release** job should be triggered._</small>
+    <small>_In Jenkins now the pipeline should be triggered, including the deploy job._</small>
   - Look in GitBlit whether the tag is set on your last commit.
 
 
@@ -803,7 +851,7 @@ You saw **The App** in the menu bar all the time. Will it come alive?<br/>First 
 
 ### Credits:
 
-> (c) 2017 Bert Koorengevel, Ordina JTech
+> (c) 2017-2018 Bert Koorengevel, Ordina - JTech
 >
 > <small>With many thanks to:<br/>
 >   - Mieke (my wife): sorry I was so busy on the laptop past weeks
