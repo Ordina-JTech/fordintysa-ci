@@ -502,7 +502,7 @@ We'll make a separate job in Jenkins that lets Maven execute the goal &nbsp; `so
 ## ![sonarqube-logo](images/sonar.png) <span>SonarQube &mdash; View the reports</span>
 
   - Start this build item and wait for it to finish.
-    <br/><small>You can watch its progress in the console.</small>
+    <br/><small>A shortcut to the console log to view the progress: click on the blinking ball.</small>
   - Click on **SonarQube** in the menu bar at the bottom of this page
   - Select the **Projects** menu item and open our project
   - On the left, open the last menu item **Project Reports**
