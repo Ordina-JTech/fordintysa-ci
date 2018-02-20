@@ -280,18 +280,14 @@ _Now the error message should be gone._
 And most of them can/should be left at their default setting.
 If you're really curious what it does, click on the question mark at the right to display a help text.</small>
 
-### [![slow](images/slow.png)](#/4/4) &#8656; read \ explanation: Build Triggers / skip &#8658; [![fast](images/fast.png)](#/4/5)
-
 
 ## ![jenkins-logo](images/jenkins.png) <span>Configure Build Item &mdash; Build Triggers (_Bouwactiveerders_)</span>
 
-Here you can define to let this item build on regular intervals, when another build has finished, or triggered by a commit, etcetera...
-
-Since we're just starting with Jenkins, it's probably best to first trigger all builds manually.
-You can do that anyway, but triggering builds automatically is not our first concern.
-We first have to see whether it works at all before we can automate that.
-
-<small>One of the build trigger items is checked by default: **Build whenever a SNAPSHOT dependency is built**.<br/><br/>
+<small>Here you can define to let this item build on regular intervals, when another build has finished, or triggered by a commit, etcetera.
+Since we're just starting with Jenkins, it's probably best to first trigger the build manually.
+Later on we will be triggering builds automatically, but it is not our first concern.
+We first have to see whether it works at all before we can automate that.<br/><br/>
+One of the build trigger items is checked by default: **Build whenever a SNAPSHOT dependency is built**.<br/><br/>
 This needs some explanation. Usage of capital letters might give you the impression that *snapshot* is a deciding factor here. 
 Well, no... That word should be in small caps between brackets. The emphasys should be on **dependency**.<br/>
 **Build whenever a _Dependency_ is built**, regardless whether that dependency is a snapshot.<br/><br/>
