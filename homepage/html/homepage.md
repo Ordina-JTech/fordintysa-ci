@@ -549,8 +549,6 @@ and we can see the progress.</small>
   - Tick the option **Build after other projects are built**
     <br/>and select project &nbsp; `fordintysa-build`.
     <br/><small>Both jobs are now connected, and QA will run after each build.</small>
-  - Select the option **Trigger even if the build is unstable**.
-    <br/><small>This way the Sonar QA reports are also generated when some of the unit tests fail.</small>
   - Save the changes.
 
 
