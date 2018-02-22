@@ -61,7 +61,16 @@ ip=`ip route 2>/dev/null | awk '/eth1/ { print $9 }'`
 # empty result?
 if [ ${ip}"x" = "x" ]; then
     # not VirtualBox, try Mac approach
-    ip=`ifconfig | grep "inet ." | awk '/broadcast/ { print $2 }'`
+    ip=`ifconfig | grep "inet ." | awk '/cast/ { print $2 }'`
+fi
+# still empty?
+if [ ${ip}"x" = "x" ]; then
+    echo $e "${red}No ip address detected, VirtualBox host-only adapter is disabled?"
+    echo $e "${yel}Sorry, this doesn't work :-/"
+    echo $e "${gry}You may try the instructions using DockerToolbox or native Docker:"
+    echo $e "${gry}https://github.com/Ordina-JTech/fordintysa-ci/wiki/GettingStarted"
+    echo ""
+    exit 99
 fi
 
 dotCount=`echo $ip | awk -F. '{print NF-1}'`
